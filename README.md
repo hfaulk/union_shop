@@ -209,6 +209,32 @@ For questions or issues related to this coursework use [the dedicated Discord ch
 
 Use the worksheets listed on [the homepage](https://manighahrmani.github.io/sandwich_shop/) as your primary learning resource for Flutter development. You must refrain from using other online resources such as Stack Overflow, YouTube tutorials, or other websites for this coursework as they may contain outdated or incorrect information.
 
+### Important Git Tips
+
+**Commit regularly!** Save your progress frequently by committing your changes to Git. This creates checkpoints you can return to if needed.
+
+```bash
+git add .
+git commit -m "Brief description of what you changed"
+git push
+```
+
+If you made a small mistake, you can revert to a previous commit:
+
+1. View your commit history: `git log --oneline`
+2. Find the commit hash (e.g., `abc1234`) where things were working
+3. Revert to that commit: `git reset --hard abc1234`
+4. Force push if needed: `git push --force`
+
+If things are completely broken and are unrecoverable, you can start fresh by re-forking the repository:
+
+1. Delete your forked repository on GitHub (Settings → Danger Zone → Delete this repository)
+2. Fork the original repository again: [https://github.com/manighahrmani/union_shop](https://github.com/manighahrmani/union_shop)
+3. **Remember to keep it public!**
+4. Clone your fresh fork and start again
+
+Regular commits not only help you recover from mistakes, but also demonstrate your development process. Remember you are marked based on your commits.
+
 ## License
 
 This project is created for educational purposes as part of the University of Portsmouth coursework.
