@@ -150,11 +150,59 @@ class HomeScreen extends StatelessWidget {
                                     color: Colors.grey,
                                   ),
                                   padding: const EdgeInsets.all(8),
-                                  itemBuilder: (context) => const [
+                                  itemBuilder: (context) => [
                                     PopupMenuItem(
                                         value: 'Home', child: Text('Home')),
                                     PopupMenuItem(
-                                        value: 'Shop', child: Text('Shop')),
+                                        // Shop: show a small inline submenu (chevron) to open categories
+                                        child: Row(
+                                      children: [
+                                        const Text('Shop'),
+                                        const Spacer(),
+                                        // small chevron button that opens a secondary popup
+                                        PopupMenuButton<String>(
+                                          icon: const Icon(Icons.chevron_right,
+                                              size: 18),
+                                          padding: EdgeInsets.zero,
+                                          itemBuilder: (context) => const [
+                                            PopupMenuItem(
+                                                value: 'Clothing',
+                                                child: Text('Clothing')),
+                                            PopupMenuItem(
+                                                value: 'Merchandise',
+                                                child: Text('Merchandise')),
+                                            PopupMenuItem(
+                                                value: 'Halloween',
+                                                child: Text('Halloween')),
+                                            PopupMenuItem(
+                                                value:
+                                                    'Signature & Essential Range',
+                                                child: Text(
+                                                    'Signature & Essential Range')),
+                                            PopupMenuItem(
+                                                value:
+                                                    'Portsmouth City Collection',
+                                                child: Text(
+                                                    'Portsmouth City Collection')),
+                                            PopupMenuItem(
+                                                value: 'Pride Collection',
+                                                child:
+                                                    Text('Pride Collection')),
+                                            PopupMenuItem(
+                                                value: 'Graduation',
+                                                child: Text('Graduation')),
+                                          ],
+                                          onSelected: (sub) {
+                                            // placeholder handler for category selection
+                                            // you can wire these to real routes later
+                                            // For now call the placeholder handler
+                                            // (menu will auto-close)
+                                            // ignore: avoid_dynamic_calls
+                                            placeholderCallbackForButtons();
+                                          },
+                                        ),
+                                      ],
+                                    )),
                                     PopupMenuItem(
                                         value: 'The Print Shack',
                                         child: Text('The Print Shack')),
