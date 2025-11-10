@@ -106,18 +106,33 @@ class ProductPage extends StatelessWidget {
                                   ),
                                   onPressed: placeholderCallbackForButtons,
                                 ),
-                                IconButton(
+                                PopupMenuButton<String>(
                                   icon: const Icon(
                                     Icons.menu,
                                     size: 18,
                                     color: Colors.grey,
                                   ),
                                   padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
+                                  itemBuilder: (context) => const [
+                                    PopupMenuItem(
+                                        value: 'Home', child: Text('Home')),
+                                    PopupMenuItem(
+                                        value: 'Shop', child: Text('Shop')),
+                                    PopupMenuItem(
+                                        value: 'The Print Shack',
+                                        child: Text('The Print Shack')),
+                                    PopupMenuItem(
+                                        value: 'SALE!', child: Text('SALE!')),
+                                    PopupMenuItem(
+                                        value: 'About', child: Text('About')),
+                                  ],
+                                  onSelected: (value) {
+                                    if (value == 'Home') {
+                                      navigateToHome(context);
+                                    } else {
+                                      placeholderCallbackForButtons();
+                                    }
+                                  },
                                 ),
                               ],
                             ),
