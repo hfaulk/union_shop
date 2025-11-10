@@ -33,6 +33,10 @@ class HomeScreen extends StatelessWidget {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
 
+  void navigateToAbout(BuildContext context) {
+    Navigator.pushNamed(context, '/about');
+  }
+
   void navigateToProduct(BuildContext context) {
     Navigator.pushNamed(context, '/product');
   }
@@ -214,8 +218,8 @@ class HomeScreen extends StatelessWidget {
                                   onSelected: (value) {
                                     if (value == 'Home') {
                                       navigateToHome(context);
-                                    } else if (value == 'Shop') {
-                                      navigateToProduct(context);
+                                    } else if (value == 'About') {
+                                      navigateToAbout(context);
                                     } else {
                                       placeholderCallbackForButtons();
                                     }
