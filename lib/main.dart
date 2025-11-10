@@ -49,7 +49,8 @@ class HomeScreen extends StatelessWidget {
           children: [
             // Header
             Container(
-              height: 100,
+              // Increased from 100 to give space for the top banner + main header
+              height: 140,
               color: Colors.white,
               child: Column(
                 children: [
