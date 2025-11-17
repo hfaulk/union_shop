@@ -89,6 +89,21 @@ class SharedLayout extends StatelessWidget {
           Expanded(
             child: SafeArea(child: body),
           ),
+
+          // Footer placeholder
+          Container(
+            width: double.infinity,
+            color: Colors.grey[50],
+            padding: const EdgeInsets.all(16),
+            child: const Text(
+              'Placeholder Footer',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.grey,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
         ],
       ),
     );
