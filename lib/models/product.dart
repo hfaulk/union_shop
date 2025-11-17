@@ -1,7 +1,7 @@
 class Product {
   final String id;
   final String title;
-  final String price;
+  final int price;
   final String imageUrl;
 
   const Product({
@@ -14,7 +14,7 @@ class Product {
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json['id'] as String,
         title: json['title'] as String,
-        price: json['price'] as String,
+        price: json['price'] as int,
         imageUrl: json['imageUrl'] as String,
       );
 
