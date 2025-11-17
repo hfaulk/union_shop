@@ -3,8 +3,9 @@ import 'package:union_shop/widgets/shared_layout.dart';
 
 class CollectionPage extends StatelessWidget {
   final String title;
+  final String? description;
 
-  const CollectionPage({super.key, required this.title});
+  const CollectionPage({super.key, required this.title, this.description});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,21 @@ class CollectionPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            // No content yet — placeholder for collection products
+            if (description != null && description!.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Text(
+                  description!,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Color(0xFF7A7A7A),
+                    height: 1.5,
+                  ),
+                ),
+              ),
+            const SizedBox(height: 20),
+            // No product content yet — placeholder for collection products
           ],
         ),
       ),
