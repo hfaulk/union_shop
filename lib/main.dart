@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/views/product_page.dart';
 import 'package:union_shop/views/about.dart';
+import 'package:union_shop/widgets/shared_layout.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -33,213 +34,16 @@ class UnionShopApp extends StatelessWidget {
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  void navigateToHome(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
-  }
-
-  void navigateToAbout(BuildContext context) {
-    Navigator.pushNamed(context, '/about');
-  }
-
-  void navigateToProduct(BuildContext context) {
-    Navigator.pushNamed(context, '/product');
-  }
-
   void placeholderCallbackForButtons() {
     // This is the event handler for buttons that don't work yet
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SharedLayout(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header
-            Container(
-              // Increased from 100 to give space for the top banner + main header
-              height: 140,
-              color: Colors.white,
-              child: Column(
-                children: [
-                  // Top banner
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 12, horizontal: 12),
-                    color: const Color(0xFF4d2963),
-                    child: const Text(
-                      'BIG SALE! OUR ESSENTIAL RANGE HAS DROPPED IN PRICE! OVER 20% OFF! COME GRAB YOURS WHILE STOCK LASTS!',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 1.2,
-                      ),
-                    ),
-                  ),
-                  // Main header
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              navigateToHome(context);
-                            },
-                            child: Image.network(
-                              'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                              height: 18,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  color: Colors.grey[300],
-                                  width: 18,
-                                  height: 18,
-                                  child: const Center(
-                                    child: Icon(Icons.image_not_supported,
-                                        color: Colors.grey),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          const Spacer(),
-                          ConstrainedBox(
-                            constraints: const BoxConstraints(maxWidth: 600),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.search,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.person_outline,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.shopping_bag_outlined,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                PopupMenuButton<String>(
-                                  icon: const Icon(
-                                    Icons.menu,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  itemBuilder: (context) => [
-                                    PopupMenuItem(
-                                        value: 'Home', child: Text('Home')),
-                                    PopupMenuItem(
-                                        // Shop: show a small inline submenu (chevron) to open categories
-                                        child: Row(
-                                      children: [
-                                        const Text('Shop'),
-                                        const Spacer(),
-                                        // small chevron button that opens a secondary popup
-                                        PopupMenuButton<String>(
-                                          icon: const Icon(Icons.chevron_right,
-                                              size: 18),
-                                          padding: EdgeInsets.zero,
-                                          itemBuilder: (context) => const [
-                                            PopupMenuItem(
-                                                value: 'Clothing',
-                                                child: Text('Clothing')),
-                                            PopupMenuItem(
-                                                value: 'Merchandise',
-                                                child: Text('Merchandise')),
-                                            PopupMenuItem(
-                                                value: 'Halloween',
-                                                child: Text('Halloween')),
-                                            PopupMenuItem(
-                                                value:
-                                                    'Signature & Essential Range',
-                                                child: Text(
-                                                    'Signature & Essential Range')),
-                                            PopupMenuItem(
-                                                value:
-                                                    'Portsmouth City Collection',
-                                                child: Text(
-                                                    'Portsmouth City Collection')),
-                                            PopupMenuItem(
-                                                value: 'Pride Collection',
-                                                child:
-                                                    Text('Pride Collection')),
-                                            PopupMenuItem(
-                                                value: 'Graduation',
-                                                child: Text('Graduation')),
-                                          ],
-                                          onSelected: (sub) {
-                                            // placeholder handler for category selection
-                                            // you can wire these to real routes later
-                                            // For now call the placeholder handler
-                                            // (menu will auto-close)
-                                            // ignore: avoid_dynamic_calls
-                                            placeholderCallbackForButtons();
-                                          },
-                                        ),
-                                      ],
-                                    )),
-                                    PopupMenuItem(
-                                        value: 'The Print Shack',
-                                        child: Text('The Print Shack')),
-                                    PopupMenuItem(
-                                        value: 'SALE!', child: Text('SALE!')),
-                                    PopupMenuItem(
-                                        value: 'About', child: Text('About')),
-                                  ],
-                                  onSelected: (value) {
-                                    if (value == 'Home') {
-                                      navigateToHome(context);
-                                    } else if (value == 'About') {
-                                      navigateToAbout(context);
-                                    } else {
-                                      placeholderCallbackForButtons();
-                                    }
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
             // Hero Section
             SizedBox(
               height: 400,
@@ -364,21 +168,6 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ],
-                ),
-              ),
-            ),
-
-            // Footer
-            Container(
-              width: double.infinity,
-              color: Colors.grey[50],
-              padding: const EdgeInsets.all(24),
-              child: const Text(
-                'Placeholder Footer',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
