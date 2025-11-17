@@ -41,7 +41,24 @@ class CollectionPage extends StatelessWidget {
                 ),
               ),
             const SizedBox(height: 20),
-            // No product content yet — placeholder for collection products
+            // Minimal visual-only filter bar (single full-width placeholder)
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF5F5F5),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  const Divider(height: 1, thickness: 1),
+                ],
+              ),
+            ),
           ],
         ),
       ),
