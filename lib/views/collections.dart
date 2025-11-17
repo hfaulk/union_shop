@@ -51,40 +51,40 @@ class CollectionsPage extends StatelessWidget {
                     Navigator.pushNamed(context, '/product');
                   },
                   child: Card(
+                    clipBehavior: Clip.hardEdge,
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        // Image takes remaining space so each card is square (grid childAspectRatio=1)
                         Expanded(
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(4),
-                                topRight: Radius.circular(4)),
-                            child: Image.network(
-                              item['image']!,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) =>
-                                  Container(
-                                color: Colors.grey[300],
-                                child: const Center(
-                                  child: Icon(Icons.image_not_supported,
-                                      color: Colors.grey),
-                                ),
+                          child: Image.network(
+                            item['image']!,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                Container(
+                              color: Colors.grey[300],
+                              child: const Center(
+                                child: Icon(Icons.image_not_supported,
+                                    color: Colors.grey),
                               ),
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: Text(
-                              item['title']!,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w600),
-                            ),
+                        // Fixed-height title area to keep all cards equal-sized
+                        Container(
+                          height: 56,
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          alignment: Alignment.center,
+                          child: Text(
+                            item['title']!,
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w600),
                           ),
                         ),
                       ],
