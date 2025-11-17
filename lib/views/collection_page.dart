@@ -155,18 +155,57 @@ class CollectionPage extends StatelessWidget {
                                   crossAxisAlignment:
                                       CrossAxisAlignment.stretch,
                                   children: [
-                                    // Rectangular placeholder where the image will go later
+                                    // Image (covers area). Falls back to placeholder on error/empty URL.
                                     AspectRatio(
                                       aspectRatio: 4 / 3,
-                                      child: Container(
-                                        color: const Color(0xFFF2F2F2),
-                                        child: const Center(
-                                          child: Icon(
-                                            Icons.image,
-                                            color: Color(0xFFBDBDBD),
-                                          ),
-                                        ),
-                                      ),
+                                      child: Builder(builder: (ctx) {
+                                        final src = p.imageUrl;
+                                        if (src.isEmpty) {
+                                          return Container(
+                                            color: const Color(0xFFF2F2F2),
+                                            child: const Center(
+                                              child: Icon(
+                                                Icons.image,
+                                                color: Color(0xFFBDBDBD),
+                                              ),
+                                            ),
+                                          );
+                                        }
+
+                                        return Image.network(
+                                          src,
+                                          fit: BoxFit.cover,
+                                          loadingBuilder:
+                                              (context, child, chunk) {
+                                            if (chunk == null) return child;
+                                            return Container(
+                                              color: const Color(0xFFF2F2F2),
+                                              child: const Center(
+                                                child: SizedBox(
+                                                  width: 24,
+                                                  height: 24,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    strokeWidth: 2,
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          errorBuilder:
+                                              (context, error, stack) {
+                                            return Container(
+                                              color: const Color(0xFFF2F2F2),
+                                              child: const Center(
+                                                child: Icon(
+                                                  Icons.broken_image,
+                                                  color: Color(0xFFBDBDBD),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      }),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(
