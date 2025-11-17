@@ -151,16 +151,54 @@ class CollectionPage extends StatelessWidget {
                                 clipBehavior: Clip.hardEdge,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(4)),
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      p.title,
-                                      textAlign: TextAlign.center,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    // Rectangular placeholder where the image will go later
+                                    AspectRatio(
+                                      aspectRatio: 4 / 3,
+                                      child: Container(
+                                        color: const Color(0xFFF2F2F2),
+                                        child: const Center(
+                                          child: Icon(
+                                            Icons.image,
+                                            color: Color(0xFFBDBDBD),
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          12.0, 8.0, 12.0, 8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            p.title,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w700,
+                                              color: Color(0xFF2E2E2E),
+                                            ),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          const SizedBox(height: 6),
+                                          Text(
+                                            '£' +
+                                                (p.price / 100)
+                                                    .toStringAsFixed(2),
+                                            style: const TextStyle(
+                                              fontSize: 15,
+                                              color: Color(0xFF7A7A7A),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               );
                             },
