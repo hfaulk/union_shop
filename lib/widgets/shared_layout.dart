@@ -11,75 +11,116 @@ class SharedLayout extends StatelessWidget {
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
+          // Header (banner + main header)
           Container(
-            width: double.infinity,
-            color: const Color(0xFF4d2963),
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-            child: const Text(
-              'BIG SALE! OUR ESSENTIAL RANGE HAS DROPPED IN PRICE! OVER 20% OFF! COME GRAB YOURS WHILE STOCK LASTS!',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 1.1,
-              ),
-            ),
-          ),
-          // Main header row
-          Container(
+            height: 140,
             color: Colors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            child: Row(
+            child: Column(
               children: [
-                // Logo
-                GestureDetector(
-                  onTap: () {},
-                  child: Image.network(
-                    'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                    height: 40,
-                    fit: BoxFit.contain,
-                    errorBuilder: (context, error, stackTrace) {
-                      return const SizedBox(
-                        width: 40,
-                        height: 40,
-                        child:
-                            Icon(Icons.image_not_supported, color: Colors.grey),
-                      );
-                    },
+                Container(
+                  width: double.infinity,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+                  color: const Color(0xFF4d2963),
+                  child: const Text(
+                    'BIG SALE! OUR ESSENTIAL RANGE HAS DROPPED IN PRICE! OVER 20% OFF! COME GRAB YOURS WHILE STOCK LASTS!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 1.2,
+                    ),
                   ),
                 ),
-
-                const Spacer(),
-
-                // Icon group (placeholders for now)
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.search, color: Colors.grey),
-                      onPressed: () {}, // placeholder
-                      tooltip: 'Search',
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {},
+                          child: Image.network(
+                            'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                            height: 18,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                color: Colors.grey[300],
+                                width: 18,
+                                height: 18,
+                                child: const Center(
+                                  child: Icon(Icons.image_not_supported,
+                                      color: Colors.grey),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        const Spacer(),
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 600),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.search,
+                                  size: 18,
+                                  color: Colors.grey,
+                                ),
+                                padding: const EdgeInsets.all(8),
+                                constraints: const BoxConstraints(
+                                  minWidth: 32,
+                                  minHeight: 32,
+                                ),
+                                onPressed: () {},
+                              ),
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.person_outline,
+                                  size: 18,
+                                  color: Colors.grey,
+                                ),
+                                padding: const EdgeInsets.all(8),
+                                constraints: const BoxConstraints(
+                                  minWidth: 32,
+                                  minHeight: 32,
+                                ),
+                                onPressed: () {},
+                              ),
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.shopping_bag_outlined,
+                                  size: 18,
+                                  color: Colors.grey,
+                                ),
+                                padding: const EdgeInsets.all(8),
+                                constraints: const BoxConstraints(
+                                  minWidth: 32,
+                                  minHeight: 32,
+                                ),
+                                onPressed: () {},
+                              ),
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.menu,
+                                  size: 18,
+                                  color: Colors.grey,
+                                ),
+                                padding: const EdgeInsets.all(8),
+                                constraints: const BoxConstraints(
+                                  minWidth: 32,
+                                  minHeight: 32,
+                                ),
+                                onPressed: () {},
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                    IconButton(
-                      icon:
-                          const Icon(Icons.person_outline, color: Colors.grey),
-                      onPressed: () {}, // placeholder
-                      tooltip: 'Account',
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.shopping_bag_outlined,
-                          color: Colors.grey),
-                      onPressed: () {}, // placeholder
-                      tooltip: 'Cart',
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.menu, color: Colors.grey),
-                      onPressed:
-                          () {}, // placeholder (menu logic will be added later)
-                      tooltip: 'Menu',
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),
@@ -90,16 +131,16 @@ class SharedLayout extends StatelessWidget {
             child: SafeArea(child: body),
           ),
 
-          // Footer placeholder
+          // Footer
           Container(
             width: double.infinity,
             color: Colors.grey[50],
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(24),
             child: const Text(
               'Placeholder Footer',
-              textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.grey,
+                fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
             ),
