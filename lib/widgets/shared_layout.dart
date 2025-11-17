@@ -234,6 +234,16 @@ class SharedLayout extends StatelessWidget {
                   SizedBox(height: 12),
                   Text('Purchase online 24/7',
                       style: TextStyle(fontWeight: FontWeight.w600)),
+                  SizedBox(height: 28),
+
+                  // Help and Information
+                  Text('Help and Information',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+                  SizedBox(height: 12),
+                  Text('Search'),
+                  SizedBox(height: 16),
+                  Text('Terms & Conditions of Sale Policy'),
                 ],
               ),
             ),
