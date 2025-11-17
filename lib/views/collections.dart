@@ -17,8 +17,6 @@ class CollectionsPage extends StatelessWidget {
                   'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282'
             });
 
-    const headingStyle = TextStyle(fontSize: 20, fontWeight: FontWeight.w700);
-
     return SharedLayout(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
