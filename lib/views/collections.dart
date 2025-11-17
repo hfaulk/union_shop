@@ -78,10 +78,13 @@ class CollectionsPage extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            item['title']!,
-                            style: const TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.w600),
+                          child: Center(
+                            child: Text(
+                              item['title']!,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.w600),
+                            ),
                           ),
                         ),
                       ],
