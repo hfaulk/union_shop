@@ -11,6 +11,10 @@ class AboutPage extends StatelessWidget {
     Navigator.pushNamed(context, '/about');
   }
 
+  void navigateToProduct(BuildContext context) {
+    Navigator.pushNamed(context, '/product');
+  }
+
   void placeholderCallbackForButtons() {
     // This is the event handler for buttons that don't work yet
   }
