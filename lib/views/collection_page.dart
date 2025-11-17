@@ -27,6 +27,22 @@ class _CollectionPageState extends State<CollectionPage> {
     'Price, high to low',
   ];
 
+  late Future<List<Product>> _productsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _productsFuture = AssetProductRepository().fetchByCollection(widget.id);
+  }
+
+  @override
+  void didUpdateWidget(covariant CollectionPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.id != widget.id) {
+      _productsFuture = AssetProductRepository().fetchByCollection(widget.id);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SharedLayout(
@@ -140,8 +156,7 @@ class _CollectionPageState extends State<CollectionPage> {
 
                   // Load and show products for this collection
                   FutureBuilder<List<Product>>(
-                    future:
-                        AssetProductRepository().fetchByCollection(widget.id),
+                    future: _productsFuture,
                     builder: (context, snap) {
                       if (snap.connectionState == ConnectionState.waiting) {
                         return const SizedBox(height: 18);
