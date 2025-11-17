@@ -41,18 +41,62 @@ class CollectionPage extends StatelessWidget {
                 ),
               ),
             const SizedBox(height: 20),
-            // Minimal visual-only filter bar (single full-width placeholder)
+            // Filter / Sort bar (visual only for now)
             Container(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Container(
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFF5F5F5),
-                      borderRadius: BorderRadius.circular(6),
-                    ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              'FILTER BY',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Color(0xFF9E9E9E),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              'All products',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Color(0xFF333333),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: const [
+                            Text(
+                              'SORT BY',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Color(0xFF9E9E9E),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              'Best selling',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Color(0xFF333333),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 12),
                   const Divider(height: 1, thickness: 1),
