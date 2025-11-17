@@ -32,6 +32,7 @@ class UnionShopApp extends StatelessWidget {
           final args = ModalRoute.of(context)!.settings.arguments
               as Map<String, String>?;
           return CollectionPage(
+            id: args?['id'] ?? '',
             title: args?['title'] ?? 'Collection',
             description: args?['description'],
           );

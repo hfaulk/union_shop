@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/shared_layout.dart';
+import 'package:union_shop/repositories/product_repository.dart';
+import 'package:union_shop/models/product.dart';
 
 class CollectionPage extends StatelessWidget {
+  final String id;
   final String title;
   final String? description;
 
-  const CollectionPage({super.key, required this.title, this.description});
+  const CollectionPage(
+      {super.key, required this.id, required this.title, this.description});
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +104,24 @@ class CollectionPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   const Divider(height: 1, thickness: 1),
+                  const SizedBox(height: 12),
+                  // Show number of products in this collection
+                  FutureBuilder<List<Product>>(
+                    future: AssetProductRepository().fetchByCollection(id),
+                    builder: (context, snap) {
+                      if (snap.connectionState == ConnectionState.waiting) {
+                        return const SizedBox(height: 18);
+                      }
+                      final count = snap.data?.length ?? 0;
+                      return Text(
+                        count.toString() + ' products',
+                        style: const TextStyle(
+                          fontStyle: FontStyle.italic,
+                          color: Color(0xFF9E9E9E),
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
