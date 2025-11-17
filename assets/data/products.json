@@ -1,0 +1,9 @@
+[
+    {
+        "id": "classic-sweatshirts",
+        "title": "Classic Sweatshirts",
+        "price": 2300,
+        "imageUrl": "https://shop.upsu.net/cdn/shop/products/GreenSweatshirtFinal_300x300.png?v=1741965433",
+        "collections": ["autumn", "clothing"]
+    }
+]
