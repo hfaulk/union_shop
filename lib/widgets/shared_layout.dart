@@ -208,17 +208,33 @@ class SharedLayout extends StatelessWidget {
           ),
 
           // Footer
+          // Footer — opening hours only (incremental change)
           Container(
             width: double.infinity,
             color: Colors.grey[50],
-            padding: const EdgeInsets.all(24),
-            child: const Text(
-              'Placeholder Footer',
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text('Opening Hours',
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+                SizedBox(height: 8),
+                Text('(Term Time)',
+                    style: TextStyle(fontStyle: FontStyle.italic)),
+                SizedBox(height: 6),
+                Text('Monday - Friday 9am - 4pm',
+                    style: TextStyle(fontWeight: FontWeight.w600)),
+                SizedBox(height: 12),
+                Text('(Outside of Term Time / Consolidation Weeks)',
+                    style: TextStyle(fontStyle: FontStyle.italic)),
+                SizedBox(height: 6),
+                Text('Monday - Friday 9am - 3pm',
+                    style: TextStyle(fontWeight: FontWeight.w600)),
+                SizedBox(height: 12),
+                Text('Purchase online 24/7',
+                    style: TextStyle(fontWeight: FontWeight.w600)),
+              ],
             ),
           ),
         ],
