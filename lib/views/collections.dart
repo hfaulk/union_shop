@@ -8,14 +8,29 @@ class CollectionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Simple, responsive collections grid. Uses SharedLayout's `body` parameter.
-    final items = List.generate(
-        6,
-        (i) => {
-              'title': 'Collection ${i + 1}',
-              'image':
-                  'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282'
-            });
+    // Single hard-coded collection (Autumn Favourites) as requested.
+    final items = [
+      {
+        'title': 'Autumn Favourites',
+        'image':
+            'https://shop.upsu.net/cdn/shop/products/GreenSweatshirtFinal_900x.png?v=1741965433'
+      },
+      {
+        'title': 'Clothing',
+        'image':
+            'https://shop.upsu.net/cdn/shop/files/PurpleHoodieFinal_900x.jpg?v=1742201957'
+      },
+      {
+        'title': 'Graduation',
+        'image':
+            'https://shop.upsu.net/cdn/shop/collections/GradGrey_900x.jpg?v=1752234294'
+      },
+      {
+        'title': 'Signature & Essential Range',
+        'image':
+            'https://shop.upsu.net/cdn/shop/files/Signature_T-Shirt_Indigo_Blue_2_900x.jpg?v=1758290534'
+      }
+    ];
 
     return SharedLayout(
       body: Padding(
