@@ -25,10 +25,14 @@ class CollectionsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Collections', style: headingStyle),
-            const SizedBox(height: 12),
-            const Text('Browse our curated collections.'),
-            const SizedBox(height: 16),
+            Center(
+              child: Text('Collections',
+                  style: TextStyle(
+                      fontSize: 34,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.grey[800])),
+            ),
+            const SizedBox(height: 28),
 
             // Grid of collection cards. shrinkWrap so it works inside the parent scroll view.
             GridView.builder(
@@ -45,7 +49,7 @@ class CollectionsPage extends StatelessWidget {
                 final item = items[index];
                 return InkWell(
                   onTap: () {
-                    // placeholder navigation — could go to a collection detail or filtered product list
+                    // placeholder navigation
                     Navigator.pushNamed(context, '/product');
                   },
                   child: Card(
