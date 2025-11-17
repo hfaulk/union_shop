@@ -3,13 +3,29 @@ import 'package:union_shop/widgets/shared_layout.dart';
 import 'package:union_shop/repositories/product_repository.dart';
 import 'package:union_shop/models/product.dart';
 
-class CollectionPage extends StatelessWidget {
+class CollectionPage extends StatefulWidget {
   final String id;
   final String title;
   final String? description;
 
   const CollectionPage(
       {super.key, required this.id, required this.title, this.description});
+
+  @override
+  State<CollectionPage> createState() => _CollectionPageState();
+}
+
+class _CollectionPageState extends State<CollectionPage> {
+  String _selectedSort = 'Featured';
+
+  final List<String> _sortOptions = [
+    'Featured',
+    'Best selling',
+    'Alphabetically, A-Z',
+    'Alphabetically, Z-A',
+    'Price, low to high',
+    'Price, high to low',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +37,7 @@ class CollectionPage extends StatelessWidget {
           children: [
             Center(
               child: Text(
-                title,
+                widget.title,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 32,
@@ -31,11 +47,11 @@ class CollectionPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            if (description != null && description!.isNotEmpty)
+            if (widget.description != null && widget.description!.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: Text(
-                  description!,
+                  widget.description!,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 16,
@@ -91,11 +107,26 @@ class CollectionPage extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 8),
-                            Text(
-                              'Best selling',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Color(0xFF333333),
+                            DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                value: _selectedSort,
+                                items: _sortOptions
+                                    .map((s) => DropdownMenuItem(
+                                          value: s,
+                                          child: Text(s),
+                                        ))
+                                    .toList(),
+                                onChanged: (v) {
+                                  if (v == null) return;
+                                  setState(() {
+                                    _selectedSort = v;
+                                  });
+                                },
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Color(0xFF333333),
+                                ),
+                                dropdownColor: Colors.white,
                               ),
                             ),
                           ],
@@ -109,14 +140,39 @@ class CollectionPage extends StatelessWidget {
 
                   // Load and show products for this collection
                   FutureBuilder<List<Product>>(
-                    future: AssetProductRepository().fetchByCollection(id),
+                    future:
+                        AssetProductRepository().fetchByCollection(widget.id),
                     builder: (context, snap) {
                       if (snap.connectionState == ConnectionState.waiting) {
                         return const SizedBox(height: 18);
                       }
 
                       final products = snap.data ?? [];
-                      final count = products.length;
+                      // Apply selected sort in-memory
+                      final sorted = List<Product>.from(products);
+                      switch (_selectedSort) {
+                        case 'Alphabetically, A-Z':
+                          sorted.sort((a, b) => a.title
+                              .toLowerCase()
+                              .compareTo(b.title.toLowerCase()));
+                          break;
+                        case 'Alphabetically, Z-A':
+                          sorted.sort((a, b) => b.title
+                              .toLowerCase()
+                              .compareTo(a.title.toLowerCase()));
+                          break;
+                        case 'Price, low to high':
+                          sorted.sort((a, b) => a.price.compareTo(b.price));
+                          break;
+                        case 'Price, high to low':
+                          sorted.sort((a, b) => b.price.compareTo(a.price));
+                          break;
+                        default:
+                          // Featured / Best selling / unknown: keep original order
+                          break;
+                      }
+
+                      final count = sorted.length;
 
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -144,9 +200,9 @@ class CollectionPage extends StatelessWidget {
                               mainAxisSpacing: 12,
                               childAspectRatio: 0.9,
                             ),
-                            itemCount: products.length,
+                            itemCount: sorted.length,
                             itemBuilder: (context, i) {
-                              final p = products[i];
+                              final p = sorted[i];
                               return Card(
                                 clipBehavior: Clip.hardEdge,
                                 shape: RoundedRectangleBorder(
