@@ -181,11 +181,17 @@ class SharedLayout extends StatelessWidget {
                                     const PopupMenuItem(
                                         value: 'SALE!', child: Text('SALE!')),
                                     const PopupMenuItem(
+                                        value: 'Collections',
+                                        child: Text('Collections')),
+                                    const PopupMenuItem(
                                         value: 'About', child: Text('About')),
                                   ],
                                   onSelected: (value) {
                                     if (value == 'Home') {
                                       _navigateToHome(context);
+                                    } else if (value == 'Collections') {
+                                      Navigator.pushNamed(
+                                          context, '/collections');
                                     } else if (value == 'About') {
                                       _navigateToAbout(context);
                                     } else {
