@@ -184,6 +184,9 @@ class SharedLayout extends StatelessWidget {
                                         value: 'Collections',
                                         child: Text('Collections')),
                                     const PopupMenuItem(
+                                        value: 'Collection Page',
+                                        child: Text('Collection Page')),
+                                    const PopupMenuItem(
                                         value: 'About', child: Text('About')),
                                   ],
                                   onSelected: (value) {
@@ -192,6 +195,11 @@ class SharedLayout extends StatelessWidget {
                                     } else if (value == 'Collections') {
                                       Navigator.pushNamed(
                                           context, '/collections');
+                                    } else if (value == 'Collection Page') {
+                                      Navigator.pushNamed(
+                                          context, '/collection', arguments: {
+                                        'title': 'Autumn Favourites'
+                                      });
                                     } else if (value == 'About') {
                                       _navigateToAbout(context);
                                     } else {
