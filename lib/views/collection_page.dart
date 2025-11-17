@@ -142,7 +142,7 @@ class CollectionPage extends StatelessWidget {
                                       : 2,
                               crossAxisSpacing: 12,
                               mainAxisSpacing: 12,
-                              childAspectRatio: 0.8,
+                              childAspectRatio: 0.9,
                             ),
                             itemCount: products.length,
                             itemBuilder: (context, i) {
@@ -170,7 +170,7 @@ class CollectionPage extends StatelessWidget {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(
-                                          12.0, 8.0, 12.0, 8.0),
+                                          12.0, 8.0, 12.0, 0.0),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -185,7 +185,7 @@ class CollectionPage extends StatelessWidget {
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
                                           ),
-                                          const SizedBox(height: 6),
+                                          const SizedBox(height: 4),
                                           Text(
                                             '£' +
                                                 (p.price / 100)
