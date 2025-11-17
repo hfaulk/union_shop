@@ -274,6 +274,7 @@ class SharedLayout extends StatelessWidget {
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF4d2963),
+                        foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         textStyle: const TextStyle(
                             fontWeight: FontWeight.w700, letterSpacing: 1.2),
