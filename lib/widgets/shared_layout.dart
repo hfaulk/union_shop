@@ -215,7 +215,7 @@ class SharedLayout extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text('Opening Hours',
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
@@ -244,6 +244,43 @@ class SharedLayout extends StatelessWidget {
                   Text('Search'),
                   SizedBox(height: 16),
                   Text('Terms & Conditions of Sale Policy'),
+
+                  SizedBox(height: 28),
+                  // Latest Offers (newsletter signup)
+                  Text('Latest Offers',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+                  SizedBox(height: 12),
+                  Container(
+                    height: 48,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade300),
+                      color: Colors.white,
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Email address',
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF4d2963),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        textStyle: const TextStyle(
+                            fontWeight: FontWeight.w700, letterSpacing: 1.2),
+                      ),
+                      child: const Text('SUBSCRIBE'),
+                    ),
+                  ),
                 ],
               ),
             ),
