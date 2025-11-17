@@ -241,9 +241,15 @@ class SharedLayout extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
                   SizedBox(height: 12),
-                  Text('Search'),
+                  GestureDetector(
+                    onTap: _placeholderCallbackForButtons,
+                    child: const Text('Search'),
+                  ),
                   SizedBox(height: 16),
-                  Text('Terms & Conditions of Sale Policy'),
+                  GestureDetector(
+                    onTap: _placeholderCallbackForButtons,
+                    child: const Text('Terms & Conditions of Sale Policy'),
+                  ),
 
                   SizedBox(height: 28),
                   // Latest Offers (newsletter signup)
