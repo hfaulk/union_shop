@@ -243,12 +243,18 @@ class SharedLayout extends StatelessWidget {
                   SizedBox(height: 12),
                   GestureDetector(
                     onTap: _placeholderCallbackForButtons,
-                    child: const Text('Search'),
+                    child: const Text('Search',
+                        style: TextStyle(
+                            color: Color(0xFF4d2963),
+                            decoration: TextDecoration.underline)),
                   ),
                   SizedBox(height: 16),
                   GestureDetector(
                     onTap: _placeholderCallbackForButtons,
-                    child: const Text('Terms & Conditions of Sale Policy'),
+                    child: const Text('Terms & Conditions of Sale Policy',
+                        style: TextStyle(
+                            color: Color(0xFF4d2963),
+                            decoration: TextDecoration.underline)),
                   ),
 
                   SizedBox(height: 28),
