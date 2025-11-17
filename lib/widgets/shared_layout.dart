@@ -267,7 +267,7 @@ class SharedLayout extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 8),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -275,7 +275,7 @@ class SharedLayout extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF4d2963),
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        padding: const EdgeInsets.symmetric(vertical: 20),
                         textStyle: const TextStyle(
                             fontWeight: FontWeight.w700, letterSpacing: 1.2),
                         shape: const RoundedRectangleBorder(
