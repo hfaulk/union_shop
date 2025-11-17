@@ -4,6 +4,18 @@ class SharedLayout extends StatelessWidget {
   final Widget body;
   const SharedLayout({super.key, required this.body});
 
+  void _navigateToHome(BuildContext context) {
+    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+  }
+
+  void _navigateToAbout(BuildContext context) {
+    Navigator.pushNamed(context, '/about');
+  }
+
+  void _placeholderCallbackForButtons() {
+    // Intentional no-op placeholder to match main.dart behavior for unimplemented buttons
+  }
+
   @override
   Widget build(BuildContext context) {
     // small scaffold with top sale banner + body area
@@ -39,7 +51,9 @@ class SharedLayout extends StatelessWidget {
                     child: Row(
                       children: [
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            _navigateToHome(context);
+                          },
                           child: Image.network(
                             'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
                             height: 18,
@@ -102,18 +116,80 @@ class SharedLayout extends StatelessWidget {
                                 ),
                                 onPressed: () {},
                               ),
-                              IconButton(
+                              PopupMenuButton<String>(
                                 icon: const Icon(
                                   Icons.menu,
                                   size: 18,
                                   color: Colors.grey,
                                 ),
                                 padding: const EdgeInsets.all(8),
-                                constraints: const BoxConstraints(
-                                  minWidth: 32,
-                                  minHeight: 32,
-                                ),
-                                onPressed: () {},
+                                itemBuilder: (context) => [
+                                  const PopupMenuItem(
+                                      value: 'Home', child: Text('Home')),
+                                  PopupMenuItem(
+                                    // Shop: show a small inline submenu (chevron) to open categories
+                                    child: Row(
+                                      children: [
+                                        const Text('Shop'),
+                                        const Spacer(),
+                                        // small chevron button that opens a secondary popup
+                                        PopupMenuButton<String>(
+                                          icon: const Icon(Icons.chevron_right,
+                                              size: 18),
+                                          padding: EdgeInsets.zero,
+                                          itemBuilder: (context) => [
+                                            const PopupMenuItem(
+                                                value: 'Clothing',
+                                                child: Text('Clothing')),
+                                            const PopupMenuItem(
+                                                value: 'Merchandise',
+                                                child: Text('Merchandise')),
+                                            const PopupMenuItem(
+                                                value: 'Halloween',
+                                                child: Text('Halloween')),
+                                            const PopupMenuItem(
+                                                value:
+                                                    'Signature & Essential Range',
+                                                child: Text(
+                                                    'Signature & Essential Range')),
+                                            const PopupMenuItem(
+                                                value:
+                                                    'Portsmouth City Collection',
+                                                child: Text(
+                                                    'Portsmouth City Collection')),
+                                            const PopupMenuItem(
+                                                value: 'Pride Collection',
+                                                child:
+                                                    Text('Pride Collection')),
+                                            const PopupMenuItem(
+                                                value: 'Graduation',
+                                                child: Text('Graduation')),
+                                          ],
+                                          onSelected: (sub) {
+                                            // placeholder handler for category selection
+                                            _placeholderCallbackForButtons();
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const PopupMenuItem(
+                                      value: 'The Print Shack',
+                                      child: Text('The Print Shack')),
+                                  const PopupMenuItem(
+                                      value: 'SALE!', child: Text('SALE!')),
+                                  const PopupMenuItem(
+                                      value: 'About', child: Text('About')),
+                                ],
+                                onSelected: (value) {
+                                  if (value == 'Home') {
+                                    _navigateToHome(context);
+                                  } else if (value == 'About') {
+                                    _navigateToAbout(context);
+                                  } else {
+                                    _placeholderCallbackForButtons();
+                                  }
+                                },
                               ),
                             ],
                           ),
