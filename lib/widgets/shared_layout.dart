@@ -278,6 +278,9 @@ class SharedLayout extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         textStyle: const TextStyle(
                             fontWeight: FontWeight.w700, letterSpacing: 1.2),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
+                        ),
                       ),
                       child: const Text('SUBSCRIBE'),
                     ),
