@@ -105,20 +105,34 @@ class CollectionPage extends StatelessWidget {
                   const SizedBox(height: 12),
                   const Divider(height: 1, thickness: 1),
                   const SizedBox(height: 12),
-                  // Show number of products in this collection
+                  // Step 1 (small): show simple list of product titles
                   FutureBuilder<List<Product>>(
                     future: AssetProductRepository().fetchByCollection(id),
                     builder: (context, snap) {
                       if (snap.connectionState == ConnectionState.waiting) {
                         return const SizedBox(height: 18);
                       }
-                      final count = snap.data?.length ?? 0;
-                      return Text(
-                        count.toString() + ' products',
-                        style: const TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Color(0xFF9E9E9E),
-                        ),
+                      final products = snap.data ?? [];
+                      final count = products.length;
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            '$count products',
+                            style: const TextStyle(
+                              fontStyle: FontStyle.italic,
+                              color: Color(0xFF9E9E9E),
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          // Simple, unstyled list of titles (small incremental change)
+                          ...products.map((p) => Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 6.0),
+                                child: Text(p.title),
+                              )),
+                        ],
                       );
                     },
                   ),
