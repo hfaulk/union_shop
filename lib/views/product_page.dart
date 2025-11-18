@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/shared_layout.dart';
-import 'package:union_shop/repositories/product_repository.dart';
-import 'package:union_shop/models/product.dart';
+// kept minimal: no repository/model imports required for now
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
@@ -22,7 +21,6 @@ class ProductPage extends StatelessWidget {
     final passedTitle = argMap?['title'] as String?;
     final passedImage = argMap?['imageUrl'] as String?;
     final passedPriceRaw = argMap?['price'];
-    final passedId = argMap?['id'] as String?;
 
     String priceText = '£15.00';
     if (passedPriceRaw != null) {
