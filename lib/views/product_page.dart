@@ -14,11 +14,27 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Read minimal product fields from route arguments (if provided)
+    final args = ModalRoute.of(context)?.settings.arguments;
+    final argMap = (args is Map) ? args as Map<String, dynamic> : null;
+    final passedTitle = argMap?['title'] as String?;
+    final passedImage = argMap?['imageUrl'] as String?;
+    final passedPriceRaw = argMap?['price'];
+
+    String priceText = '£15.00';
+    if (passedPriceRaw != null) {
+      if (passedPriceRaw is int) {
+        priceText = '£' + (passedPriceRaw / 100).toStringAsFixed(2);
+      } else if (passedPriceRaw is String) {
+        priceText = passedPriceRaw;
+      }
+    }
+
     return SharedLayout(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Product details (moved into SharedLayout body)
+            // Product details (uses passed args when available)
             Container(
               color: Colors.white,
               padding: const EdgeInsets.all(24),
@@ -36,7 +52,8 @@ class ProductPage extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Image.network(
-                        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                        passedImage ??
+                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
@@ -67,9 +84,9 @@ class ProductPage extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // Product name
-                  const Text(
-                    'Placeholder Product Name',
-                    style: TextStyle(
+                  Text(
+                    passedTitle ?? 'Placeholder Product Name',
+                    style: const TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -79,9 +96,9 @@ class ProductPage extends StatelessWidget {
                   const SizedBox(height: 12),
 
                   // Product price
-                  const Text(
-                    '£15.00',
-                    style: TextStyle(
+                  Text(
+                    priceText,
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF4d2963),
