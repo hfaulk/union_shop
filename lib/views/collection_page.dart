@@ -254,7 +254,12 @@ class _CollectionPageState extends State<CollectionPage> {
                                   Navigator.pushNamed(
                                     context,
                                     '/product',
-                                    arguments: {'id': p.id},
+                                    arguments: {
+                                      'id': p.id,
+                                      'title': p.title,
+                                      'price': p.price,
+                                      'imageUrl': p.imageUrl,
+                                    },
                                   );
                                 },
                                 child: Card(
