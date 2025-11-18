@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/shared_layout.dart';
+import 'package:union_shop/repositories/product_repository.dart';
+import 'package:union_shop/models/product.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
@@ -20,6 +22,7 @@ class ProductPage extends StatelessWidget {
     final passedTitle = argMap?['title'] as String?;
     final passedImage = argMap?['imageUrl'] as String?;
     final passedPriceRaw = argMap?['price'];
+    final passedId = argMap?['id'] as String?;
 
     String priceText = '£15.00';
     if (passedPriceRaw != null) {
@@ -30,18 +33,17 @@ class ProductPage extends StatelessWidget {
       }
     }
 
+    // Minimal: render using the passed-in fields only (keeps diff small)
     return SharedLayout(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Product details (uses passed args when available)
             Container(
               color: Colors.white,
               padding: const EdgeInsets.all(24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Product image
                   Container(
                     height: 300,
                     width: double.infinity,
@@ -59,71 +61,41 @@ class ProductPage extends StatelessWidget {
                           return Container(
                             color: Colors.grey[300],
                             child: const Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.image_not_supported,
-                                    size: 64,
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(height: 8),
-                                  Text(
-                                    'Image unavailable',
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
-                                ],
-                              ),
+                              child: Icon(Icons.image_not_supported,
+                                  size: 64, color: Colors.grey),
                             ),
                           );
                         },
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 24),
-
-                  // Product name
                   Text(
                     passedTitle ?? 'Placeholder Product Name',
                     style: const TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
                   ),
-
                   const SizedBox(height: 12),
-
-                  // Product price
                   Text(
                     priceText,
                     style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF4d2963),
-                    ),
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF4d2963)),
                   ),
-
                   const SizedBox(height: 24),
-
-                  // Product description
-                  const Text(
-                    'Description',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
-                  ),
+                  const Text('Description',
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black)),
                   const SizedBox(height: 8),
                   const Text(
                     'This is a placeholder description for the product. Students should replace this with real product information and implement proper data management.',
                     style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                      height: 1.5,
-                    ),
+                        fontSize: 16, color: Colors.grey, height: 1.5),
                   ),
                 ],
               ),
