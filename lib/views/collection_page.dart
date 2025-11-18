@@ -249,97 +249,106 @@ class _CollectionPageState extends State<CollectionPage> {
                             itemCount: filtered.length,
                             itemBuilder: (context, i) {
                               final p = filtered[i];
-                              return Card(
-                                clipBehavior: Clip.hardEdge,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4)),
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    // Image (covers area). Falls back to placeholder on error/empty URL.
-                                    AspectRatio(
-                                      aspectRatio: 4 / 3,
-                                      child: Builder(builder: (ctx) {
-                                        final src = p.imageUrl;
-                                        if (src.isEmpty) {
-                                          return Container(
-                                            color: const Color(0xFFF2F2F2),
-                                            child: const Center(
-                                              child: Icon(
-                                                Icons.image,
-                                                color: Color(0xFFBDBDBD),
-                                              ),
-                                            ),
-                                          );
-                                        }
-
-                                        return Image.network(
-                                          src,
-                                          fit: BoxFit.cover,
-                                          loadingBuilder:
-                                              (context, child, chunk) {
-                                            if (chunk == null) return child;
-                                            return Container(
-                                              color: const Color(0xFFF2F2F2),
-                                              child: const Center(
-                                                child: SizedBox(
-                                                  width: 24,
-                                                  height: 24,
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    strokeWidth: 2,
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          errorBuilder:
-                                              (context, error, stack) {
+                              return InkWell(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/product',
+                                    arguments: {'id': p.id},
+                                  );
+                                },
+                                child: Card(
+                                  clipBehavior: Clip.hardEdge,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(4)),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      // Image (covers area). Falls back to placeholder on error/empty URL.
+                                      AspectRatio(
+                                        aspectRatio: 4 / 3,
+                                        child: Builder(builder: (ctx) {
+                                          final src = p.imageUrl;
+                                          if (src.isEmpty) {
                                             return Container(
                                               color: const Color(0xFFF2F2F2),
                                               child: const Center(
                                                 child: Icon(
-                                                  Icons.broken_image,
+                                                  Icons.image,
                                                   color: Color(0xFFBDBDBD),
                                                 ),
                                               ),
                                             );
-                                          },
-                                        );
-                                      }),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          12.0, 8.0, 12.0, 0.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            p.title,
-                                            style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w700,
-                                              color: Color(0xFF2E2E2E),
-                                            ),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          const SizedBox(height: 4),
-                                          Text(
-                                            '£' +
-                                                (p.price / 100)
-                                                    .toStringAsFixed(2),
-                                            style: const TextStyle(
-                                              fontSize: 15,
-                                              color: Color(0xFF7A7A7A),
-                                            ),
-                                          ),
-                                        ],
+                                          }
+
+                                          return Image.network(
+                                            src,
+                                            fit: BoxFit.cover,
+                                            loadingBuilder:
+                                                (context, child, chunk) {
+                                              if (chunk == null) return child;
+                                              return Container(
+                                                color: const Color(0xFFF2F2F2),
+                                                child: const Center(
+                                                  child: SizedBox(
+                                                    width: 24,
+                                                    height: 24,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      strokeWidth: 2,
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            errorBuilder:
+                                                (context, error, stack) {
+                                              return Container(
+                                                color: const Color(0xFFF2F2F2),
+                                                child: const Center(
+                                                  child: Icon(
+                                                    Icons.broken_image,
+                                                    color: Color(0xFFBDBDBD),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        }),
                                       ),
-                                    ),
-                                  ],
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            12.0, 8.0, 12.0, 0.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              p.title,
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w700,
+                                                color: Color(0xFF2E2E2E),
+                                              ),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            const SizedBox(height: 4),
+                                            Text(
+                                              '£' +
+                                                  (p.price / 100)
+                                                      .toStringAsFixed(2),
+                                              style: const TextStyle(
+                                                fontSize: 15,
+                                                color: Color(0xFF7A7A7A),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               );
                             },
