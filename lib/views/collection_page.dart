@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/shared_layout.dart';
 import 'package:union_shop/repositories/product_repository.dart';
-// collections are not fetched here; FILTER BY will use static options from the screenshot
 import 'package:union_shop/models/product.dart';
 
 class CollectionPage extends StatefulWidget {
