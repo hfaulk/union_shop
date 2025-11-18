@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/shared_layout.dart';
 import 'package:union_shop/repositories/product_repository.dart';
+// collections are not fetched here; FILTER BY will use static options from the screenshot
 import 'package:union_shop/models/product.dart';
 
 class CollectionPage extends StatefulWidget {
@@ -27,6 +28,15 @@ class _CollectionPageState extends State<CollectionPage> {
     'Price, high to low',
   ];
 
+  // Filter options requested: label -> collection id used for filtering
+  final Map<String, String> _filterMap = {
+    'All Products': 'all',
+    'Clothing': 'clothing',
+    'Merchandise': 'merchandise',
+    'Popular': 'popular',
+  };
+
+  String _selectedFilterKey = 'all';
   late Future<List<Product>> _productsFuture;
 
   @override
@@ -98,12 +108,26 @@ class _CollectionPageState extends State<CollectionPage> {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            SizedBox(height: 8),
-                            Text(
-                              'All products',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Color(0xFF333333),
+                            const SizedBox(height: 8),
+                            DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                value: _selectedFilterKey,
+                                items: _filterMap.entries
+                                    .map((e) => DropdownMenuItem(
+                                          value: e.value,
+                                          child: Text(e.key),
+                                        ))
+                                    .toList(),
+                                onChanged: (v) {
+                                  if (v == null) return;
+                                  setState(() {
+                                    _selectedFilterKey = v;
+                                  });
+                                },
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Color(0xFF333333),
+                                ),
                               ),
                             ),
                           ],
@@ -187,7 +211,15 @@ class _CollectionPageState extends State<CollectionPage> {
                           break;
                       }
 
-                      final count = sorted.length;
+                      // Apply collection filter based on selected key
+                      final filtered = _selectedFilterKey == 'all'
+                          ? sorted
+                          : sorted
+                              .where((p) =>
+                                  p.collections.contains(_selectedFilterKey))
+                              .toList();
+
+                      final count = filtered.length;
 
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -215,9 +247,9 @@ class _CollectionPageState extends State<CollectionPage> {
                               mainAxisSpacing: 12,
                               childAspectRatio: 0.9,
                             ),
-                            itemCount: sorted.length,
+                            itemCount: filtered.length,
                             itemBuilder: (context, i) {
-                              final p = sorted[i];
+                              final p = filtered[i];
                               return Card(
                                 clipBehavior: Clip.hardEdge,
                                 shape: RoundedRectangleBorder(
