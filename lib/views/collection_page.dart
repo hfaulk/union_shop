@@ -341,9 +341,8 @@ class _CollectionPageState extends State<CollectionPage> {
                                             ),
                                             const SizedBox(height: 4),
                                             Text(
-                                              '£' +
-                                                  (p.price / 100)
-                                                      .toStringAsFixed(2),
+                                              '£${(p.price / 100)
+                                                      .toStringAsFixed(2)}',
                                               style: const TextStyle(
                                                 fontSize: 15,
                                                 color: Color(0xFF7A7A7A),

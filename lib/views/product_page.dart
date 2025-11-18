@@ -25,7 +25,7 @@ class ProductPage extends StatelessWidget {
     String priceText = '£15.00';
     if (passedPriceRaw != null) {
       if (passedPriceRaw is int) {
-        priceText = '£' + (passedPriceRaw / 100).toStringAsFixed(2);
+        priceText = '£${(passedPriceRaw / 100).toStringAsFixed(2)}';
       } else if (passedPriceRaw is String) {
         priceText = passedPriceRaw;
       }
