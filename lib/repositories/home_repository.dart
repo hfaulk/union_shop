@@ -49,7 +49,13 @@ class HomeRepository {
           final collection = await collectionRepo.fetchById(id);
           if (collection == null) continue;
           final products = await productRepo.fetchByCollection(collection.id);
-          // take first two
+          // choose two lowest-priced products (respect discountedPrice when available)
+          int effectivePrice(Product p) =>
+              (p.discount && p.discountedPrice != null)
+                  ? p.discountedPrice!
+                  : p.price;
+          products
+              .sort((a, b) => effectivePrice(a).compareTo(effectivePrice(b)));
           featured[collection] = products.take(2).toList();
         }
 
