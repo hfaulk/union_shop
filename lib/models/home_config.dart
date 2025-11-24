@@ -1,5 +1,3 @@
-import 'package:union_shop/models/collection.dart';
-
 class HomeConfig {
   final String heroTitle;
   final String heroDescription;
