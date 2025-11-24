@@ -172,15 +172,24 @@ class HomeScreen extends StatelessWidget {
             Container(
               child: Padding(
                   padding: const EdgeInsets.all(40.0),
-                  child: Column(
-                    children: [
-                      const Text('Featured Collection #1',
-                          style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black))
-                    ],
-                  )),
+                  child: Column(children: [
+                    const Text('Featured Collection #1',
+                        style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black)),
+                    const SizedBox(height: 16),
+                    Row(children: [
+                      Expanded(
+                          child: SizedBox(
+                        height: 320,
+                        child: ProductCard(
+                            title: 'Sample Product',
+                            price: '£20.00',
+                            imageUrl: 'https://via.placeholder.com/150'),
+                      ))
+                    ])
+                  ])),
             ),
           ],
         ),
