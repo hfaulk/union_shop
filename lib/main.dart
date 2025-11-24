@@ -170,7 +170,6 @@ class HomeScreen extends StatelessWidget {
 
             // Featured Collection #1 Section
             Container(
-              color: Colors.white,
               child: Padding(
                   padding: const EdgeInsets.all(40.0),
                   child: Column(
