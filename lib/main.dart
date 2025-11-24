@@ -110,7 +110,8 @@ class HomeScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              home?.heroTitle ?? 'Essential Range - Over 20% Off!',
+                              home?.heroTitle ??
+                                  'Essential Range - Over 20% Off!',
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 fontSize: 32,
@@ -135,8 +136,8 @@ class HomeScreen extends StatelessWidget {
                               onPressed: () {
                                 final heroCollection = home?.heroCollection;
                                 if (heroCollection != null) {
-                                  Navigator.pushNamed(
-                                      context, '/collections/${heroCollection.id}');
+                                  Navigator.pushNamed(context,
+                                      '/collections/${heroCollection.id}');
                                 } else {
                                   navigateToCollection(context);
                                 }
@@ -151,7 +152,8 @@ class HomeScreen extends StatelessWidget {
                               ),
                               child: const Text(
                                 'BROWSE COLLECTION',
-                                style: TextStyle(fontSize: 14, letterSpacing: 1),
+                                style:
+                                    TextStyle(fontSize: 14, letterSpacing: 1),
                               ),
                             ),
                           ],
