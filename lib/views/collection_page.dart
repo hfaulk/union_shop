@@ -342,7 +342,8 @@ class _CollectionPageState extends State<CollectionPage> {
                                                     color: Color(0xFF2E2E2E),
                                                   ),
                                                   maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                 ),
                                               ),
                                             ),
