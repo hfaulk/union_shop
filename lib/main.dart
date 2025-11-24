@@ -4,6 +4,9 @@ import 'package:union_shop/views/about.dart';
 import 'package:union_shop/views/collections.dart';
 import 'package:union_shop/views/collection_page.dart';
 import 'package:union_shop/widgets/shared_layout.dart';
+import 'package:union_shop/repositories/home_repository.dart';
+import 'package:union_shop/repositories/collection_repository.dart';
+import 'package:union_shop/repositories/product_repository.dart';
 
 void main() {
   runApp(const UnionShopApp());
