@@ -183,20 +183,32 @@ class HomeScreen extends StatelessWidget {
                       Expanded(
                           child: SizedBox(
                         height: 190,
-                        child: ProductCard(
-                            title: 'Sample Product',
-                            price: '£20.00',
-                            imageUrl: 'https://via.placeholder.com/150'),
+                        child: Card(
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                          clipBehavior: Clip.antiAlias,
+                          child: ProductCard(
+                              title: 'Sample Product',
+                              price: '£20.00',
+                              imageUrl: 'https://via.placeholder.com/150'),
+                        ),
                       )),
-                      SizedBox(width: 20),
+                      const SizedBox(width: 20),
                       Expanded(
                           child: SizedBox(
                         height: 190,
-                        child: ProductCard(
-                            title: 'Sample Product',
-                            price: '£20.00',
-                            originalPrice: '£25.00',
-                            imageUrl: 'https://via.placeholder.com/150'),
+                        child: Card(
+                          elevation: 2,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                          clipBehavior: Clip.antiAlias,
+                          child: ProductCard(
+                              title: 'Sample Product',
+                              price: '£20.00',
+                              originalPrice: '£25.00',
+                              imageUrl: 'https://via.placeholder.com/150'),
+                        ),
                       ))
                     ])
                   ])),
