@@ -190,6 +190,14 @@ class _CollectionPageState extends State<CollectionPage> {
                       final products = snap.data ?? [];
                       // Apply selected sort in-memory
                       final sorted = List<Product>.from(products);
+
+                      // Helper: effective price uses discountedPrice when available
+                      int effectivePrice(Product p) {
+                        return (p.discount && p.discountedPrice != null)
+                            ? p.discountedPrice!
+                            : p.price;
+                      }
+
                       switch (_selectedSort) {
                         case 'Alphabetically, A-Z':
                           sorted.sort((a, b) => a.title
@@ -202,10 +210,12 @@ class _CollectionPageState extends State<CollectionPage> {
                               .compareTo(a.title.toLowerCase()));
                           break;
                         case 'Price, low to high':
-                          sorted.sort((a, b) => a.price.compareTo(b.price));
+                          sorted.sort((a, b) =>
+                              effectivePrice(a).compareTo(effectivePrice(b)));
                           break;
                         case 'Price, high to low':
-                          sorted.sort((a, b) => b.price.compareTo(a.price));
+                          sorted.sort((a, b) =>
+                              effectivePrice(b).compareTo(effectivePrice(a)));
                           break;
                         default:
                           // Featured / Best selling / unknown: keep original order

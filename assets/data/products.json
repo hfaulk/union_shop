@@ -10,6 +10,8 @@
         "id": "classic-hoodies",
         "title": "Classic Hoodies",
         "price": 2500,
+        "discount": true,
+        "discountedPrice": 899,
         "imageUrl": "https://shop.upsu.net/cdn/shop/files/PurpleHoodieFinal_300x300.jpg?v=1742201957",
         "collections": ["clothing"]
     },
