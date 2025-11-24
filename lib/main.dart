@@ -229,12 +229,14 @@ class HomeScreen extends StatelessWidget {
 class ProductCard extends StatelessWidget {
   final String title;
   final String price;
+  final String? originalPrice;
   final String imageUrl;
 
   const ProductCard({
     super.key,
     required this.title,
     required this.price,
+    this.originalPrice,
     required this.imageUrl,
   });
 
@@ -271,10 +273,30 @@ class ProductCard extends StatelessWidget {
                 maxLines: 2,
               ),
               const SizedBox(height: 4),
-              Text(
-                price,
-                style: const TextStyle(fontSize: 13, color: Colors.grey),
-              ),
+              if (originalPrice != null) ...[
+                Row(
+                  children: [
+                    Text(
+                      originalPrice!,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: Colors.grey,
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      price,
+                      style: const TextStyle(fontSize: 13, color: Colors.blue),
+                    ),
+                  ],
+                ),
+              ] else ...[
+                Text(
+                  price,
+                  style: const TextStyle(fontSize: 13, color: Colors.grey),
+                ),
+              ],
             ],
           ),
         ],
