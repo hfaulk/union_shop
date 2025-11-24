@@ -259,6 +259,8 @@ class _CollectionPageState extends State<CollectionPage> {
                                       'title': p.title,
                                       'price': p.price,
                                       'imageUrl': p.imageUrl,
+                                      'discount': p.discount,
+                                      'discountedPrice': p.discountedPrice,
                                     },
                                   );
                                 },
