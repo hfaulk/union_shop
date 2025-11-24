@@ -94,51 +94,69 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Content overlay
+                  // Content overlay - loaded from `assets/data/home_config.json`
                   Positioned(
                     left: 24,
                     right: 24,
                     top: 80,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Essential Range - Over 20% Off!',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            height: 1.2,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          "Over 20% off on our Essential Range. Come and grab yours while stocks last!",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            height: 1.5,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 32),
-                        ElevatedButton(
-                          onPressed: () => navigateToCollection(context),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF4d2963),
-                            foregroundColor: Colors.white,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.zero,
+                    child: FutureBuilder<HomeData?>(
+                      future: HomeRepository(
+                        collectionRepo: AssetCollectionRepository(),
+                        productRepo: AssetProductRepository(),
+                      ).load(),
+                      builder: (context, snapshot) {
+                        final home = snapshot.data;
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              home?.heroTitle ?? 'Essential Range - Over 20% Off!',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 32,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                height: 1.2,
+                              ),
                             ),
-                            minimumSize: const Size(0, 56),
-                          ),
-                          child: const Text(
-                            'BROWSE COLLECTION',
-                            style: TextStyle(fontSize: 14, letterSpacing: 1),
-                          ),
-                        ),
-                      ],
+                            const SizedBox(height: 16),
+                            Text(
+                              home?.heroDescription ??
+                                  'Over 20% off on our Essential Range. Come and grab yours while stocks last!',
+                              style: const TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                                height: 1.5,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 32),
+                            ElevatedButton(
+                              onPressed: () {
+                                final heroCollection = home?.heroCollection;
+                                if (heroCollection != null) {
+                                  Navigator.pushNamed(
+                                      context, '/collections/${heroCollection.id}');
+                                } else {
+                                  navigateToCollection(context);
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF4d2963),
+                                foregroundColor: Colors.white,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero,
+                                ),
+                                minimumSize: const Size(0, 56),
+                              ),
+                              child: const Text(
+                                'BROWSE COLLECTION',
+                                style: TextStyle(fontSize: 14, letterSpacing: 1),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
                     ),
                   ),
                 ],
