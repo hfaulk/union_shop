@@ -243,11 +243,12 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Image area with fixed aspect ratio
-          AspectRatio(
-            aspectRatio: 4 / 3,
+          // Image area: fixed height so the info area keeps predictable space
+          SizedBox(
+            height: 95,
             child: Image.network(
               imageUrl,
+              width: double.infinity,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
@@ -262,19 +263,21 @@ class ProductCard extends StatelessWidget {
           // Info area
           Container(
             color: const Color(0xFFF7EEF6),
-            padding: const EdgeInsets.fromLTRB(16, 18, 16, 18),
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 4),
+                const SizedBox(height: 2),
                 Text(
                   title,
                   style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 6),
                 if (originalPrice != null) ...[
                   Row(
                     children: [
@@ -290,7 +293,7 @@ class ProductCard extends StatelessWidget {
                       Text(
                         price,
                         style: const TextStyle(
-                            fontSize: 16,
+                            fontSize: 13,
                             color: Colors.black54,
                             fontWeight: FontWeight.w600),
                       ),
@@ -299,7 +302,7 @@ class ProductCard extends StatelessWidget {
                 ] else ...[
                   Text(
                     price,
-                    style: const TextStyle(fontSize: 16, color: Colors.black54),
+                    style: const TextStyle(fontSize: 13, color: Colors.black54),
                   ),
                 ],
               ],
@@ -310,4 +313,3 @@ class ProductCard extends StatelessWidget {
     );
   }
 }
-
