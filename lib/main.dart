@@ -12,6 +12,9 @@ void main() {
   runApp(const UnionShopApp());
 }
 
+// Small helper: format integer pence as a pounds string, e.g. 1499 -> £14.99
+String penceToPounds(int pence) => '£${(pence / 100).toStringAsFixed(2)}';
+
 class UnionShopApp extends StatelessWidget {
   const UnionShopApp({super.key});
 
