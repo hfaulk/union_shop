@@ -54,11 +54,8 @@ class CollectionsPage extends StatelessWidget {
                     final c = collections[index];
                     return InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, '/collection', arguments: {
-                          'id': c.id,
-                          'title': c.title,
-                          'description': c.description ?? ''
-                        });
+                        final slug = c.id;
+                        Navigator.pushNamed(context, '/collections/$slug');
                       },
                       child: Card(
                         clipBehavior: Clip.hardEdge,

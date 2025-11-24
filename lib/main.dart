@@ -25,16 +25,26 @@ class UnionShopApp extends StatelessWidget {
       routes: {
         '/product': (context) => const ProductPage(),
         '/collections': (context) => const CollectionsPage(),
-        '/collection': (context) {
-          final args = ModalRoute.of(context)!.settings.arguments
-              as Map<String, String>?;
-          return CollectionPage(
-            id: args?['id'] ?? '',
-            title: args?['title'] ?? 'Collection',
-            description: args?['description'],
-          );
-        },
         '/about': (context) => const AboutPage(),
+      },
+      onGenerateRoute: (settings) {
+        final name = settings.name ?? '';
+        // parse as URI to handle any encoded parts
+        final uri = Uri.parse(name);
+        // match /collections/:slug
+        if (uri.pathSegments.length == 2 &&
+            uri.pathSegments[0] == 'collections') {
+          final slug = uri.pathSegments[1];
+          final title = Uri.decodeComponent(slug.replaceAll('-', ' '));
+          return MaterialPageRoute(
+            settings: settings,
+            builder: (context) => CollectionPage(
+              id: slug,
+              title: title,
+            ),
+          );
+        }
+        return null; // fall back to routes map
       },
     );
   }
