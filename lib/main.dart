@@ -172,8 +172,16 @@ class HomeScreen extends StatelessWidget {
             Container(
               color: Colors.white,
               child: Padding(
-                padding: const EdgeInsets.all(40.0),
-              ),
+                  padding: const EdgeInsets.all(40.0),
+                  child: Column(
+                    children: [
+                      const Text('Featured Collection #1',
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black))
+                    ],
+                  )),
             ),
           ],
         ),
