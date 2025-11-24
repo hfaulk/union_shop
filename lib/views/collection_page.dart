@@ -340,40 +340,42 @@ class _CollectionPageState extends State<CollectionPage> {
                                               overflow: TextOverflow.ellipsis,
                                             ),
                                             const SizedBox(height: 4),
-                                               // Show discounted price if present
-                                               p.discount && p.discountedPrice != null
-                                                   ? Row(
-                                                       children: [
-                                                         Text(
-                                                           '£${(p.price / 100)
-                                                                   .toStringAsFixed(2)}',
-                                                           style: const TextStyle(
-                                                             fontSize: 15,
-                                                             color: Color(0xFF9E9E9E),
-                                                             decoration:
-                                                                 TextDecoration.lineThrough,
-                                                           ),
-                                                         ),
-                                                         const SizedBox(width: 8),
-                                                         Text(
-                                                           '£${(p.discountedPrice! / 100)
-                                                                   .toStringAsFixed(2)}',
-                                                           style: const TextStyle(
-                                                             fontSize: 15,
-                                                             fontWeight: FontWeight.w700,
-                                                             color: Color(0xFF4d2963),
-                                                           ),
-                                                         ),
-                                                       ],
-                                                     )
-                                                   : Text(
-                                                       '£${(p.price / 100)
-                                                               .toStringAsFixed(2)}',
-                                                       style: const TextStyle(
-                                                         fontSize: 15,
-                                                         color: Color(0xFF7A7A7A),
-                                                       ),
-                                                     ),
+                                            // Show discounted price if present
+                                            p.discount &&
+                                                    p.discountedPrice != null
+                                                ? Row(
+                                                    children: [
+                                                      Text(
+                                                        '£${(p.price / 100).toStringAsFixed(2)}',
+                                                        style: const TextStyle(
+                                                          fontSize: 15,
+                                                          color:
+                                                              Color(0xFF9E9E9E),
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .lineThrough,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(width: 8),
+                                                      Text(
+                                                        '£${(p.discountedPrice! / 100).toStringAsFixed(2)}',
+                                                        style: const TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color:
+                                                              Color(0xFF4d2963),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )
+                                                : Text(
+                                                    '£${(p.price / 100).toStringAsFixed(2)}',
+                                                    style: const TextStyle(
+                                                      fontSize: 15,
+                                                      color: Color(0xFF7A7A7A),
+                                                    ),
+                                                  ),
                                           ],
                                         ),
                                       ),

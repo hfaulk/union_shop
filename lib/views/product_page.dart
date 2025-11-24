@@ -31,6 +31,17 @@ class ProductPage extends StatelessWidget {
       }
     }
 
+    final passedDiscount = argMap?['discount'] == true;
+    final passedDiscountedRaw = argMap?['discountedPrice'];
+    String? discountedText;
+    if (passedDiscountedRaw != null) {
+      if (passedDiscountedRaw is int) {
+        discountedText = '£${(passedDiscountedRaw / 100).toStringAsFixed(2)}';
+      } else if (passedDiscountedRaw is String) {
+        discountedText = passedDiscountedRaw;
+      }
+    }
+
     // Minimal: render using the passed-in fields only (keeps diff small)
     return SharedLayout(
       body: SingleChildScrollView(
@@ -76,13 +87,36 @@ class ProductPage extends StatelessWidget {
                         color: Colors.black),
                   ),
                   const SizedBox(height: 12),
-                  Text(
-                    priceText,
-                    style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF4d2963)),
-                  ),
+                  // Show discounted pricing if available
+                  passedDiscount && discountedText != null
+                      ? Row(
+                          children: [
+                            Text(
+                              priceText,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                color: Color(0xFF9E9E9E),
+                                decoration: TextDecoration.lineThrough,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Text(
+                              discountedText,
+                              style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF4d2963),
+                              ),
+                            ),
+                          ],
+                        )
+                      : Text(
+                          priceText,
+                          style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF4d2963)),
+                        ),
                   const SizedBox(height: 24),
                   const Text('Description',
                       style: TextStyle(
