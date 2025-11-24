@@ -54,6 +54,8 @@ class _CollectionPageState extends State<CollectionPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isWide = MediaQuery.of(context).size.width > 600;
+    final gridChildAspectRatio = isWide ? 0.9 : 0.75;
     return SharedLayout(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24),
@@ -236,15 +238,11 @@ class _CollectionPageState extends State<CollectionPage> {
                           GridView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount:
-                                  MediaQuery.of(context).size.width > 600
-                                      ? 3
-                                      : 2,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: isWide ? 3 : 2,
                               crossAxisSpacing: 12,
                               mainAxisSpacing: 12,
-                              childAspectRatio: 0.9,
+                              childAspectRatio: gridChildAspectRatio,
                             ),
                             itemCount: filtered.length,
                             itemBuilder: (context, i) {
