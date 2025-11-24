@@ -243,7 +243,9 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
+          // Image area with fixed aspect ratio
+          AspectRatio(
+            aspectRatio: 4 / 3,
             child: Image.network(
               imageUrl,
               fit: BoxFit.cover,
@@ -257,44 +259,55 @@ class ProductCard extends StatelessWidget {
               },
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 4),
-              Text(
-                title,
-                style: const TextStyle(fontSize: 14, color: Colors.black),
-                maxLines: 2,
-              ),
-              const SizedBox(height: 4),
-              if (originalPrice != null) ...[
-                Row(
-                  children: [
-                    Text(
-                      originalPrice!,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: Colors.grey,
-                        decoration: TextDecoration.lineThrough,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      price,
-                      style: const TextStyle(fontSize: 13, color: Colors.blue),
-                    ),
-                  ],
-                ),
-              ] else ...[
+          // Info area
+          Container(
+            color: const Color(0xFFF7EEF6),
+            padding: const EdgeInsets.fromLTRB(16, 18, 16, 18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 4),
                 Text(
-                  price,
-                  style: const TextStyle(fontSize: 13, color: Colors.grey),
+                  title,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
+                const SizedBox(height: 12),
+                if (originalPrice != null) ...[
+                  Row(
+                    children: [
+                      Text(
+                        originalPrice!,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        price,
+                        style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                ] else ...[
+                  Text(
+                    price,
+                    style: const TextStyle(fontSize: 16, color: Colors.black54),
+                  ),
+                ],
               ],
-            ],
+            ),
           ),
         ],
       ),
     );
   }
 }
+
