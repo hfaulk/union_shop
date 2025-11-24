@@ -1,0 +1,13 @@
+[
+    {
+        "hero": {
+            "title": "Essential Range - Over 20% Off!",
+            "description": "Over 20% off on our Essential Range. Come and grab yours while stocks last!",
+            "collection": "essential"
+        },
+        "featuredCollections": [
+            "signature-essentials",
+            "autumn"
+        ]
+    }
+]
