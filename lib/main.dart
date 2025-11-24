@@ -182,10 +182,20 @@ class HomeScreen extends StatelessWidget {
                     Row(children: [
                       Expanded(
                           child: SizedBox(
-                        height: 320,
+                        height: 190,
                         child: ProductCard(
                             title: 'Sample Product',
                             price: '£20.00',
+                            imageUrl: 'https://via.placeholder.com/150'),
+                      )),
+                      SizedBox(width: 20),
+                      Expanded(
+                          child: SizedBox(
+                        height: 190,
+                        child: ProductCard(
+                            title: 'Sample Product',
+                            price: '£20.00',
+                            originalPrice: '£25.00',
                             imageUrl: 'https://via.placeholder.com/150'),
                       ))
                     ])
