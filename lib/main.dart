@@ -168,7 +168,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            // Products Section
+            // Featured Collection #1 Section
             Container(
               color: Colors.white,
               child: Padding(
