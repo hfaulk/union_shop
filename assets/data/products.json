@@ -17,6 +17,8 @@
         "id": "signature-tshirt",
         "title": "Signature T-Shirt",
         "price": 1499,
+        "discount": true,
+        "discountedPrice": 999,
         "imageUrl": "https://shop.upsu.net/cdn/shop/files/Signature_T-Shirt_Indigo_Blue_2_300x300.jpg?v=1758290534",
         "collections": ["signature-essentials", "clothing"]
     },
