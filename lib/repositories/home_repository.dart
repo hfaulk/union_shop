@@ -45,18 +45,36 @@ class HomeRepository {
             : null;
 
         final Map<Collection, List<Product>> featured = {};
-        for (final id in cfg.featuredCollectionIds) {
-          final collection = await collectionRepo.fetchById(id);
+        // cfg.featuredCollections is a map collectionId -> list of productIds
+        for (final entry in cfg.featuredCollections.entries) {
+          final collectionId = entry.key;
+          final productIds = entry.value;
+          final collection = await collectionRepo.fetchById(collectionId);
           if (collection == null) continue;
-          final products = await productRepo.fetchByCollection(collection.id);
-          // choose two lowest-priced products (respect discountedPrice when available)
-          int effectivePrice(Product p) =>
-              (p.discount && p.discountedPrice != null)
-                  ? p.discountedPrice!
-                  : p.price;
-          products
-              .sort((a, b) => effectivePrice(a).compareTo(effectivePrice(b)));
-          featured[collection] = products.take(2).toList();
+
+          final List<Product> chosen = [];
+          // If product ids are specified, try to load those exact products in order
+          if (productIds.isNotEmpty) {
+            for (final pid in productIds) {
+              final p = await productRepo.fetchById(pid);
+              if (p != null) chosen.add(p);
+              if (chosen.length >= 2) break;
+            }
+          }
+
+          // Fallback: if no products specified or found, choose lowest-priced products from the collection
+          if (chosen.isEmpty) {
+            final products = await productRepo.fetchByCollection(collection.id);
+            int effectivePrice(Product p) =>
+                (p.discount && p.discountedPrice != null)
+                    ? p.discountedPrice!
+                    : p.price;
+            products
+                .sort((a, b) => effectivePrice(a).compareTo(effectivePrice(b)));
+            chosen.addAll(products.take(2).toList());
+          }
+
+          featured[collection] = chosen;
         }
 
         return HomeData(
