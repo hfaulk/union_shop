@@ -20,24 +20,6 @@ class _HeroCarouselState extends State<HeroCarousel> {
 
   List<HeroSlide> _loadedSlides = [];
 
-  final List<HeroSlide> _sample = const [
-    HeroSlide(
-      image: 'assets/images/hero1.png',
-      title: 'Essential Range - Over 20% OFF!',
-      description:
-          'Over 20% off our Essential Range. Come and grab yours while stock lasts!',
-      buttonText: 'BROWSE COLLECTION',
-      routeOrUrl: '/collections',
-    ),
-    HeroSlide(
-      image: 'assets/images/hero2.jpg',
-      title: 'New Arrivals',
-      description: 'Check out our new range for the season.',
-      buttonText: 'SHOP NOW',
-      routeOrUrl: '/products',
-    ),
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -68,8 +50,10 @@ class _HeroCarouselState extends State<HeroCarousel> {
   void _startAutoplay() {
     _autoplayTimer?.cancel();
     _autoplayTimer = Timer.periodic(_autoPlayInterval, (_) {
-      final len =
-          widget.slides.isNotEmpty ? widget.slides.length : _sample.length;
+      final len = widget.slides.isNotEmpty
+          ? widget.slides.length
+          : _loadedSlides.length;
+      if (len == 0) return; // nothing to advance to
       final next = (_current + 1) % len;
       if (_controller.hasClients) {
         _controller.animateToPage(next,
@@ -102,9 +86,19 @@ class _HeroCarouselState extends State<HeroCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    final slides = widget.slides.isNotEmpty
-        ? widget.slides
-        : (_loadedSlides.isNotEmpty ? _loadedSlides : _sample);
+    final slides = widget.slides.isNotEmpty ? widget.slides : _loadedSlides;
+    if (slides.isEmpty) {
+      return SizedBox(
+        height: 420,
+        child: Container(
+          color: Colors.grey[900],
+          child: const Center(
+            child: Text('No slides available',
+                style: TextStyle(color: Colors.white)),
+          ),
+        ),
+      );
+    }
     return SizedBox(
       height: 420,
       child: Stack(
@@ -149,26 +143,7 @@ class _HeroCarouselState extends State<HeroCarousel> {
                       ],
                     ),
                   ),
-                  Positioned(
-                    left: 12,
-                    top: 0,
-                    bottom: 0,
-                    child: Center(
-                      child: IconButton(
-                        color: Colors.white,
-                        icon: const Icon(Icons.chevron_left, size: 32),
-                        onPressed: () {
-                          final prev = (_current - 1) < 0
-                              ? slides.length - 1
-                              : _current - 1;
-                          _controller.animateToPage(prev,
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeInOut);
-                          _restartAutoplayWithDelay();
-                        },
-                      ),
-                    ),
-                  ),
+                  // per-slide arrow removed; shared overlay arrows remain
                 ],
               );
             },
