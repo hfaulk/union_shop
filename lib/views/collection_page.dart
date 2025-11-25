@@ -198,28 +198,26 @@ class _CollectionPageState extends State<CollectionPage> {
                             : p.price;
                       }
 
-                      switch (_selectedSort) {
-                        case 'Alphabetically, A-Z':
-                          sorted.sort((a, b) => a.title
-                              .toLowerCase()
-                              .compareTo(b.title.toLowerCase()));
-                          break;
-                        case 'Alphabetically, Z-A':
-                          sorted.sort((a, b) => b.title
-                              .toLowerCase()
-                              .compareTo(a.title.toLowerCase()));
-                          break;
-                        case 'Price, low to high':
-                          sorted.sort((a, b) =>
-                              effectivePrice(a).compareTo(effectivePrice(b)));
-                          break;
-                        case 'Price, high to low':
-                          sorted.sort((a, b) =>
-                              effectivePrice(b).compareTo(effectivePrice(a)));
-                          break;
-                        default:
-                          // Featured / Best selling / unknown: keep original order
-                          break;
+                      // Normalize selected sort to be case-insensitive and robust
+                      final sortKey = _selectedSort.toLowerCase();
+                      if (sortKey == 'alphabetically, a-z') {
+                        sorted.sort((a, b) => a.title
+                            .toLowerCase()
+                            .compareTo(b.title.toLowerCase()));
+                      } else if (sortKey == 'alphabetically, z-a') {
+                        sorted.sort((a, b) => b.title
+                            .toLowerCase()
+                            .compareTo(a.title.toLowerCase()));
+                      } else if (sortKey.contains('price') &&
+                          sortKey.contains('low')) {
+                        sorted.sort((a, b) =>
+                            effectivePrice(a).compareTo(effectivePrice(b)));
+                      } else if (sortKey.contains('price') &&
+                          sortKey.contains('high')) {
+                        sorted.sort((a, b) =>
+                            effectivePrice(b).compareTo(effectivePrice(a)));
+                      } else {
+                        // Featured / Best selling / unknown: keep original order
                       }
 
                       // Apply collection filter based on selected key
