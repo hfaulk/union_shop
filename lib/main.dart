@@ -362,7 +362,7 @@ class ProductCard extends StatelessWidget {
           // Info area
           Container(
             color: const Color(0xFFF7EEF6),
-            padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+            padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
