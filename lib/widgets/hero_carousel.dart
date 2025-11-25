@@ -65,6 +65,13 @@ class _HeroCarouselState extends State<HeroCarousel> {
     _autoplayTimer = null;
   }
 
+  Timer? _resumeTimer;
+  void _restartAutoplayWithDelay([Duration delay = const Duration(seconds: 6)]) {
+    _resumeTimer?.cancel();
+    _stopAutoplay();
+    _resumeTimer = Timer(delay, () => _startAutoplay());
+  }
+
   @override
   void dispose() {
     _stopAutoplay();
