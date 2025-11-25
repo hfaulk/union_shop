@@ -4,6 +4,7 @@ import 'package:union_shop/views/about.dart';
 import 'package:union_shop/views/collections.dart';
 import 'package:union_shop/views/collection_page.dart';
 import 'package:union_shop/widgets/shared_layout.dart';
+import 'package:union_shop/widgets/hero_carousel.dart';
 import 'package:union_shop/repositories/home_repository.dart';
 import 'package:union_shop/repositories/collection_repository.dart';
 import 'package:union_shop/repositories/product_repository.dart';
@@ -73,100 +74,9 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Hero Section
+            // Hero Section (replaced by widget)
             SizedBox(
-              height: 400,
-              width: double.infinity,
-              child: Stack(
-                children: [
-                  // Background image
-                  Positioned.fill(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.7),
-                        ),
-                      ),
-                    ),
-                  ),
-                  // Content overlay - loaded from `assets/data/home_config.json`
-                  Positioned(
-                    left: 24,
-                    right: 24,
-                    top: 80,
-                    child: FutureBuilder<HomeData?>(
-                      future: HomeRepository(
-                        collectionRepo: AssetCollectionRepository(),
-                        productRepo: AssetProductRepository(),
-                      ).load(),
-                      builder: (context, snapshot) {
-                        final home = snapshot.data;
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              home?.heroTitle ??
-                                  'Essential Range - Over 20% Off!',
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontSize: 32,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                height: 1.2,
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              home?.heroDescription ??
-                                  'Over 20% off on our Essential Range. Come and grab yours while stocks last!',
-                              style: const TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                                height: 1.5,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 32),
-                            ElevatedButton(
-                              onPressed: () {
-                                final heroCollection = home?.heroCollection;
-                                if (heroCollection != null) {
-                                  Navigator.pushNamed(context,
-                                      '/collections/${heroCollection.id}');
-                                } else {
-                                  navigateToCollection(context);
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFF4d2963),
-                                foregroundColor: Colors.white,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.zero,
-                                ),
-                                minimumSize: const Size(0, 56),
-                              ),
-                              child: const Text(
-                                'BROWSE COLLECTION',
-                                style:
-                                    TextStyle(fontSize: 14, letterSpacing: 1),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                height: 400, width: double.infinity, child: HeroCarousel()),
 
             // Featured Collection #1 Section (driven from home_config.json)
             FutureBuilder<HomeData?>(
