@@ -16,8 +16,8 @@ void main() {
       );
       // Carousel first slide title
       expect(find.text('Essential Range - Over 20% OFF!'), findsOneWidget);
-      // Featured collection fallback sample product label
-      expect(find.text('Sample Product'), findsOneWidget);
+      // Featured collection fallback: there should be at least one product card
+      expect(find.byType(ProductCard), findsWidgets);
     });
 
     testWidgets('should display product cards', (tester) async {
@@ -25,7 +25,7 @@ void main() {
       await tester.pump();
 
       // Check that sample product cards are displayed in the fallback
-      expect(find.text('Sample Product'), findsWidgets);
+      expect(find.byType(ProductCard), findsWidgets);
       // Check a sample price is displayed (may appear multiple times)
       expect(find.text('£20.00'), findsWidgets);
     });

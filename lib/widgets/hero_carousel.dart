@@ -159,6 +159,7 @@ class _HeroCarouselState extends State<HeroCarousel> {
             bottom: 0,
             child: Center(
               child: IconButton(
+                key: const ValueKey('hero_arrow_left'),
                 color: Colors.white,
                 icon: const Icon(Icons.chevron_left, size: 32),
                 onPressed: () {
@@ -178,6 +179,7 @@ class _HeroCarouselState extends State<HeroCarousel> {
             bottom: 0,
             child: Center(
               child: IconButton(
+                key: const ValueKey('hero_arrow_right'),
                 color: Colors.white,
                 icon: const Icon(Icons.chevron_right, size: 32),
                 onPressed: () {
