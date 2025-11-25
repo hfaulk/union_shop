@@ -44,14 +44,44 @@ class _HeroCarouselState extends State<HeroCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    // Minimal placeholder UI for incremental development.
-    return const SizedBox(
+    final slides = widget.slides.isNotEmpty ? widget.slides : _sample;
+    return SizedBox(
       height: 420,
-      child: Center(
-        child: Text(
-          'HeroCarousel placeholder',
-          style: TextStyle(color: Colors.white, fontSize: 18),
-        ),
+      child: PageView.builder(
+        controller: _controller,
+        itemCount: slides.length,
+        itemBuilder: (context, index) {
+          final s = slides[index];
+          return Stack(
+            fit: StackFit.expand,
+            children: [
+              Image.asset(s.image,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) =>
+                      Container(color: Colors.grey[800])),
+              Container(color: Colors.black.withOpacity(0.45)),
+              Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(s.title,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 8),
+                    Text(s.description,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: Colors.white70)),
+                    const SizedBox(height: 16),
+                    ElevatedButton(onPressed: () {}, child: Text(s.buttonText)),
+                  ],
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
