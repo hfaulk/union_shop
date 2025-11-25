@@ -52,7 +52,7 @@ class _HeroCarouselState extends State<HeroCarousel> {
     final slides = widget.slides.isNotEmpty ? widget.slides : _sample;
     return SizedBox(
       height: 420,
-      child: PageView.builder(
+      child: Stack(children: [PageView.builder(
         controller: _controller,
         itemCount: slides.length,
         itemBuilder: (context, index) {
