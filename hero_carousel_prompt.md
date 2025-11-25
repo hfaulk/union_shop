@@ -83,36 +83,32 @@ flutter test
 ```
 
 Feature Checklist
-- [ ] Slide background image with cover + overlay
-- [ ] Title text: large, centered, white
-- [ ] Description text: medium, centered
-- [ ] CTA button: centered, themed, accessible
-- [ ] PageView-based slide rendering
-- [ ] Indicator dots (clickable/focusable)
-- [ ] Previous/Next arrows (clickable/focusable)
+- [x] Slide background image with cover + overlay
+- [x] Title text: large, centered, white
+- [x] Description text: medium, centered
+- [x] CTA button: centered, themed, accessible (present; navigation wiring pending)
+- [x] PageView-based slide rendering
+- [x] Indicator dots (clickable/focusable)
+- [x] Previous/Next arrows (clickable/focusable)
 - [ ] Autoplay with configurable interval
 - [ ] Pause on user interaction
 - [ ] Infinite looping
 - [ ] Keyboard left/right navigation
 - [ ] Semantics labels for screen readers
 - [ ] Widget tests (basic interactions)
-- [ ] Small-line-change incremental commits
+- [x] Small-line-change incremental commits
 
 Implementation Status Ticker
 - Prompt file creation: [x]
 - Plan / TODOs initialized: [x]
-- Step 1 — Model: [ ]
-- Step 2 — Skeleton widget: [ ]
-- Step 3 — PageView slides: [ ]
- - Step 1 — Model: [x]
- - Step 2 — Skeleton widget: [x]
- - Step 3 — PageView slides: [x]
-- Step 4 — Indicators: [ ]
-- Step 5 — Arrows: [ ]
+- Step 1 — Model: [x]
+- Step 2 — Skeleton widget: [x]
+- Step 3 — PageView slides: [x]
+- Step 4 — Indicators: [x]
+- Step 5 — Arrows: [x]
 - Step 6 — Autoplay: [ ]
 - Step 7 — Data externalization: [ ]
- - Step 7 — Data externalization: [ ]
- - Step 8 — Integrate into `lib/main.dart`: [x]
+- Step 8 — Integrate into `lib/main.dart`: [x]
 - Step 9 — Accessibility & tests: [ ]
 - Step 10 — Polish & docs: [ ]
 
