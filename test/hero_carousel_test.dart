@@ -29,8 +29,8 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    // Tap the right arrow button
-    await tester.tap(find.byIcon(Icons.chevron_right));
+    // Tap the right arrow button (target IconButton to avoid ambiguity)
+    await tester.tap(find.widgetWithIcon(IconButton, Icons.chevron_right));
     await tester.pumpAndSettle();
 
     expect(find.text('New Arrivals'), findsOneWidget);
@@ -48,8 +48,10 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    // Tap the second indicator (index 1)
-    await tester.tap(find.byType(GestureDetector).at(1));
+    // Tap the second indicator (index 1) — ensure visible then tap center
+    final indicator = find.byType(GestureDetector).at(1);
+    await tester.ensureVisible(indicator);
+    await tester.tapAt(tester.getCenter(indicator));
     await tester.pumpAndSettle();
 
     expect(find.text('New Arrivals'), findsOneWidget);
@@ -67,8 +69,8 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    // Tap the left arrow button (should wrap to last slide)
-    await tester.tap(find.byIcon(Icons.chevron_left));
+    // Tap the left arrow button (should wrap to last slide); target IconButton
+    await tester.tap(find.widgetWithIcon(IconButton, Icons.chevron_left));
     await tester.pumpAndSettle();
 
     expect(find.text('New Arrivals'), findsOneWidget);
@@ -110,10 +112,10 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    // Advance twice: first -> second, then wrap to first
-    await tester.tap(find.byIcon(Icons.chevron_right));
+    // Advance twice: first -> second, then wrap to first (target IconButton)
+    await tester.tap(find.widgetWithIcon(IconButton, Icons.chevron_right));
     await tester.pumpAndSettle();
-    await tester.tap(find.byIcon(Icons.chevron_right));
+    await tester.tap(find.widgetWithIcon(IconButton, Icons.chevron_right));
     await tester.pumpAndSettle();
 
     expect(find.text('Essential Range - Over 20% OFF!'), findsOneWidget);
