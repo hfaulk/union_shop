@@ -3,7 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:union_shop/views/product_page.dart';
 
 void main() {
-  testWidgets('ProductPage shows discounted and original prices when discount present',
+  testWidgets(
+      'ProductPage shows discounted and original prices when discount present',
       (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(
       routes: {
