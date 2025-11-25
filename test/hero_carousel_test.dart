@@ -16,4 +16,23 @@ void main() {
 
     expect(find.text('Essential Range - Over 20% OFF!'), findsOneWidget);
   });
+
+  testWidgets('navigates to next slide when right arrow tapped',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: HeroCarousel(),
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+
+    // Tap the right arrow button
+    await tester.tap(find.byIcon(Icons.chevron_right));
+    await tester.pumpAndSettle();
+
+    expect(find.text('New Arrivals'), findsOneWidget);
+  });
 }
