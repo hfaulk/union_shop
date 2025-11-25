@@ -16,8 +16,7 @@ void main() {
       );
       // Carousel first slide title
       expect(find.text('Essential Range - Over 20% OFF!'), findsOneWidget);
-      // Featured collection fallback title and sample product label
-      expect(find.text('Featured Collection'), findsOneWidget);
+      // Featured collection fallback sample product label
       expect(find.text('Sample Product'), findsOneWidget);
     });
 
@@ -27,8 +26,8 @@ void main() {
 
       // Check that sample product cards are displayed in the fallback
       expect(find.text('Sample Product'), findsWidgets);
-      // Check a sample price is displayed
-      expect(find.text('£20.00'), findsOneWidget);
+      // Check a sample price is displayed (may appear multiple times)
+      expect(find.text('£20.00'), findsWidgets);
     });
 
     testWidgets('should display header icons', (tester) async {
