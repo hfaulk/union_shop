@@ -5,9 +5,9 @@
             "description": "Over 20% off on our Essential Range. Come and grab yours while stocks last!",
             "collection": "essential"
         },
-        "featuredCollections": [
-            "signature-essentials",
-            "autumn"
-        ]
+        "featuredCollections": {
+            "signature-essentials": ["signature-tshirt", "signature-hoodie"],
+            "autumn": ["classic-sweatshirts", "classic-hoodies"]
+        }
     }
 ]

@@ -13,7 +13,7 @@
         "discount": true,
         "discountedPrice": 899,
         "imageUrl": "https://shop.upsu.net/cdn/shop/files/PurpleHoodieFinal_300x300.jpg?v=1742201957",
-        "collections": ["clothing"]
+        "collections": ["clothing", "autumn"]
     },
     {
         "id": "signature-tshirt",
