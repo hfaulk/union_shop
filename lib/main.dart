@@ -182,7 +182,7 @@ class HomeScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(40.0),
                       child: Column(children: [
-                        const Text('Featured Collection #1',
+                        const Text('Featured Collection',
                             style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -245,41 +245,65 @@ class HomeScreen extends StatelessWidget {
                         const SizedBox(height: 16),
                         Row(
                           children: [
-                            for (var i = 0; i < 2; i++)
-                              Expanded(
-                                child: SizedBox(
-                                  height: 190,
-                                  child: i < products.length
-                                      ? Card(
-                                          elevation: 2,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8)),
-                                          clipBehavior: Clip.antiAlias,
-                                          child: ProductCard(
-                                            title: products[i].title,
-                                            price: penceToPounds(products[i]
-                                                        .discount &&
-                                                    products[i]
-                                                            .discountedPrice !=
-                                                        null
-                                                ? products[i].discountedPrice!
-                                                : products[i].price),
-                                            originalPrice: products[i]
-                                                        .discount &&
-                                                    products[i]
-                                                            .discountedPrice !=
-                                                        null
-                                                ? penceToPounds(
-                                                    products[i].price)
-                                                : null,
-                                            imageUrl: products[i].imageUrl,
-                                          ),
-                                        )
-                                      : const SizedBox.shrink(),
-                                ),
+                            Expanded(
+                              child: SizedBox(
+                                height: 190,
+                                child: products.isNotEmpty
+                                    ? Card(
+                                        elevation: 2,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
+                                        clipBehavior: Clip.antiAlias,
+                                        child: ProductCard(
+                                          title: products[0].title,
+                                          price: penceToPounds(products[0]
+                                                      .discount &&
+                                                  products[0].discountedPrice !=
+                                                      null
+                                              ? products[0].discountedPrice!
+                                              : products[0].price),
+                                          originalPrice: products[0].discount &&
+                                                  products[0].discountedPrice !=
+                                                      null
+                                              ? penceToPounds(products[0].price)
+                                              : null,
+                                          imageUrl: products[0].imageUrl,
+                                        ),
+                                      )
+                                    : const SizedBox.shrink(),
                               ),
-                            if (products.length < 2) const SizedBox(width: 16),
+                            ),
+                            const SizedBox(width: 32),
+                            Expanded(
+                              child: SizedBox(
+                                height: 190,
+                                child: products.length > 1
+                                    ? Card(
+                                        elevation: 2,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
+                                        clipBehavior: Clip.antiAlias,
+                                        child: ProductCard(
+                                          title: products[1].title,
+                                          price: penceToPounds(products[1]
+                                                      .discount &&
+                                                  products[1].discountedPrice !=
+                                                      null
+                                              ? products[1].discountedPrice!
+                                              : products[1].price),
+                                          originalPrice: products[1].discount &&
+                                                  products[1].discountedPrice !=
+                                                      null
+                                              ? penceToPounds(products[1].price)
+                                              : null,
+                                          imageUrl: products[1].imageUrl,
+                                        ),
+                                      )
+                                    : const SizedBox.shrink(),
+                              ),
+                            ),
                           ],
                         ),
                       ],
