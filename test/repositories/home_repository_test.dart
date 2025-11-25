@@ -7,7 +7,8 @@ void main() {
   group('HomeRepository', () {
     final collectionRepo = AssetCollectionRepository();
     final productRepo = AssetProductRepository();
-    final repo = HomeRepository(collectionRepo: collectionRepo, productRepo: productRepo);
+    final repo = HomeRepository(
+        collectionRepo: collectionRepo, productRepo: productRepo);
 
     test('load returns HomeData with featured collections', () async {
       final hd = await repo.load();
