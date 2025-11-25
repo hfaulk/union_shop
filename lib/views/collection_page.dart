@@ -193,7 +193,11 @@ class _CollectionPageState extends State<CollectionPage> {
 
                       // Helper: effective price uses discountedPrice when available
                       int effectivePrice(Product p) {
-                        return (p.discount && p.discountedPrice != null)
+                        // Prefer an explicit discounted price when present;
+                        // some data may include `discountedPrice` without the
+                        // `discount` flag, so treat `discountedPrice` as
+                        // authoritative when non-null.
+                        return (p.discountedPrice != null)
                             ? p.discountedPrice!
                             : p.price;
                       }
