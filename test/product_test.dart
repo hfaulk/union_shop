@@ -24,11 +24,8 @@ void main() {
       await tester.pumpWidget(createTestWidget());
       await tester.pump();
 
-      // Check that student instruction is present (use a substring of the instruction)
-      expect(
-        find.textContaining('Students should add size options'),
-        findsOneWidget,
-      );
+      // Check that the product description text is present
+      expect(find.text('Product Description Please!'), findsOneWidget);
     });
 
     testWidgets('should display header icons', (tester) async {
