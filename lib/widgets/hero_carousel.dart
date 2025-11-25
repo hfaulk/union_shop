@@ -167,7 +167,7 @@ class _HeroCarouselState extends State<HeroCarousel> {
                   _controller.animateToPage(prev,
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeInOut);
-                      _restartAutoplayWithDelay();
+                  _restartAutoplayWithDelay();
                 },
               ),
             ),
@@ -185,7 +185,7 @@ class _HeroCarouselState extends State<HeroCarousel> {
                   _controller.animateToPage(next,
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeInOut);
-                    _restartAutoplayWithDelay();
+                  _restartAutoplayWithDelay();
                 },
               ),
             ),
