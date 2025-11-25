@@ -103,8 +103,8 @@ class _HeroCarouselState extends State<HeroCarousel> {
   @override
   Widget build(BuildContext context) {
     final slides = widget.slides.isNotEmpty
-      ? widget.slides
-      : (_loadedSlides.isNotEmpty ? _loadedSlides : _sample);
+        ? widget.slides
+        : (_loadedSlides.isNotEmpty ? _loadedSlides : _sample);
     return SizedBox(
       height: 420,
       child: Stack(
