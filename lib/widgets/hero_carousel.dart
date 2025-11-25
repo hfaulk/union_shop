@@ -83,7 +83,14 @@ class _HeroCarouselState extends State<HeroCarousel> {
                             style: const TextStyle(color: Colors.white70)),
                         const SizedBox(height: 16),
                         ElevatedButton(
-                            onPressed: () {}, child: Text(s.buttonText)),
+                          onPressed: () {
+                            final route = s.routeOrUrl;
+                            if (route.startsWith('/')) {
+                              Navigator.pushNamed(context, route);
+                            }
+                          },
+                          child: Text(s.buttonText),
+                        ),
                       ],
                     ),
                   ),
