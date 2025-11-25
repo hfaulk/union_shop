@@ -9,7 +9,8 @@ void main() {
     final list = json.decode(raw) as List<dynamic>;
     final map = (list.isNotEmpty ? list.first as Map<String, dynamic> : {});
 
-    expect(map.containsKey('featuredCollections') || map.keys.isNotEmpty, isTrue);
+    expect(
+        map.containsKey('featuredCollections') || map.keys.isNotEmpty, isTrue);
     final featured = (map['featuredCollections'] as Map<String, dynamic>?);
     expect(featured, isNotNull);
     expect(featured!.isNotEmpty, isTrue);
