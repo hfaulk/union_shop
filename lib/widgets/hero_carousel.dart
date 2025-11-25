@@ -11,6 +11,7 @@ class HeroCarousel extends StatefulWidget {
 
 class _HeroCarouselState extends State<HeroCarousel> {
   late final PageController _controller;
+  int _current = 0;
 
   final List<HeroSlide> _sample = const [
     HeroSlide(
@@ -34,6 +35,10 @@ class _HeroCarouselState extends State<HeroCarousel> {
   void initState() {
     super.initState();
     _controller = PageController();
+    _controller.addListener(() {
+      final page = (_controller.page ?? 0).round();
+      if (page != _current) setState(() => _current = page);
+    });
   }
 
   @override
@@ -77,6 +82,28 @@ class _HeroCarouselState extends State<HeroCarousel> {
                     const SizedBox(height: 16),
                     ElevatedButton(onPressed: () {}, child: Text(s.buttonText)),
                   ],
+                ),
+              ),
+              Positioned(
+                bottom: 12,
+                left: 0,
+                right: 0,
+                child: Center(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: List.generate(
+                        slides.length,
+                        (i) => Container(
+                              width: 8,
+                              height: 8,
+                              margin: const EdgeInsets.symmetric(horizontal: 6),
+                              decoration: BoxDecoration(
+                                  color: i == _current
+                                      ? Colors.white
+                                      : Colors.white30,
+                                  shape: BoxShape.circle),
+                            )),
+                  ),
                 ),
               ),
             ],
