@@ -106,7 +106,6 @@ class _HeroCarouselState extends State<HeroCarousel> {
                       ),
                     ),
                   ),
-              
                 ],
               );
             },
@@ -121,8 +120,11 @@ class _HeroCarouselState extends State<HeroCarousel> {
                 color: Colors.white,
                 icon: const Icon(Icons.chevron_left, size: 32),
                 onPressed: () {
-                  final prev = (_current - 1) < 0 ? slides.length - 1 : _current - 1;
-                  _controller.animateToPage(prev, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+                  final prev =
+                      (_current - 1) < 0 ? slides.length - 1 : _current - 1;
+                  _controller.animateToPage(prev,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut);
                 },
               ),
             ),
@@ -137,12 +139,29 @@ class _HeroCarouselState extends State<HeroCarousel> {
                 icon: const Icon(Icons.chevron_right, size: 32),
                 onPressed: () {
                   final next = (_current + 1) % slides.length;
-                  _controller.animateToPage(next, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+                  _controller.animateToPage(next,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut);
                 },
               ),
             ),
           ),
-              
+          // Shared overlay: indicators
+          Positioned(
+            bottom: 12,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: List.generate(
+                  slides.length,
+                  (i) => GestureDetector(
+                    onTap: () => _controller.animateToPage(i,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut),
+                    child: Container(
+                      width: 8,
                       height: 8,
                       margin: const EdgeInsets.symmetric(horizontal: 6),
                       decoration: BoxDecoration(
