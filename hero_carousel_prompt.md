@@ -87,6 +87,7 @@ Feature Checklist
 - [x] Title text: large, centered, white
 - [x] Description text: medium, centered
 - [x] CTA button: centered, themed, accessible (present; navigation wiring pending)
+ - [x] CTA button: centered, themed, accessible (present; internal route navigation wired)
 - [x] PageView-based slide rendering
 - [x] Indicator dots (clickable/focusable)
 - [x] Previous/Next arrows (clickable/focusable)
@@ -109,6 +110,9 @@ Implementation Status Ticker
 - Step 8 — Integrate into `lib/main.dart`: [x]
 - Step 9 — Accessibility & tests: [ ]
 - Step 10 — Polish & docs: [ ]
+
+Next recommended tiny step
+- Implement autoplay with pause-on-interaction (small change, ~12-18 lines). This will advance pages on a timer and stop when the user interacts (swipe, arrow, or dot). After that's working, proceed to keyboard/semantics and then tests.
 
 Notes and Edge Cases
 - If the current hero is implemented in a single giant widget, prefer wrapping it and toggling display to avoid breaking unrelated code. But the final plan expects replacing it by a widget import and a single-line swap.
