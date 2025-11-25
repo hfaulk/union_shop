@@ -97,4 +97,25 @@ void main() {
 
     expect(find.text('COLLECTIONS PAGE'), findsOneWidget);
   });
+
+  testWidgets('wraps from last to first when advancing past last slide',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: HeroCarousel(),
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+
+    // Advance twice: first -> second, then wrap to first
+    await tester.tap(find.byIcon(Icons.chevron_right));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byIcon(Icons.chevron_right));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Essential Range - Over 20% OFF!'), findsOneWidget);
+  });
 }
