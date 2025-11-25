@@ -11,7 +11,7 @@ class FakeCollectionRepo implements CollectionRepository {
   Future<List<Collection>> fetchAll() async => items;
   @override
   Future<Collection?> fetchById(String id) async =>
-      items.firstWhere((c) => c.id == id, orElse: () => null);
+      items.firstWhere((c) => c.id == id, orElse: () => items.isNotEmpty ? items.first : throw StateError('not found'));
 }
 
 void main() {
