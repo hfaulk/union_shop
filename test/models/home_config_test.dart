@@ -14,6 +14,9 @@ void main() {
 
     expect(cfg, isA<HomeConfig>());
     expect(cfg.featuredCollections.containsKey('signature-essentials'), isTrue);
-    expect(cfg.featuredCollections['signature-essentials']!.contains('signature-tshirt'), isTrue);
+    expect(
+        cfg.featuredCollections['signature-essentials']!
+            .contains('signature-tshirt'),
+        isTrue);
   });
 }
