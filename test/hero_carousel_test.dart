@@ -1,13 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:union_shop/widgets/hero_carousel.dart';
+import 'package:union_shop/models/hero_slide.dart';
+
+const sampleSlides = [
+  HeroSlide(
+    image: 'assets/images/sample1.png',
+    title: 'Essential Range - Over 20% OFF!',
+    description: 'Great value essentials',
+    buttonText: 'BROWSE COLLECTION',
+    routeOrUrl: '/collections',
+  ),
+  HeroSlide(
+    image: 'assets/images/sample2.png',
+    title: 'New Arrivals',
+    description: 'Check out new items',
+    buttonText: 'SHOP NOW',
+    routeOrUrl: '/collections',
+  ),
+];
 
 void main() {
   testWidgets('shows first slide title', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: HeroCarousel(),
+          body: HeroCarousel(slides: sampleSlides),
         ),
       ),
     );
@@ -22,7 +40,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: HeroCarousel(),
+          body: HeroCarousel(slides: sampleSlides),
         ),
       ),
     );
@@ -41,7 +59,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: HeroCarousel(),
+          body: HeroCarousel(slides: sampleSlides),
         ),
       ),
     );
@@ -62,7 +80,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: HeroCarousel(),
+          body: HeroCarousel(slides: sampleSlides),
         ),
       ),
     );
@@ -86,7 +104,7 @@ void main() {
               ),
         },
         home: Scaffold(
-          body: HeroCarousel(),
+          body: HeroCarousel(slides: sampleSlides),
         ),
       ),
     );
