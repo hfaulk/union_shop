@@ -7,7 +7,8 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(
       routes: {
-        '/product': (context) => const Scaffold(body: Center(child: Text('PRODUCT PAGE'))),
+        '/product': (context) =>
+            const Scaffold(body: Center(child: Text('PRODUCT PAGE'))),
       },
       home: Scaffold(
         body: Card(
