@@ -5,8 +5,7 @@ Goal
 
 High-level Requirements
 - Each slide: background image (cover), overlay (soft darken), title, description, CTA (text + route/url). All elements centered horizontally.
-- Carousel controls: indicator dots, previous/next arrows (start simple: autoplay + pause on user interaction).
-- Accessibility: semantic labels for images and controls, focusable buttons.
+- Carousel controls: indicator dots, previous/next arrows
 - Responsive: maintain layout across typical phone/tablet/desktop breakpoints.
 - Minimal dependencies: prefer built-in Flutter widgets (`PageView`, `AnimatedBuilder`, `AnimatedOpacity`, `GestureDetector`) and avoid heavy new packages.
 - Incremental changes: every code change must be limited to small patches (preferably ≤20 lines changed) so the commit history is fine-grained.
@@ -92,7 +91,6 @@ Feature Checklist
 - [x] Indicator dots (clickable/focusable)
 - [x] Previous/Next arrows (clickable/focusable)
 - [ ] Autoplay with configurable interval
-- [ ] Pause on user interaction
 - [ ] Infinite looping
 - [ ] Widget tests (basic interactions)
 - [x] Small-line-change incremental commits
