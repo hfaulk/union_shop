@@ -168,50 +168,125 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            // Featured Collection #1 Section
-            Container(
-              child: Padding(
-                  padding: const EdgeInsets.all(40.0),
-                  child: Column(children: [
-                    const Text('Featured Collection #1',
-                        style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black)),
-                    const SizedBox(height: 16),
-                    Row(children: [
-                      Expanded(
-                          child: SizedBox(
-                        height: 190,
-                        child: Card(
-                          elevation: 2,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          clipBehavior: Clip.antiAlias,
-                          child: ProductCard(
-                              title: 'Sample Product',
-                              price: '£20.00',
-                              imageUrl: 'https://via.placeholder.com/150'),
+            // Featured Collection #1 Section (driven from home_config.json)
+            FutureBuilder<HomeData?>(
+              future: HomeRepository(
+                collectionRepo: AssetCollectionRepository(),
+                productRepo: AssetProductRepository(),
+              ).load(),
+              builder: (context, snapshot) {
+                final home = snapshot.data;
+                if (home == null || home.featured.isEmpty) {
+                  // fallback: show same placeholders while loading or if no data
+                  return Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(40.0),
+                      child: Column(children: [
+                        const Text('Featured Collection #1',
+                            style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black)),
+                        const SizedBox(height: 16),
+                        Row(children: [
+                          Expanded(
+                              child: SizedBox(
+                            height: 190,
+                            child: Card(
+                              elevation: 2,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8)),
+                              clipBehavior: Clip.antiAlias,
+                              child: ProductCard(
+                                  title: 'Sample Product',
+                                  price: '£20.00',
+                                  imageUrl: 'https://via.placeholder.com/150'),
+                            ),
+                          )),
+                          const SizedBox(width: 20),
+                          Expanded(
+                              child: SizedBox(
+                            height: 190,
+                            child: Card(
+                              elevation: 2,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8)),
+                              clipBehavior: Clip.antiAlias,
+                              child: ProductCard(
+                                  title: 'Sample Product',
+                                  price: '£20.00',
+                                  originalPrice: '£25.00',
+                                  imageUrl: 'https://via.placeholder.com/150'),
+                            ),
+                          ))
+                        ])
+                      ]),
+                    ),
+                  );
+                }
+
+                // Use the first featured collection from the config
+                final first = home.featured.entries.first;
+                final collection = first.key;
+                final products = first.value;
+
+                return Container(
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(40.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(collection.title,
+                            style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black)),
+                        const SizedBox(height: 16),
+                        Row(
+                          children: [
+                            for (var i = 0; i < 2; i++)
+                              Expanded(
+                                child: SizedBox(
+                                  height: 190,
+                                  child: i < products.length
+                                      ? Card(
+                                          elevation: 2,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8)),
+                                          clipBehavior: Clip.antiAlias,
+                                          child: ProductCard(
+                                            title: products[i].title,
+                                            price: penceToPounds(products[i]
+                                                        .discount &&
+                                                    products[i]
+                                                            .discountedPrice !=
+                                                        null
+                                                ? products[i].discountedPrice!
+                                                : products[i].price),
+                                            originalPrice: products[i]
+                                                        .discount &&
+                                                    products[i]
+                                                            .discountedPrice !=
+                                                        null
+                                                ? penceToPounds(
+                                                    products[i].price)
+                                                : null,
+                                            imageUrl: products[i].imageUrl,
+                                          ),
+                                        )
+                                      : const SizedBox.shrink(),
+                                ),
+                              ),
+                            if (products.length < 2) const SizedBox(width: 16),
+                          ],
                         ),
-                      )),
-                      const SizedBox(width: 20),
-                      Expanded(
-                          child: SizedBox(
-                        height: 190,
-                        child: Card(
-                          elevation: 2,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          clipBehavior: Clip.antiAlias,
-                          child: ProductCard(
-                              title: 'Sample Product',
-                              price: '£20.00',
-                              originalPrice: '£25.00',
-                              imageUrl: 'https://via.placeholder.com/150'),
-                        ),
-                      ))
-                    ])
-                  ])),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),
