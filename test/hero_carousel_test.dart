@@ -54,4 +54,23 @@ void main() {
 
     expect(find.text('New Arrivals'), findsOneWidget);
   });
+
+  testWidgets('navigates to previous slide when left arrow tapped',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: HeroCarousel(),
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+
+    // Tap the left arrow button (should wrap to last slide)
+    await tester.tap(find.byIcon(Icons.chevron_left));
+    await tester.pumpAndSettle();
+
+    expect(find.text('New Arrivals'), findsOneWidget);
+  });
 }
