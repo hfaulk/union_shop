@@ -5,8 +5,8 @@ Goal
 
 High-level Requirements
 - Each slide: background image (cover), overlay (soft darken), title, description, CTA (text + route/url). All elements centered horizontally.
-- Carousel controls: indicator dots, previous/next arrows, pause/play control optional (start simple: autoplay + pause on user interaction).
-- Accessibility: semantic labels for images and controls, keyboard navigation (left/right), focusable buttons.
+- Carousel controls: indicator dots, previous/next arrows (start simple: autoplay + pause on user interaction).
+- Accessibility: semantic labels for images and controls, focusable buttons.
 - Responsive: maintain layout across typical phone/tablet/desktop breakpoints.
 - Minimal dependencies: prefer built-in Flutter widgets (`PageView`, `AnimatedBuilder`, `AnimatedOpacity`, `GestureDetector`) and avoid heavy new packages.
 - Incremental changes: every code change must be limited to small patches (preferably ≤20 lines changed) so the commit history is fine-grained.
@@ -31,14 +31,13 @@ Functional Behavior
 - Looping: true (infinite loop).
 - Indicators: centered dots at bottom; tapping a dot moves to that slide.
 - Arrows: left/right arrow buttons near bottom center (or just above dots). Tapping moves one slide.
-- Keyboard: left/right arrows navigate. Enter/Space on focused CTA triggers navigation.
 - Animation: smooth page transitions (PageView default physics is good), subtle fade on overlay if desired.
 
 Visual Specs (as in screenshot)
 - Huge title, bold, white, shadow/soft outline for legibility.
 - Subtitle/description smaller, white, centered.
 - Button: purple background (`#4b2e6d` or app primary), uppercase small text with letter spacing.
-- Background: full-bleed image using `BoxFit.cover` with an overlay gradient or semi-transparent dark color to ensure text contrast.
+- Background: full-bleed image using `BoxFit.cover` with an overlay gradient or semi-transparent dark color to ensure text contrast. (for now use a placeholder image)
 
 Accessibility
 - Use `Semantics` for the carousel region and each control.
@@ -65,7 +64,7 @@ Implementation Plan (small incremental commits — each suggested step is intent
 - Step 10 (small): Polish styles, responsive text sizes, and finalize README notes. Commit: "Style and docs polish".
 
 Developer Constraints (required by you)
-- Never change more than ~10-20 lines at a time. Use many small commits for each step above.
+- Never change more than ~10-20 lines at a time. Use many small commits for each step above (can break down further if needed).
 - Keep changes localized: create new files where possible instead of touching large files.
 - Use clear commit messages matching the steps.
 
