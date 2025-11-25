@@ -18,7 +18,7 @@ class _HeroCarouselState extends State<HeroCarousel> {
 
   final List<HeroSlide> _sample = const [
     HeroSlide(
-      image: 'assets/images/hero1.jpg',
+      image: 'assets/images/hero1.png',
       title: 'Essential Range - Over 20% OFF!',
       description:
           'Over 20% off our Essential Range. Come and grab yours while stock lasts!',
