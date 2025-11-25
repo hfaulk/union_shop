@@ -73,4 +73,28 @@ void main() {
 
     expect(find.text('New Arrivals'), findsOneWidget);
   });
+
+  testWidgets('navigates to named route when CTA tapped',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        routes: {
+          '/collections': (context) => const Scaffold(
+                body: Center(child: Text('COLLECTIONS PAGE')),
+              ),
+        },
+        home: Scaffold(
+          body: HeroCarousel(),
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+
+    // Tap the CTA button on first slide
+    await tester.tap(find.text('BROWSE COLLECTION'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('COLLECTIONS PAGE'), findsOneWidget);
+  });
 }
