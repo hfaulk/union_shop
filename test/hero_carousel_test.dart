@@ -29,8 +29,8 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    // Tap the right arrow button (target IconButton to avoid ambiguity)
-    await tester.tap(find.widgetWithIcon(IconButton, Icons.chevron_right));
+    // Tap the right arrow button (target the shared overlay arrow by key)
+    await tester.tap(find.byKey(const ValueKey('hero_arrow_right')));
     await tester.pumpAndSettle();
 
     expect(find.text('New Arrivals'), findsOneWidget);
@@ -69,8 +69,8 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    // Tap the left arrow button (should wrap to last slide); target IconButton
-    await tester.tap(find.widgetWithIcon(IconButton, Icons.chevron_left));
+    // Tap the left arrow button (should wrap to last slide); target shared arrow
+    await tester.tap(find.byKey(const ValueKey('hero_arrow_left')));
     await tester.pumpAndSettle();
 
     expect(find.text('New Arrivals'), findsOneWidget);
@@ -113,9 +113,9 @@ void main() {
     await tester.pumpAndSettle();
 
     // Advance twice: first -> second, then wrap to first (target IconButton)
-    await tester.tap(find.widgetWithIcon(IconButton, Icons.chevron_right));
+    await tester.tap(find.byKey(const ValueKey('hero_arrow_right')));
     await tester.pumpAndSettle();
-    await tester.tap(find.widgetWithIcon(IconButton, Icons.chevron_right));
+    await tester.tap(find.byKey(const ValueKey('hero_arrow_right')));
     await tester.pumpAndSettle();
 
     expect(find.text('Essential Range - Over 20% OFF!'), findsOneWidget);
