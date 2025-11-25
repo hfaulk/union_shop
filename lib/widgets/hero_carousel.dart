@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
 import '../models/hero_slide.dart';
 
 class HeroCarousel extends StatefulWidget {
@@ -15,6 +17,8 @@ class _HeroCarouselState extends State<HeroCarousel> {
   int _current = 0;
   Timer? _autoplayTimer;
   final Duration _autoPlayInterval = const Duration(seconds: 6);
+
+  List<HeroSlide> _loadedSlides = [];
 
   final List<HeroSlide> _sample = const [
     HeroSlide(
@@ -44,6 +48,21 @@ class _HeroCarouselState extends State<HeroCarousel> {
     });
     // start autoplay
     _startAutoplay();
+    // try load external slides from assets/data/hero_slides.json
+    _loadExternalSlides();
+  }
+
+  Future<void> _loadExternalSlides() async {
+    try {
+      final raw = await rootBundle.loadString('assets/data/hero_slides.json');
+      final data = jsonDecode(raw) as List<dynamic>;
+      final slides = data
+          .map((e) => HeroSlide.fromJson(e as Map<String, dynamic>))
+          .toList();
+      if (slides.isNotEmpty && mounted) setState(() => _loadedSlides = slides);
+    } catch (_) {
+      // ignore, keep using sample
+    }
   }
 
   void _startAutoplay() {
@@ -83,7 +102,9 @@ class _HeroCarouselState extends State<HeroCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    final slides = widget.slides.isNotEmpty ? widget.slides : _sample;
+    final slides = widget.slides.isNotEmpty
+      ? widget.slides
+      : (_loadedSlides.isNotEmpty ? _loadedSlides : _sample);
     return SizedBox(
       height: 420,
       child: Stack(
