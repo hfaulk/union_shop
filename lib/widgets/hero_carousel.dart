@@ -119,7 +119,6 @@ class _HeroCarouselState extends State<HeroCarousel> {
                   ),
                 ),
               ),
-              
             ],
           );
         },
