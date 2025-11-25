@@ -93,8 +93,6 @@ Feature Checklist
 - [ ] Autoplay with configurable interval
 - [ ] Pause on user interaction
 - [ ] Infinite looping
-- [ ] Keyboard left/right navigation
-- [ ] Semantics labels for screen readers
 - [ ] Widget tests (basic interactions)
 - [x] Small-line-change incremental commits
 
