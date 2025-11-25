@@ -52,90 +52,82 @@ class _HeroCarouselState extends State<HeroCarousel> {
     final slides = widget.slides.isNotEmpty ? widget.slides : _sample;
     return SizedBox(
       height: 420,
-      child: Stack(children: [PageView.builder(
-        controller: _controller,
-        itemCount: slides.length,
-        itemBuilder: (context, index) {
-          final s = slides[index];
-          return Stack(
-            fit: StackFit.expand,
-            children: [
-              Image.asset(s.image,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) =>
-                      Container(color: Colors.grey[800])),
-              Container(color: Colors.black.withOpacity(0.45)),
-              Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(s.title,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold)),
-                    const SizedBox(height: 8),
-                    Text(s.description,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(color: Colors.white70)),
-                    const SizedBox(height: 16),
-                    ElevatedButton(onPressed: () {}, child: Text(s.buttonText)),
-                  ],
-                ),
-              ),
-              Positioned(
-                left: 12,
-                top: 0,
-                bottom: 0,
-                child: Center(
-                  child: IconButton(
-                    color: Colors.white,
-                    icon: const Icon(Icons.chevron_left, size: 32),
-                    onPressed: () {
-                      final prev =
-                          (_current - 1) < 0 ? slides.length - 1 : _current - 1;
-                      _controller.animateToPage(prev,
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut);
-                    },
+      child: Stack(
+        children: [
+          PageView.builder(
+            controller: _controller,
+            itemCount: slides.length,
+            itemBuilder: (context, index) {
+              final s = slides[index];
+              return Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.asset(s.image,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) =>
+                          Container(color: Colors.grey[800])),
+                  Container(color: Colors.black.withOpacity(0.45)),
+                  Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(s.title,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 8),
+                        Text(s.description,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(color: Colors.white70)),
+                        const SizedBox(height: 16),
+                        ElevatedButton(
+                            onPressed: () {}, child: Text(s.buttonText)),
+                      ],
+                    ),
                   ),
-                ),
-              ),
-              Positioned(
-                right: 12,
-                top: 0,
-                bottom: 0,
-                child: Center(
-                  child: IconButton(
-                    color: Colors.white,
-                    icon: const Icon(Icons.chevron_right, size: 32),
-                    onPressed: () {
-                      final next = (_current + 1) % slides.length;
-                      _controller.animateToPage(next,
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut);
-                    },
+                  Positioned(
+                    left: 12,
+                    top: 0,
+                    bottom: 0,
+                    child: Center(
+                      child: IconButton(
+                        color: Colors.white,
+                        icon: const Icon(Icons.chevron_left, size: 32),
+                        onPressed: () {
+                          final prev = (_current - 1) < 0
+                              ? slides.length - 1
+                              : _current - 1;
+                          _controller.animateToPage(prev,
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeInOut);
+                        },
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-          Positioned(
-            bottom: 12,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: List.generate(
-                  slides.length,
-                  (i) => GestureDetector(
-                    onTap: () => _controller.animateToPage(i, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut),
-                    child: Container(
-                      width: 8,
+                  Positioned(
+                    right: 12,
+                    top: 0,
+                    bottom: 0,
+                    child: Center(
+                      child: IconButton(
+                        color: Colors.white,
+                        icon: const Icon(Icons.chevron_right, size: 32),
+                        onPressed: () {
+                          final next = (_current + 1) % slides.length;
+                          _controller.animateToPage(next,
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeInOut);
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+              
                       height: 8,
                       margin: const EdgeInsets.symmetric(horizontal: 6),
                       decoration: BoxDecoration(
