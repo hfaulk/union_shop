@@ -85,14 +85,13 @@ Feature Checklist
 - [x] Slide background image with cover + overlay
 - [x] Title text: large, centered, white
 - [x] Description text: medium, centered
-- [x] CTA button: centered, themed, accessible (present; navigation wiring pending)
- - [x] CTA button: centered, themed, accessible (present; internal route navigation wired)
+- [x] CTA button: centered, themed, accessible (present; internal route navigation wired)
 - [x] PageView-based slide rendering
 - [x] Indicator dots (clickable/focusable)
 - [x] Previous/Next arrows (clickable/focusable)
-- [ ] Autoplay with configurable interval
-- [ ] Infinite looping
-- [ ] Widget tests (basic interactions)
+- [x] Autoplay (advances on interval; pauses on interaction)
+- [x] Infinite looping (wraps prev/next)
+- [x] Widget tests (basic interactions implemented in `test/hero_carousel_test.dart`)
 - [x] Small-line-change incremental commits
 
 Implementation Status Ticker
@@ -103,14 +102,15 @@ Implementation Status Ticker
 - Step 3 — PageView slides: [x]
 - Step 4 — Indicators: [x]
 - Step 5 — Arrows: [x]
-- Step 6 — Autoplay: [ ]
+- Step 6 — Autoplay: [x] (autoplay + pause/resume implemented in widget)
 - Step 7 — Data externalization: [ ]
 - Step 8 — Integrate into `lib/main.dart`: [x]
-- Step 9 — Accessibility & tests: [ ]
+- Step 9 — Accessibility & tests: [x] (widget tests added; semantics/labels pending)
 - Step 10 — Polish & docs: [ ]
 
 Next recommended tiny step
-- Implement autoplay with pause-on-interaction (small change, ~12-18 lines). This will advance pages on a timer and stop when the user interacts (swipe, arrow, or dot). After that's working, proceed to keyboard/semantics and then tests.
+- Add semantic labels (`Semantics` / `semanticLabel`) to images and CTA buttons and ensure indicators are accessible (small change, ~10-15 lines).
+- Optionally: make the autoplay interval configurable via the `HeroCarousel` constructor (small change, ~8-12 lines).
 
 Notes and Edge Cases
 - If the current hero is implemented in a single giant widget, prefer wrapping it and toggling display to avoid breaking unrelated code. But the final plan expects replacing it by a widget import and a single-line swap.
