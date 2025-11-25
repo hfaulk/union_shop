@@ -106,26 +106,41 @@ class _HeroCarouselState extends State<HeroCarousel> {
                       ),
                     ),
                   ),
-                  Positioned(
-                    right: 12,
-                    top: 0,
-                    bottom: 0,
-                    child: Center(
-                      child: IconButton(
-                        color: Colors.white,
-                        icon: const Icon(Icons.chevron_right, size: 32),
-                        onPressed: () {
-                          final next = (_current + 1) % slides.length;
-                          _controller.animateToPage(next,
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeInOut);
-                        },
-                      ),
-                    ),
-                  ),
+              
                 ],
               );
             },
+          ),
+          // Shared overlay arrows
+          Positioned(
+            left: 12,
+            top: 0,
+            bottom: 0,
+            child: Center(
+              child: IconButton(
+                color: Colors.white,
+                icon: const Icon(Icons.chevron_left, size: 32),
+                onPressed: () {
+                  final prev = (_current - 1) < 0 ? slides.length - 1 : _current - 1;
+                  _controller.animateToPage(prev, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+                },
+              ),
+            ),
+          ),
+          Positioned(
+            right: 12,
+            top: 0,
+            bottom: 0,
+            child: Center(
+              child: IconButton(
+                color: Colors.white,
+                icon: const Icon(Icons.chevron_right, size: 32),
+                onPressed: () {
+                  final next = (_current + 1) % slides.length;
+                  _controller.animateToPage(next, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+                },
+              ),
+            ),
           ),
               
                       height: 8,
