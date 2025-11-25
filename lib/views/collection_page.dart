@@ -7,9 +7,14 @@ class CollectionPage extends StatefulWidget {
   final String id;
   final String title;
   final String? description;
+  final ProductRepository? productRepo;
 
   const CollectionPage(
-      {super.key, required this.id, required this.title, this.description});
+      {super.key,
+      required this.id,
+      required this.title,
+      this.description,
+      this.productRepo});
 
   @override
   State<CollectionPage> createState() => _CollectionPageState();
@@ -41,7 +46,8 @@ class _CollectionPageState extends State<CollectionPage> {
   @override
   void initState() {
     super.initState();
-    _productsFuture = AssetProductRepository().fetchByCollection(widget.id);
+    final repo = widget.productRepo ?? AssetProductRepository();
+    _productsFuture = repo.fetchByCollection(widget.id);
   }
 
   @override
