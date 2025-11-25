@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import '../models/hero_slide.dart';
 
 class HeroCarousel extends StatefulWidget {
@@ -12,6 +13,8 @@ class HeroCarousel extends StatefulWidget {
 class _HeroCarouselState extends State<HeroCarousel> {
   late final PageController _controller;
   int _current = 0;
+  Timer? _autoplayTimer;
+  final Duration _autoPlayInterval = const Duration(seconds: 6);
 
   final List<HeroSlide> _sample = const [
     HeroSlide(
@@ -39,10 +42,32 @@ class _HeroCarouselState extends State<HeroCarousel> {
       final page = (_controller.page ?? 0).round();
       if (page != _current) setState(() => _current = page);
     });
+    // start autoplay
+    _startAutoplay();
+  }
+
+  void _startAutoplay() {
+    _autoplayTimer?.cancel();
+    _autoplayTimer = Timer.periodic(_autoPlayInterval, (_) {
+      final len =
+          widget.slides.isNotEmpty ? widget.slides.length : _sample.length;
+      final next = (_current + 1) % len;
+      if (_controller.hasClients) {
+        _controller.animateToPage(next,
+            duration: const Duration(milliseconds: 400),
+            curve: Curves.easeInOut);
+      }
+    });
+  }
+
+  void _stopAutoplay() {
+    _autoplayTimer?.cancel();
+    _autoplayTimer = null;
   }
 
   @override
   void dispose() {
+    _stopAutoplay();
     _controller.dispose();
     super.dispose();
   }
