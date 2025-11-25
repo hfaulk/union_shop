@@ -9,7 +9,8 @@ void main() {
     expect(penceToPounds(0), equals('£0.00'));
   });
 
-  testWidgets('onGenerateRoute handles /collections/:slug and shows CollectionPage title',
+  testWidgets(
+      'onGenerateRoute handles /collections/:slug and shows CollectionPage title',
       (WidgetTester tester) async {
     // Build a small app with the same onGenerateRoute logic
     await tester.pumpWidget(MaterialApp(
@@ -24,7 +25,8 @@ void main() {
       onGenerateRoute: (settings) {
         final name = settings.name ?? '';
         final uri = Uri.parse(name);
-        if (uri.pathSegments.length == 2 && uri.pathSegments[0] == 'collections') {
+        if (uri.pathSegments.length == 2 &&
+            uri.pathSegments[0] == 'collections') {
           final slug = uri.pathSegments[1];
           final title = Uri.decodeComponent(slug.replaceAll('-', ' '));
           return MaterialPageRoute(
