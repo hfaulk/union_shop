@@ -123,7 +123,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: HeroCarousel(),
+          body: HeroCarousel(slides: sampleSlides),
         ),
       ),
     );
