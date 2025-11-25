@@ -66,7 +66,8 @@ class _HeroCarouselState extends State<HeroCarousel> {
   }
 
   Timer? _resumeTimer;
-  void _restartAutoplayWithDelay([Duration delay = const Duration(seconds: 6)]) {
+  void _restartAutoplayWithDelay(
+      [Duration delay = const Duration(seconds: 6)]) {
     _resumeTimer?.cancel();
     _stopAutoplay();
     _resumeTimer = Timer(delay, () => _startAutoplay());
@@ -75,6 +76,7 @@ class _HeroCarouselState extends State<HeroCarousel> {
   @override
   void dispose() {
     _stopAutoplay();
+    _resumeTimer?.cancel();
     _controller.dispose();
     super.dispose();
   }
@@ -141,6 +143,7 @@ class _HeroCarouselState extends State<HeroCarousel> {
                           _controller.animateToPage(prev,
                               duration: const Duration(milliseconds: 300),
                               curve: Curves.easeInOut);
+                          _restartAutoplayWithDelay();
                         },
                       ),
                     ),
@@ -164,6 +167,7 @@ class _HeroCarouselState extends State<HeroCarousel> {
                   _controller.animateToPage(prev,
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeInOut);
+                      _restartAutoplayWithDelay();
                 },
               ),
             ),
@@ -181,6 +185,7 @@ class _HeroCarouselState extends State<HeroCarousel> {
                   _controller.animateToPage(next,
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeInOut);
+                    _restartAutoplayWithDelay();
                 },
               ),
             ),
@@ -196,9 +201,12 @@ class _HeroCarouselState extends State<HeroCarousel> {
                 children: List.generate(
                   slides.length,
                   (i) => GestureDetector(
-                    onTap: () => _controller.animateToPage(i,
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut),
+                    onTap: () {
+                      _controller.animateToPage(i,
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut);
+                      _restartAutoplayWithDelay();
+                    },
                     child: Container(
                       width: 8,
                       height: 8,
