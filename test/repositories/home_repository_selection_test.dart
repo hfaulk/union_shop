@@ -13,7 +13,9 @@ class FileProductRepo {
   Future<List<Product>> fetchAll() async {
     final raw = File(path).readAsStringSync();
     final data = json.decode(raw) as List<dynamic>;
-    return data.map((e) => Product.fromJson(e as Map<String, dynamic>)).toList();
+    return data
+        .map((e) => Product.fromJson(e as Map<String, dynamic>))
+        .toList();
   }
 
   Future<Product?> fetchById(String id) async {
@@ -35,7 +37,8 @@ void main() {
   group('Home selection logic (fixture-driven)', () {
     final prodRepo = FileProductRepo('assets/data/products.json');
 
-    test('when product ids provided, those products are selected in order', () async {
+    test('when product ids provided, those products are selected in order',
+        () async {
       final productIds = ['classic-hoodies', 'classic-sweatshirts'];
       final chosen = <Product>[];
       for (final pid in productIds) {
