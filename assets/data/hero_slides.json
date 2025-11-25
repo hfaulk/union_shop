@@ -12,5 +12,12 @@
     "description": "Check out our new range for the season.",
     "buttonText": "SHOP NOW",
     "routeOrUrl": "/products"
+  },
+  {
+    "image": "assets/images/hero3.jpg",
+    "title": "What's your next move...",
+    "description": "Are you with us?",
+    "buttonText": "FIND YOUR STUDENT ACCOMMODATION",
+    "routeOrUrl": "/"
   }
 ]
