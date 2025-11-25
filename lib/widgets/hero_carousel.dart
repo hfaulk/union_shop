@@ -119,28 +119,7 @@ class _HeroCarouselState extends State<HeroCarousel> {
                   ),
                 ),
               ),
-              Positioned(
-                bottom: 12,
-                left: 0,
-                right: 0,
-                child: Center(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: List.generate(
-                        slides.length,
-                        (i) => Container(
-                              width: 8,
-                              height: 8,
-                              margin: const EdgeInsets.symmetric(horizontal: 6),
-                              decoration: BoxDecoration(
-                                  color: i == _current
-                                      ? Colors.white
-                                      : Colors.white30,
-                                  shape: BoxShape.circle),
-                            )),
-                  ),
-                ),
-              ),
+              
             ],
           );
         },
