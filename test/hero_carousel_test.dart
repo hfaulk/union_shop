@@ -35,4 +35,23 @@ void main() {
 
     expect(find.text('New Arrivals'), findsOneWidget);
   });
+
+  testWidgets('navigates when indicator dot tapped',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: HeroCarousel(),
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+
+    // Tap the second indicator (index 1)
+    await tester.tap(find.byType(GestureDetector).at(1));
+    await tester.pumpAndSettle();
+
+    expect(find.text('New Arrivals'), findsOneWidget);
+  });
 }
