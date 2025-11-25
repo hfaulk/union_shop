@@ -6,11 +6,14 @@ import 'package:union_shop/repositories/collection_repository.dart';
 class CollectionsPage extends StatelessWidget {
   static const String routeName = '/collections';
 
-  const CollectionsPage({super.key});
+  // Allow injecting a repository for tests; default uses bundled assets.
+  final CollectionRepository? repo;
+
+  const CollectionsPage({super.key, this.repo});
 
   @override
   Widget build(BuildContext context) {
-    final repo = AssetCollectionRepository();
+    final repoInstance = repo ?? AssetCollectionRepository();
 
     return SharedLayout(
       body: Padding(
@@ -29,7 +32,7 @@ class CollectionsPage extends StatelessWidget {
 
             // Load collections from the asset repository and show them in a grid
             FutureBuilder<List<Collection>>(
-              future: repo.fetchAll(),
+              future: repoInstance.fetchAll(),
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
