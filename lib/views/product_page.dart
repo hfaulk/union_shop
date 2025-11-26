@@ -194,6 +194,21 @@ class ProductPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF5B33E1),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6)),
+                      ),
+                      child: const Text('Buy with shop',
+                          style: TextStyle(color: Colors.white, fontSize: 16)),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
                   const Text('Description',
                       style: TextStyle(
                           fontSize: 18,
