@@ -22,5 +22,11 @@
         "title": "Signature & Essentials Range",
         "description": "Discover our Signature & Essentials collection",
         "imageUrl": "https://shop.upsu.net/cdn/shop/files/Signature_T-Shirt_Indigo_Blue_2_900x.jpg?v=1758290534"
+    },
+    {
+        "id": "sale",
+        "title": "Sale",
+        "description": "Check out our discounted items",
+        "imageUrl": "assets/images/sale-collection.png"
     }
 ]
