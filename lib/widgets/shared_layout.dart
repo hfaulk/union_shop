@@ -140,11 +140,6 @@ class SharedLayout extends StatelessWidget {
                                         ),
                                         // keep Shop as a popup for now (will expand later)
                                         PopupMenuButton<String>(
-                                          child: const Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 8.0),
-                                            child: Text('Shop'),
-                                          ),
                                           padding: EdgeInsets.zero,
                                           itemBuilder: (c) => [
                                             const PopupMenuItem(
@@ -159,6 +154,11 @@ class SharedLayout extends StatelessWidget {
                                           ],
                                           onSelected: (_) =>
                                               _placeholderCallbackForButtons(),
+                                          child: const Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 8.0),
+                                            child: Text('Shop'),
+                                          ),
                                         ),
                                         TextButton(
                                           onPressed: () => Navigator.pushNamed(
