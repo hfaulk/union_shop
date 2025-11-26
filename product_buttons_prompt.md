@@ -18,14 +18,14 @@ Constraints & rules
 - Accessibility: Use semantic Widgets where possible (e.g., `DropdownButton`, `TextButton`, `ElevatedButton`, `OutlinedButton`). Use `Semantics` labels on interactive placeholders.
 
 Milestones
-- [ ] 1 — Add product title, price and tax included text.
-- [ ] 2 — Add Color label and dropdown placeholder.
-- [ ] 3 — Add Size label and dropdown placeholder.
-- [ ] 4 — Add Quantity box (numeric placeholder) next to Size.
-- [ ] 5 — Add outlined `ADD TO CART` button (full width inside card).
-- [ ] 6 — Add large purple `Buy with shop` button (full width, distinct style).
-- [ ] 7 — Add `More payment options` link text.
-- [ ] 8 — Add product description paragraph.
+- [x] 1 — Add product title, price and tax included text.  (2025-11-26) — `feat(product_page): add title and price`
+- [x] 2 — Add Color label and dropdown placeholder.  (2025-11-26) — `feat(product_page): add color dropdown placeholder`
+- [x] 3 — Add Size label and dropdown placeholder.  (2025-11-26) — `feat(product_page): add size dropdown and quantity field placeholder`
+- [x] 4 — Add Quantity box (numeric placeholder) next to Size.  (2025-11-26) — `feat(product_page): replace quantity input with +/- controls (min 0, max 10)`
+- [x] 5 — Add outlined `ADD TO CART` button (full width inside card).  (2025-11-26) — `feat(product_page): add outlined 'ADD TO CART' button placeholder`
+- [x] 6 — Add large purple `Buy with shop` button (full width, distinct style).  (2025-11-26) — `feat(product_page): add 'Buy with shop' button placeholder`
+- [x] 7 — Add `More payment options` link text.  (2025-11-26) — `feat(product_page): add 'More payment options' link placeholder`
+- [x] 8 — Add product description paragraph.  (2025-11-26) — `feat(product_page): add product description placeholder`
 - [ ] 9 — Tweak spacing and typography to approximate the screenshot.
 
 Per-chunk implementation plan (each chunk must be 10–30 lines)
