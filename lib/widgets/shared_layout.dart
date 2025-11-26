@@ -76,53 +76,57 @@ class SharedLayout extends StatelessWidget {
                           ConstrainedBox(
                             constraints: const BoxConstraints(maxWidth: 600),
                             child: Row(
-                              mainAxisSize: MainAxisSize.min,
+                              mainAxisSize: MainAxisSize.max,
                               children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    IconButton(
-                                      icon: const Icon(
-                                        Icons.search,
-                                        size: 18,
-                                        color: Colors.grey,
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      IconButton(
+                                        icon: const Icon(
+                                          Icons.search,
+                                          size: 18,
+                                          color: Colors.grey,
+                                        ),
+                                        padding: const EdgeInsets.all(8),
+                                        constraints: const BoxConstraints(
+                                          minWidth: 32,
+                                          minHeight: 32,
+                                        ),
+                                        onPressed: () {},
                                       ),
-                                      padding: const EdgeInsets.all(8),
-                                      constraints: const BoxConstraints(
-                                        minWidth: 32,
-                                        minHeight: 32,
+                                      IconButton(
+                                        icon: const Icon(
+                                          Icons.person_outline,
+                                          size: 18,
+                                          color: Colors.grey,
+                                        ),
+                                        padding: const EdgeInsets.all(8),
+                                        constraints: const BoxConstraints(
+                                          minWidth: 32,
+                                          minHeight: 32,
+                                        ),
+                                        onPressed: () {},
                                       ),
-                                      onPressed: () {},
-                                    ),
-                                    IconButton(
-                                      icon: const Icon(
-                                        Icons.person_outline,
-                                        size: 18,
-                                        color: Colors.grey,
+                                      IconButton(
+                                        icon: const Icon(
+                                          Icons.shopping_bag_outlined,
+                                          size: 18,
+                                          color: Colors.grey,
+                                        ),
+                                        padding: const EdgeInsets.all(8),
+                                        constraints: const BoxConstraints(
+                                          minWidth: 32,
+                                          minHeight: 32,
+                                        ),
+                                        onPressed: () {},
                                       ),
-                                      padding: const EdgeInsets.all(8),
-                                      constraints: const BoxConstraints(
-                                        minWidth: 32,
-                                        minHeight: 32,
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                    IconButton(
-                                      icon: const Icon(
-                                        Icons.shopping_bag_outlined,
-                                        size: 18,
-                                        color: Colors.grey,
-                                      ),
-                                      padding: const EdgeInsets.all(8),
-                                      constraints: const BoxConstraints(
-                                        minWidth: 32,
-                                        minHeight: 32,
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                                LayoutBuilder(builder: (context, constraints) {
+                                Expanded(child: Center(child: LayoutBuilder(
+                                    builder: (context, constraints) {
                                   final isDesktop =
                                       MediaQuery.of(context).size.width >= 800;
                                   if (isDesktop) {
@@ -231,7 +235,7 @@ class SharedLayout extends StatelessWidget {
                                       }
                                     },
                                   );
-                                }),
+                                }))),
                               ],
                             ),
                           ),
