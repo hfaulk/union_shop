@@ -117,7 +117,12 @@ class ProductPage extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               color: Color(0xFF4d2963)),
                         ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Tax included.',
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 16),
                   const Text('Description',
                       style: TextStyle(
                           fontSize: 18,
