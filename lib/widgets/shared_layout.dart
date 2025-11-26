@@ -117,88 +117,116 @@ class SharedLayout extends StatelessWidget {
                                   ),
                                   onPressed: () {},
                                 ),
-                                PopupMenuButton<String>(
-                                  icon: const Icon(
-                                    Icons.menu,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  itemBuilder: (context) => [
-                                    const PopupMenuItem(
-                                        value: 'Home', child: Text('Home')),
-                                    PopupMenuItem(
-                                      // Shop: show a small inline submenu (chevron) to open categories
-                                      child: Row(
-                                        children: [
-                                          const Text('Shop'),
-                                          const Spacer(),
-                                          // small chevron button that opens a secondary popup
-                                          PopupMenuButton<String>(
-                                            icon: const Icon(
-                                                Icons.chevron_right,
-                                                size: 18),
-                                            padding: EdgeInsets.zero,
-                                            itemBuilder: (context) => [
-                                              const PopupMenuItem(
-                                                  value: 'Clothing',
-                                                  child: Text('Clothing')),
-                                              const PopupMenuItem(
-                                                  value: 'Merchandise',
-                                                  child: Text('Merchandise')),
-                                              const PopupMenuItem(
-                                                  value: 'Halloween',
-                                                  child: Text('Halloween')),
-                                              const PopupMenuItem(
-                                                  value:
-                                                      'Signature & Essential Range',
-                                                  child: Text(
-                                                      'Signature & Essential Range')),
-                                              const PopupMenuItem(
-                                                  value:
-                                                      'Portsmouth City Collection',
-                                                  child: Text(
-                                                      'Portsmouth City Collection')),
-                                              const PopupMenuItem(
-                                                  value: 'Pride Collection',
-                                                  child:
-                                                      Text('Pride Collection')),
-                                              const PopupMenuItem(
-                                                  value: 'Graduation',
-                                                  child: Text('Graduation')),
-                                            ],
-                                            onSelected: (sub) {
-                                              // placeholder handler for category selection
-                                              _placeholderCallbackForButtons();
-                                            },
+                                LayoutBuilder(builder: (context, constraints) {
+                                  final isDesktop =
+                                      MediaQuery.of(context).size.width >= 800;
+                                  if (isDesktop) {
+                                    return Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              _navigateToHome(context),
+                                          child: const Text('Home'),
+                                        ),
+                                        // keep Shop as a popup for now (will expand later)
+                                        PopupMenuButton<String>(
+                                          child: const Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 8.0),
+                                            child: Text('Shop'),
                                           ),
-                                        ],
-                                      ),
+                                          padding: EdgeInsets.zero,
+                                          itemBuilder: (c) => [
+                                            const PopupMenuItem(
+                                                value: 'Clothing',
+                                                child: Text('Clothing')),
+                                            const PopupMenuItem(
+                                                value: 'Merchandise',
+                                                child: Text('Merchandise')),
+                                            const PopupMenuItem(
+                                                value: 'Halloween',
+                                                child: Text('Halloween')),
+                                          ],
+                                          onSelected: (_) =>
+                                              _placeholderCallbackForButtons(),
+                                        ),
+                                        TextButton(
+                                          onPressed: () => Navigator.pushNamed(
+                                              context, '/collections'),
+                                          child: const Text('Collections'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () =>
+                                              _navigateToAbout(context),
+                                          child: const Text('About'),
+                                        ),
+                                      ],
+                                    );
+                                  }
+                                  // fallback to original popup on smaller screens
+                                  return PopupMenuButton<String>(
+                                    icon: const Icon(
+                                      Icons.menu,
+                                      size: 18,
+                                      color: Colors.grey,
                                     ),
-                                    const PopupMenuItem(
-                                        value: 'The Print Shack',
-                                        child: Text('The Print Shack')),
-                                    const PopupMenuItem(
-                                        value: 'SALE!', child: Text('SALE!')),
-                                    const PopupMenuItem(
-                                        value: 'Collections',
-                                        child: Text('Collections')),
-                                    const PopupMenuItem(
-                                        value: 'About', child: Text('About')),
-                                  ],
-                                  onSelected: (value) {
-                                    if (value == 'Home') {
-                                      _navigateToHome(context);
-                                    } else if (value == 'Collections') {
-                                      Navigator.pushNamed(
-                                          context, '/collections');
-                                    } else if (value == 'About') {
-                                      _navigateToAbout(context);
-                                    } else {
-                                      _placeholderCallbackForButtons();
-                                    }
-                                  },
-                                ),
+                                    padding: const EdgeInsets.all(8),
+                                    itemBuilder: (context) => [
+                                      const PopupMenuItem(
+                                          value: 'Home', child: Text('Home')),
+                                      PopupMenuItem(
+                                        child: Row(
+                                          children: [
+                                            const Text('Shop'),
+                                            const Spacer(),
+                                            PopupMenuButton<String>(
+                                              icon: const Icon(
+                                                  Icons.chevron_right,
+                                                  size: 18),
+                                              padding: EdgeInsets.zero,
+                                              itemBuilder: (context) => [
+                                                const PopupMenuItem(
+                                                    value: 'Clothing',
+                                                    child: Text('Clothing')),
+                                                const PopupMenuItem(
+                                                    value: 'Merchandise',
+                                                    child: Text('Merchandise')),
+                                                const PopupMenuItem(
+                                                    value: 'Halloween',
+                                                    child: Text('Halloween')),
+                                              ],
+                                              onSelected: (sub) =>
+                                                  _placeholderCallbackForButtons(),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const PopupMenuItem(
+                                          value: 'The Print Shack',
+                                          child: Text('The Print Shack')),
+                                      const PopupMenuItem(
+                                          value: 'SALE!', child: Text('SALE!')),
+                                      const PopupMenuItem(
+                                          value: 'Collections',
+                                          child: Text('Collections')),
+                                      const PopupMenuItem(
+                                          value: 'About', child: Text('About')),
+                                    ],
+                                    onSelected: (value) {
+                                      if (value == 'Home') {
+                                        _navigateToHome(context);
+                                      } else if (value == 'Collections') {
+                                        Navigator.pushNamed(
+                                            context, '/collections');
+                                      } else if (value == 'About') {
+                                        _navigateToAbout(context);
+                                      } else {
+                                        _placeholderCallbackForButtons();
+                                      }
+                                    },
+                                  );
+                                }),
                               ],
                             ),
                           ),
