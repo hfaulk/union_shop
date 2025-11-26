@@ -2,8 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/shared_layout.dart';
 // kept minimal: no repository/model imports required for now
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
+
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
+  int _quantity = 1;
+  final int _maxQuantity = 10;
+  final int _minQuantity = 0;
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
