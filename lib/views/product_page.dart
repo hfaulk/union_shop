@@ -122,6 +122,25 @@ class ProductPage extends StatelessWidget {
                     'Tax included.',
                     style: TextStyle(fontSize: 14, color: Colors.grey),
                   ),
+                  const SizedBox(height: 12),
+                  const Text('Color',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black)),
+                  const SizedBox(height: 8),
+                  DropdownButtonFormField<String>(
+                    value: 'Black',
+                    items: ['Black', 'White']
+                        .map((c) => DropdownMenuItem(value: c, child: Text(c)))
+                        .toList(),
+                    onChanged: (_) {},
+                    decoration: const InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
                   const SizedBox(height: 16),
                   const Text('Description',
                       style: TextStyle(
