@@ -3,25 +3,25 @@
         "id": "autumn",
         "title": "Autumn Favourites",
         "description": "Shop all this seasons must haves in one",
-        "imageUrl": "https://shop.upsu.net/cdn/shop/products/GreenSweatshirtFinal_900x.png?v=1741965433"
+        "imageUrl": "assets/images/autumn_collection.png"
     },
     {
         "id": "clothing",
         "title": "Clothing",
         "description": "Explore our range of clothing items",
-        "imageUrl": "https://shop.upsu.net/cdn/shop/files/PurpleHoodieFinal_900x.jpg?v=1742201957"
+        "imageUrl": "assets/images/clothing_collection.png"
     },
     {
         "id": "graduation",
         "title": "Graduation",
         "description": "Celebrate your achievement with our graduation collection",
-        "imageUrl": "https://shop.upsu.net/cdn/shop/collections/GradGrey_900x.jpg?v=1752234294"
+        "imageUrl": "assets/images/graduation_collection.png"
     },
     {
         "id": "signature-essentials",
         "title": "Signature & Essentials Range",
         "description": "Discover our Signature & Essentials collection",
-        "imageUrl": "https://shop.upsu.net/cdn/shop/files/Signature_T-Shirt_Indigo_Blue_2_900x.jpg?v=1758290534"
+        "imageUrl": "assets/images/signature_essentials_collection.png"
     },
     {
         "id": "sale",
