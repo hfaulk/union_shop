@@ -175,12 +175,38 @@ class _ProductPageState extends State<ProductPage> {
                       ),
                       const SizedBox(width: 12),
                       SizedBox(
-                        width: 88,
-                        child: TextFormField(
-                          initialValue: '1',
-                          decoration: const InputDecoration(
-                              border: OutlineInputBorder()),
-                          keyboardType: TextInputType.number,
+                        width: 112,
+                        child: Container(
+                          height: 48,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            border: Border.all(color: Colors.grey.shade400),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
+                                icon: const Icon(Icons.remove),
+                                onPressed: _quantity > _minQuantity
+                                    ? () => setState(() => _quantity--)
+                                    : null,
+                                padding: EdgeInsets.zero,
+                                constraints: const BoxConstraints(
+                                    minWidth: 36, minHeight: 36),
+                              ),
+                              Text('$_quantity',
+                                  style: const TextStyle(fontSize: 16)),
+                              IconButton(
+                                icon: const Icon(Icons.add),
+                                onPressed: _quantity < _maxQuantity
+                                    ? () => setState(() => _quantity++)
+                                    : null,
+                                padding: EdgeInsets.zero,
+                                constraints: const BoxConstraints(
+                                    minWidth: 36, minHeight: 36),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
