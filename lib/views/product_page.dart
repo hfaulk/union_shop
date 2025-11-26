@@ -142,6 +142,41 @@ class ProductPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
+                  const Text('Size',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black)),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          value: 'S',
+                          items: ['S', 'M', 'L']
+                              .map((s) =>
+                                  DropdownMenuItem(value: s, child: Text(s)))
+                              .toList(),
+                          onChanged: (_) {},
+                          decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 14),
+                              border: OutlineInputBorder()),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      SizedBox(
+                        width: 88,
+                        child: TextFormField(
+                          initialValue: '1',
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder()),
+                          keyboardType: TextInputType.number,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
                   const Text('Description',
                       style: TextStyle(
                           fontSize: 18,
