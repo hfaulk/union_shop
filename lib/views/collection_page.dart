@@ -28,8 +28,8 @@ class _CollectionPageState extends State<CollectionPage> {
     'Best selling',
     'Alphabetically, A-Z',
     'Alphabetically, Z-A',
-    'Price, low to high',
-    'Price, high to low',
+    'Price, Low to High',
+    'Price, High to Low',
   ];
 
   // Filter options requested: label -> collection id used for filtering
