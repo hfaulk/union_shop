@@ -27,6 +27,6 @@
         "id": "sale",
         "title": "Sale",
         "description": "Check out our discounted items",
-        "imageUrl": "assets/images/sale-collection.png"
+        "imageUrl": "assets/images/sale_collection.png"
     }
 ]
