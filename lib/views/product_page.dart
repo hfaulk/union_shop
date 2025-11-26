@@ -12,7 +12,7 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   int _quantity = 1;
   final int _maxQuantity = 10;
-  final int _minQuantity = 0;
+  final int _minQuantity = 1;
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
