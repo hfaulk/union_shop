@@ -13,7 +13,7 @@
         "discount": true,
         "discountedPrice": 899,
         "imageUrl": "https://shop.upsu.net/cdn/shop/files/PurpleHoodieFinal_300x300.jpg?v=1742201957",
-        "collections": ["clothing", "autumn"]
+        "collections": ["clothing", "autumn", "sale"]
     },
     {
         "id": "signature-tshirt",
@@ -22,14 +22,16 @@
         "discount": true,
         "discountedPrice": 999,
         "imageUrl": "https://shop.upsu.net/cdn/shop/files/Signature_T-Shirt_Indigo_Blue_2_300x300.jpg?v=1758290534",
-        "collections": ["signature-essentials", "clothing"]
+        "collections": ["signature-essentials", "clothing", "sale"]
     },
     {
         "id": "graduation-hoodie",
         "title": "Graduation Hoodie",
         "price": 2700,
+        "discount": true,
+        "discountedPrice": 2500,
         "imageUrl": "https://shop.upsu.net/cdn/shop/collections/GradGrey_300x300.jpg?v=1752234294",
-        "collections": ["graduation", "clothing"]
+        "collections": ["graduation", "clothing", "sale"]
     },
     {
         "id": "graduation-tshirt",
