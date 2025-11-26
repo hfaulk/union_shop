@@ -209,6 +209,16 @@ class ProductPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
+                  Center(
+                    child: TextButton(
+                      onPressed: () {},
+                      child: const Text('More payment options',
+                          style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              color: Colors.black)),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
                   const Text('Description',
                       style: TextStyle(
                           fontSize: 18,
