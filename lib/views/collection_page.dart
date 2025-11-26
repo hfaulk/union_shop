@@ -28,8 +28,8 @@ class _CollectionPageState extends State<CollectionPage> {
     'Best selling',
     'Alphabetically, A-Z',
     'Alphabetically, Z-A',
-    'Price, Low to High',
-    'Price, High to Low',
+    'Price, low to high',
+    'Price, high to low',
   ];
 
   // Filter options requested: label -> collection id used for filtering
@@ -95,7 +95,7 @@ class _CollectionPageState extends State<CollectionPage> {
               ),
             const SizedBox(height: 20),
 
-            // Filter / Sort bar (visual only for now)
+            // Filter / Sort bar
             Container(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Column(
