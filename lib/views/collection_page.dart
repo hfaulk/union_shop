@@ -199,13 +199,17 @@ class _CollectionPageState extends State<CollectionPage> {
 
                       // Helper: effective price uses discountedPrice when available
                       int effectivePrice(Product p) {
-                        // Prefer an explicit discounted price when present;
-                        // some data may include `discountedPrice` without the
-                        // `discount` flag, so treat `discountedPrice` as
-                        // authoritative when non-null.
-                        return (p.discountedPrice != null)
-                            ? p.discountedPrice!
-                            : p.price;
+                        // Prefer the discounted price only when the product
+                        // explicitly has a discount and the discounted value
+                        // is actually lower than the original price. This
+                        // guards against inconsistent data where
+                        // `discountedPrice` might be >= `price`.
+                        if (p.discount && p.discountedPrice != null) {
+                          return p.discountedPrice! < p.price
+                              ? p.discountedPrice!
+                              : p.price;
+                        }
+                        return p.price;
                       }
 
                       // Normalize selected sort to be case-insensitive and robust
@@ -219,11 +223,11 @@ class _CollectionPageState extends State<CollectionPage> {
                             .toLowerCase()
                             .compareTo(a.title.toLowerCase()));
                       } else if (sortKey.contains('price') &&
-                          sortKey.contains('low')) {
+                          sortKey.contains('low to high')) {
                         sorted.sort((a, b) =>
                             effectivePrice(a).compareTo(effectivePrice(b)));
                       } else if (sortKey.contains('price') &&
-                          sortKey.contains('high')) {
+                          sortKey.contains('high to low')) {
                         sorted.sort((a, b) =>
                             effectivePrice(b).compareTo(effectivePrice(a)));
                       } else {
