@@ -73,35 +73,51 @@ class _CartPageState extends State<CartPage> {
                 ))
             .toList(),
       ),
-      bottomNavigationBar: Padding(
+      bottomNavigationBar: Container(
         padding: const EdgeInsets.all(12.0),
-        child: ElevatedButton(
-          onPressed: vm == null || items.isEmpty
-              ? null
-              : () async {
-                  final confirmed = await showDialog<bool>(
-                      context: context,
-                      builder: (c) => AlertDialog(
-                            title: const Text('Confirm order'),
-                            content: const Text('Place this order?'),
-                            actions: [
-                              TextButton(
-                                  onPressed: () => Navigator.pop(c, false),
-                                  child: const Text('Cancel')),
-                              TextButton(
-                                  onPressed: () => Navigator.pop(c, true),
-                                  child: const Text('Confirm')),
-                            ],
-                          ));
-                  if (confirmed == true) {
-                    await vm!.placeOrder();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Order placed')));
-                  }
-                },
-          child: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 16),
-              child: Text('Checkout')),
+        color: Colors.white,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Totals
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('Subtotal'),
+                Text(
+                    '£${items.fold<double>(0, (s, it) => s + it.price * it.quantity).toStringAsFixed(2)}'),
+              ],
+            ),
+            const SizedBox(height: 8),
+            ElevatedButton(
+              onPressed: vm == null || items.isEmpty
+                  ? null
+                  : () async {
+                      final confirmed = await showDialog<bool>(
+                          context: context,
+                          builder: (c) => AlertDialog(
+                                title: const Text('Confirm order'),
+                                content: const Text('Place this order?'),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () => Navigator.pop(c, false),
+                                      child: const Text('Cancel')),
+                                  TextButton(
+                                      onPressed: () => Navigator.pop(c, true),
+                                      child: const Text('Confirm')),
+                                ],
+                              ));
+                      if (confirmed == true) {
+                        await vm!.placeOrder();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Order placed')));
+                      }
+                    },
+              child: const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                  child: Text('Checkout')),
+            ),
+          ],
         ),
       ),
     );
