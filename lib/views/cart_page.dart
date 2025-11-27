@@ -79,9 +79,25 @@ class _CartPageState extends State<CartPage> {
           onPressed: vm == null || items.isEmpty
               ? null
               : () async {
-                  await vm!.placeOrder();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Order placed')));
+                  final confirmed = await showDialog<bool>(
+                      context: context,
+                      builder: (c) => AlertDialog(
+                            title: const Text('Confirm order'),
+                            content: const Text('Place this order?'),
+                            actions: [
+                              TextButton(
+                                  onPressed: () => Navigator.pop(c, false),
+                                  child: const Text('Cancel')),
+                              TextButton(
+                                  onPressed: () => Navigator.pop(c, true),
+                                  child: const Text('Confirm')),
+                            ],
+                          ));
+                  if (confirmed == true) {
+                    await vm!.placeOrder();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Order placed')));
+                  }
                 },
           child: const Padding(
               padding: EdgeInsets.symmetric(vertical: 16),
