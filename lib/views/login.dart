@@ -44,6 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    const SizedBox(height: 40),
                     GestureDetector(
                       onTap: () => Navigator.pushNamedAndRemoveUntil(
                           context, '/', (r) => false),
