@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/view_models/cart_view_model.dart';
 import 'package:union_shop/views/product_page.dart';
 import 'package:union_shop/views/about.dart';
 import 'package:union_shop/views/collections.dart';
@@ -10,15 +11,19 @@ import 'package:union_shop/repositories/home_repository.dart';
 import 'package:union_shop/repositories/collection_repository.dart';
 import 'package:union_shop/repositories/product_repository.dart';
 
-void main() {
-  runApp(const UnionShopApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final cartViewModel = CartViewModel();
+  await cartViewModel.loadCart();
+  runApp(UnionShopApp(cartViewModel: cartViewModel));
 }
 
 // Small helper: format integer pence as a pounds string, e.g. 1499 -> £14.99
 String penceToPounds(int pence) => '£${(pence / 100).toStringAsFixed(2)}';
 
 class UnionShopApp extends StatelessWidget {
-  const UnionShopApp({super.key});
+  final CartViewModel cartViewModel;
+  const UnionShopApp({super.key, required this.cartViewModel});
 
   @override
   Widget build(BuildContext context) {
