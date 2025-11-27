@@ -25,8 +25,8 @@ Future<void> main() async {
 String penceToPounds(int pence) => '£${(pence / 100).toStringAsFixed(2)}';
 
 class UnionShopApp extends StatelessWidget {
-  final CartViewModel cartViewModel;
-  const UnionShopApp({super.key, required this.cartViewModel});
+  final CartViewModel? cartViewModel;
+  const UnionShopApp({super.key, this.cartViewModel});
 
   @override
   Widget build(BuildContext context) {
