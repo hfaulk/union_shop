@@ -23,6 +23,9 @@ class CollectionPage extends StatefulWidget {
 class _CollectionPageState extends State<CollectionPage> {
   String _selectedSort = 'Featured';
 
+  static const int pageSize = 12;
+  int currentPage = 1;
+
   final List<String> _sortOptions = [
     'Featured',
     'Best selling',
