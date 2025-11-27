@@ -51,69 +51,102 @@ class _CollectionsPageState extends State<CollectionsPage> {
                 }
 
                 // Compute pagination slice for current page
-                final totalPages = (collections.length + pageSize - 1) ~/ pageSize;
+                final totalPages =
+                    (collections.length + pageSize - 1) ~/ pageSize;
                 final start = (currentPage - 1) * pageSize;
-                final pagedCollections = collections.skip(start).take(pageSize).toList();
+                final pagedCollections =
+                    collections.skip(start).take(pageSize).toList();
 
-                return GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount:
-                        MediaQuery.of(context).size.width > 600 ? 3 : 2,
-                    crossAxisSpacing: 12,
-                    mainAxisSpacing: 12,
-                    childAspectRatio: 1,
-                  ),
-                  itemCount: pagedCollections.length,
-                  itemBuilder: (context, index) {
-                    final c = pagedCollections[index];
-                    return InkWell(
-                      onTap: () {
-                        final slug = c.id;
-                        Navigator.pushNamed(context, '/collections/$slug');
-                      },
-                      child: Card(
-                        clipBehavior: Clip.hardEdge,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Expanded(
-                              child: Image.network(
-                                c.imageUrl ?? '',
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) =>
-                                    Container(
-                                  color: Colors.grey[300],
-                                  child: const Center(
-                                    child: Icon(Icons.image_not_supported,
-                                        color: Colors.grey),
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount:
+                            MediaQuery.of(context).size.width > 600 ? 3 : 2,
+                        crossAxisSpacing: 12,
+                        mainAxisSpacing: 12,
+                        childAspectRatio: 1,
+                      ),
+                      itemCount: pagedCollections.length,
+                      itemBuilder: (context, index) {
+                        final c = pagedCollections[index];
+                        return InkWell(
+                          onTap: () {
+                            final slug = c.id;
+                            Navigator.pushNamed(context, '/collections/$slug');
+                          },
+                          child: Card(
+                            clipBehavior: Clip.hardEdge,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  child: Image.network(
+                                    c.imageUrl ?? '',
+                                    fit: BoxFit.cover,
+                                    errorBuilder:
+                                        (context, error, stackTrace) =>
+                                            Container(
+                                      color: Colors.grey[300],
+                                      child: const Center(
+                                        child: Icon(Icons.image_not_supported,
+                                            color: Colors.grey),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
+                                Container(
+                                  height: 56,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    c.title,
+                                    textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                              ],
                             ),
-                            Container(
-                              height: 56,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              alignment: Alignment.center,
-                              child: Text(
-                                c.title,
-                                textAlign: TextAlign.center,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                          ],
+                          ),
+                        );
+                      },
+                    ),
+
+                    // Pagination controls
+                    const SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButton(
+                          onPressed: currentPage > 1
+                              ? () => setState(() => currentPage--)
+                              : null,
+                          child: const Text('Prev'),
                         ),
-                      ),
-                    );
-                  },
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text('Page $currentPage of $totalPages'),
+                        ),
+                        TextButton(
+                          onPressed: currentPage < totalPages
+                              ? () => setState(() => currentPage++)
+                              : null,
+                          child: const Text('Next'),
+                        ),
+                      ],
+                    ),
+                  ],
                 );
               },
             ),
