@@ -5,6 +5,7 @@ import 'package:union_shop/views/about.dart';
 import 'package:union_shop/views/collections.dart';
 import 'package:union_shop/views/collection_page.dart';
 import 'package:union_shop/views/login.dart';
+import 'package:union_shop/views/cart_page.dart';
 import 'package:union_shop/widgets/shared_layout.dart';
 import 'package:union_shop/widgets/hero_carousel.dart';
 import 'package:union_shop/repositories/home_repository.dart';
@@ -39,6 +40,7 @@ class UnionShopApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/product': (context) => const ProductPage(),
+        '/cart': (context) => const CartPage(),
         '/collections': (context) => const CollectionsPage(),
         '/about': (context) => const AboutPage(),
         '/login': (context) => const LoginPage(),
