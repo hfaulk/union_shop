@@ -231,12 +231,23 @@ class _ProductPageState extends State<ProductPage> {
                         final price =
                             double.tryParse(priceText.replaceAll('£', '')) ??
                                 0.0;
+                        // Prefer discounted value if present
+                        double finalPrice = price;
+                        if (passedDiscount && passedDiscountedRaw != null) {
+                          if (passedDiscountedRaw is int) {
+                            finalPrice = passedDiscountedRaw / 100.0;
+                          } else if (passedDiscountedRaw is String) {
+                            finalPrice = double.tryParse(
+                                    passedDiscountedRaw.replaceAll('£', '')) ??
+                                price;
+                          }
+                        }
                         final item = CartItem(
                           productId: (argMap?['id'] ??
                                   DateTime.now().millisecondsSinceEpoch)
                               .toString(),
                           name: passedTitle ?? 'Product',
-                          price: price,
+                          price: finalPrice,
                           image: passedImage ?? '',
                           options: {
                             'size': _selectedSize,

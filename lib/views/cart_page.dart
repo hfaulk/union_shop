@@ -33,8 +33,17 @@ class _CartPageState extends State<CartPage> {
         children: items
             .map((it) => ListTile(
                   title: Text(it.name),
-                  subtitle: Text(
-                      '${it.options.entries.map((e) => '${e.key}:${e.value}').join(', ')}'),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(it.options.entries
+                          .map((e) => '${e.key}:${e.value}')
+                          .join(', ')),
+                      const SizedBox(height: 4),
+                      Text(
+                          'Price: £${it.price.toStringAsFixed(2)} • Subtotal: £${(it.price * it.quantity).toStringAsFixed(2)}'),
+                    ],
+                  ),
                   trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                     IconButton(
                         icon: const Icon(Icons.remove_circle_outline),
