@@ -9,10 +9,10 @@ class HeroCarousel extends StatefulWidget {
   const HeroCarousel({super.key, this.slides = const []});
 
   @override
-  _HeroCarouselState createState() => _HeroCarouselState();
+  HeroCarouselState createState() => HeroCarouselState();
 }
 
-class _HeroCarouselState extends State<HeroCarousel> {
+class HeroCarouselState extends State<HeroCarousel> {
   late final PageController _controller;
   int _current = 0;
   Timer? _autoplayTimer;
