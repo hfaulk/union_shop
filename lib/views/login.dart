@@ -112,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                       const SizedBox(height: 12),
-                      Container(
+                      SizedBox(
                         height: 52,
                         child: TextField(
                           controller: _controller,

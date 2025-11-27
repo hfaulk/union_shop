@@ -143,7 +143,7 @@ class _ProductPageState extends State<ProductPage> {
                           color: Colors.black)),
                   const SizedBox(height: 8),
                   DropdownButtonFormField<String>(
-                    value: _selectedColor,
+                    initialValue: _selectedColor,
                     items: ['Black', 'White']
                         .map((c) => DropdownMenuItem(value: c, child: Text(c)))
                         .toList(),
@@ -166,7 +166,7 @@ class _ProductPageState extends State<ProductPage> {
                     children: [
                       Expanded(
                         child: DropdownButtonFormField<String>(
-                          value: _selectedSize,
+                          initialValue: _selectedSize,
                           items: ['S', 'M', 'L']
                               .map((s) =>
                                   DropdownMenuItem(value: s, child: Text(s)))
