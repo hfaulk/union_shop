@@ -12,12 +12,16 @@ class LoginPage extends StatelessWidget {
       body: Center(
         child: Card(
           margin: const EdgeInsets.all(24),
-          child: SizedBox(
-            width: 360,
-            height: 420,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
+          child: LayoutBuilder(builder: (context, constraints) {
+            final cardWidth = constraints.maxWidth > 420
+                ? 420.0
+                : constraints.maxWidth * 0.9;
+            return SizedBox(
+              width: cardWidth,
+              height: 420,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   GestureDetector(
