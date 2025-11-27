@@ -83,13 +83,20 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(height: 12),
-                    Row(children: const [
-                      Expanded(child: Divider()),
-                      Padding(
+                    Row(
+                      children: [
+                        const Expanded(child: Divider(thickness: 1)),
+                        const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text('or')),
-                      Expanded(child: Divider())
-                    ]),
+                          child: Text('or',
+                              style: TextStyle(
+                                  color: Colors.black54, fontSize: 13)),
+                        ),
+                        Expanded(
+                            child: Divider(
+                                color: Colors.grey.shade300, thickness: 1)),
+                      ],
+                    ),
                     const SizedBox(height: 12),
                     Container(
                       height: 48,
