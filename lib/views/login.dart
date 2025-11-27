@@ -36,7 +36,9 @@ class LoginPage extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Log in with service (dummy)')));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Log in with service (dummy)')));
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF4d2963),
@@ -46,7 +48,13 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  Row(children: const [Expanded(child: Divider()), Padding(padding: EdgeInsets.symmetric(horizontal:8.0), child: Text('or')), Expanded(child: Divider())]),
+                  Row(children: const [
+                    Expanded(child: Divider()),
+                    Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text('or')),
+                    Expanded(child: Divider())
+                  ]),
                 ],
               ),
             ),
