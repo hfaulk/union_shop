@@ -40,8 +40,12 @@ class _LoginPageState extends State<LoginPage> {
               MediaQuery.of(context).padding.vertical,
         ),
         child: Center(
-          child: Card(
+          child: Container(
             margin: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
+            decoration: BoxDecoration(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              borderRadius: BorderRadius.circular(12),
+            ),
             child: LayoutBuilder(builder: (context, constraints) {
               final cardWidth = constraints.maxWidth > 420
                   ? 420.0
