@@ -106,6 +106,7 @@ class _CartPageState extends State<CartPage> {
               onPressed: vm == null || items.isEmpty
                   ? null
                   : () async {
+                      final messenger = ScaffoldMessenger.of(context);
                       final confirmed = await showDialog<bool>(
                           context: context,
                           builder: (c) => AlertDialog(
@@ -121,7 +122,6 @@ class _CartPageState extends State<CartPage> {
                                 ],
                               ));
                       if (confirmed == true) {
-                        final messenger = ScaffoldMessenger.of(context);
                         await vm.placeOrder();
                         if (!mounted) return;
                         messenger.showSnackBar(
