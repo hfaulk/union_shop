@@ -55,6 +55,39 @@ class LoginPage extends StatelessWidget {
                         child: Text('or')),
                     Expanded(child: Divider())
                   ]),
+                  const SizedBox(height: 12),
+                  Container(
+                    height: 48,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade300),
+                      color: Colors.white,
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Email',
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Continue (dummy)')));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.grey.shade200,
+                        foregroundColor: Colors.black54,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                      ),
+                      child: const Text('Continue'),
+                    ),
+                  ),
                 ],
               ),
             ),
