@@ -50,10 +50,11 @@ class _CartPageState extends State<CartPage> {
                         onPressed: () async {
                           final vm = appCartViewModel;
                           if (vm != null) {
+                            final messenger = ScaffoldMessenger.of(context);
                             await vm.updateQuantity(it.id, it.quantity - 1);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Quantity updated')));
+                            if (!mounted) return;
+                            messenger.showSnackBar(const SnackBar(
+                                content: Text('Quantity updated')));
                           }
                         }),
                     Text('${it.quantity}'),
@@ -62,10 +63,11 @@ class _CartPageState extends State<CartPage> {
                         onPressed: () async {
                           final vm = appCartViewModel;
                           if (vm != null) {
+                            final messenger = ScaffoldMessenger.of(context);
                             await vm.updateQuantity(it.id, it.quantity + 1);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Quantity updated')));
+                            if (!mounted) return;
+                            messenger.showSnackBar(const SnackBar(
+                                content: Text('Quantity updated')));
                           }
                         }),
                     IconButton(
@@ -73,8 +75,10 @@ class _CartPageState extends State<CartPage> {
                         onPressed: () async {
                           final vm = appCartViewModel;
                           if (vm != null) {
+                            final messenger = ScaffoldMessenger.of(context);
                             await vm.removeItemById(it.id);
-                            ScaffoldMessenger.of(context).showSnackBar(
+                            if (!mounted) return;
+                            messenger.showSnackBar(
                                 const SnackBar(content: Text('Removed item')));
                           }
                         }),
@@ -117,8 +121,10 @@ class _CartPageState extends State<CartPage> {
                                 ],
                               ));
                       if (confirmed == true) {
+                        final messenger = ScaffoldMessenger.of(context);
                         await vm.placeOrder();
-                        ScaffoldMessenger.of(context).showSnackBar(
+                        if (!mounted) return;
+                        messenger.showSnackBar(
                             const SnackBar(content: Text('Order placed')));
                       }
                     },
