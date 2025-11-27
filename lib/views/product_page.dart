@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/shared_layout.dart';
+import 'package:union_shop/view_models/cart_view_model.dart';
+import 'package:union_shop/models/cart_item.dart';
 // kept minimal: no repository/model imports required for now
 
 class ProductPage extends StatefulWidget {
@@ -13,6 +15,8 @@ class _ProductPageState extends State<ProductPage> {
   int _quantity = 1;
   final int _maxQuantity = 10;
   final int _minQuantity = 1;
+  String _selectedColor = 'Black';
+  String _selectedSize = 'S';
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -139,11 +143,12 @@ class _ProductPageState extends State<ProductPage> {
                           color: Colors.black)),
                   const SizedBox(height: 8),
                   DropdownButtonFormField<String>(
-                    value: 'Black',
+                    value: _selectedColor,
                     items: ['Black', 'White']
                         .map((c) => DropdownMenuItem(value: c, child: Text(c)))
                         .toList(),
-                    onChanged: (_) {},
+                    onChanged: (v) =>
+                        setState(() => _selectedColor = v ?? 'Black'),
                     decoration: const InputDecoration(
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 12, vertical: 14),
@@ -161,12 +166,13 @@ class _ProductPageState extends State<ProductPage> {
                     children: [
                       Expanded(
                         child: DropdownButtonFormField<String>(
-                          value: 'S',
+                          value: _selectedSize,
                           items: ['S', 'M', 'L']
                               .map((s) =>
                                   DropdownMenuItem(value: s, child: Text(s)))
                               .toList(),
-                          onChanged: (_) {},
+                          onChanged: (v) =>
+                              setState(() => _selectedSize = v ?? 'S'),
                           decoration: const InputDecoration(
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 14),
@@ -215,7 +221,33 @@ class _ProductPageState extends State<ProductPage> {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        final vm = appCartViewModel;
+                        if (vm == null) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Cart not ready')));
+                          return;
+                        }
+                        final price =
+                            double.tryParse(priceText.replaceAll('£', '')) ??
+                                0.0;
+                        final item = CartItem(
+                          productId: (argMap?['id'] ??
+                                  DateTime.now().millisecondsSinceEpoch)
+                              .toString(),
+                          name: passedTitle ?? 'Product',
+                          price: price,
+                          image: passedImage ?? '',
+                          options: {
+                            'size': _selectedSize,
+                            'color': _selectedColor
+                          },
+                          quantity: _quantity,
+                        );
+                        vm.addItem(item);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Added to cart')));
+                      },
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         side: const BorderSide(color: Color(0xFF4d2963)),

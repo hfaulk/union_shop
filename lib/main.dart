@@ -14,6 +14,8 @@ import 'package:union_shop/repositories/product_repository.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final cartViewModel = CartViewModel();
+  // expose globally for simple access from screens
+  appCartViewModel = cartViewModel;
   await cartViewModel.loadCart();
   runApp(UnionShopApp(cartViewModel: cartViewModel));
 }

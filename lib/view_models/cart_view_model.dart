@@ -2,6 +2,9 @@ import 'package:flutter/foundation.dart';
 import '../models/cart_item.dart';
 import '../repositories/cart_repository.dart';
 
+// Global app-scoped reference (set from `main.dart`) to keep access simple
+CartViewModel? appCartViewModel;
+
 class CartViewModel extends ChangeNotifier {
   final CartRepository _repo;
   List<CartItem> items = [];
