@@ -29,8 +29,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Card(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Center(
+          child: Card(
           margin: const EdgeInsets.all(24),
           child: LayoutBuilder(builder: (context, constraints) {
             final cardWidth =
