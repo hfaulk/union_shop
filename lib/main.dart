@@ -11,6 +11,7 @@ import 'package:union_shop/widgets/hero_carousel.dart';
 import 'package:union_shop/repositories/home_repository.dart';
 import 'package:union_shop/repositories/collection_repository.dart';
 import 'package:union_shop/repositories/product_repository.dart';
+import 'package:union_shop/views/home_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +37,7 @@ class UnionShopApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
       ),
-      home: const HomeScreen(),
+      home: const HomeView(),
       initialRoute: '/',
       routes: {
         '/product': (context) => const ProductPage(),
