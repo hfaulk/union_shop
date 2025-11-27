@@ -18,13 +18,19 @@ class LoginPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   GestureDetector(
-                    onTap: () => Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false),
-                    child: Image.network('https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854', height: 64),
+                    onTap: () => Navigator.pushNamedAndRemoveUntil(
+                        context, '/', (r) => false),
+                    child: Image.network(
+                        'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                        height: 64),
                   ),
                   const SizedBox(height: 18),
-                  const Text('Sign in', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+                  const Text('Sign in',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
                   const SizedBox(height: 6),
-                  const Text('Choose how you\'d like to sign in', style: TextStyle(color: Colors.black54)),
+                  const Text('Choose how you\'d like to sign in',
+                      style: TextStyle(color: Colors.black54)),
                 ],
               ),
             ),
