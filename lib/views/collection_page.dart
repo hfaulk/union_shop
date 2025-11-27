@@ -277,9 +277,9 @@ class _CollectionPageState extends State<CollectionPage> {
                               mainAxisSpacing: 12,
                               childAspectRatio: gridChildAspectRatio,
                             ),
-                            itemCount: filtered.length,
+                            itemCount: pagedProducts.length,
                             itemBuilder: (context, i) {
-                              final p = filtered[i];
+                              final p = pagedProducts[i];
                               return InkWell(
                                 onTap: () {
                                   Navigator.pushNamed(
