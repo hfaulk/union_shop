@@ -247,6 +247,13 @@ class _CollectionPageState extends State<CollectionPage> {
 
                       final count = filtered.length;
 
+                      // Pagination slice for current page
+                      final totalPages =
+                          (filtered.length + pageSize - 1) ~/ pageSize;
+                      final start = (currentPage - 1) * pageSize;
+                      final pagedProducts =
+                          filtered.skip(start).take(pageSize).toList();
+
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
