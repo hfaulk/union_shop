@@ -69,6 +69,7 @@ class UnionShopApp extends StatelessWidget {
   }
 }
 
+@Deprecated('Use HomeView')
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
