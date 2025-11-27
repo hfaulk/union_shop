@@ -76,6 +76,48 @@ class _CollectionPageState extends State<CollectionPage> {
                 widget.title,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF333333),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            if (widget.description != null && widget.description!.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Text(
+                  widget.description!,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Color(0xFF7A7A7A),
+                    height: 1.5,
+                  ),
+                ),
+              ),
+            const SizedBox(height: 20),
+
+            // Filter / Sort bar
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'FILTER BY',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Color(0xFF9E9E9E),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                             const SizedBox(height: 8),
                             DropdownButtonHideUnderline(
                               child: DropdownButton<String>(
@@ -98,46 +140,7 @@ class _CollectionPageState extends State<CollectionPage> {
                                 ),
                               ),
                             ),
-                                          value: e.value,
-                                          child: Text(e.key),
-                                        ))
-                                    .toList(),
-                                onChanged: (v) {
-                                  if (v == null) return;
-                                  setState(() {
-                                    _selectedFilterKey = v;
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            },
-                          ),
-
-                          const SizedBox(height: 12),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TextButton(
-                                onPressed: currentPage > 1
-                                    ? () => setState(() => currentPage--)
-                                    : null,
-                                child: const Text('Prev'),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Text('Page $currentPage of $totalPages'),
-                              ),
-                              TextButton(
-                                onPressed: currentPage < totalPages
-                                    ? () => setState(() => currentPage++)
-                                    : null,
-                                child: const Text('Next'),
-                              ),
-                            ],
-                          ),
-                        ],
-                      );
+                          ],
                         ),
                       ),
                       const SizedBox(width: 16),
