@@ -132,15 +132,38 @@ class _CollectionPageState extends State<CollectionPage> {
                                   if (v == null) return;
                                   setState(() {
                                     _selectedFilterKey = v;
-                                  });
-                                },
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Color(0xFF333333),
-                                ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            },
+                          ),
+
+                          const SizedBox(height: 12),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                onPressed: currentPage > 1
+                                    ? () => setState(() => currentPage--)
+                                    : null,
+                                child: const Text('Prev'),
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Text('Page $currentPage of $totalPages'),
+                              ),
+                              TextButton(
+                                onPressed: currentPage < totalPages
+                                    ? () => setState(() => currentPage++)
+                                    : null,
+                                child: const Text('Next'),
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
                         ),
                       ),
                       const SizedBox(width: 16),
