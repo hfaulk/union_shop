@@ -25,4 +25,10 @@ class CartRepository {
 
   // Convenience helpers - simple wrappers that load, modify, and save.
   Future<void> clearCart() async => saveCart([]);
+
+  Future<void> saveLastOrder(List<CartItem> items) async {
+    final prefs = await SharedPreferences.getInstance();
+    final s = jsonEncode(items.map((e) => e.toJson()).toList());
+    await prefs.setString('last_order_v1', s);
+  }
 }

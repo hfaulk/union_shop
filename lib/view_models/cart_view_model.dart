@@ -41,6 +41,8 @@ class CartViewModel extends ChangeNotifier {
   }
 
   Future<void> placeOrder() async {
+    // persist the last order then clear the cart
+    await _repo.saveLastOrder(items);
     items = [];
     await _repo.clearCart();
     notifyListeners();
