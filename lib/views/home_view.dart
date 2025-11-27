@@ -47,18 +47,55 @@ class HomeView extends StatelessWidget {
                   final first = entries.isNotEmpty ? entries[0] : null;
                   final second = entries.length > 1 ? entries[1] : null;
 
+                  Widget buildFeaturedEntry(MapEntry? entry) {
+                    final collection = entry?.key;
+                    final products = entry?.value ?? [];
+                    final p = products.isNotEmpty ? products[0] : null;
+                    final price = p != null
+                        ? '£${(p.price / 100).toStringAsFixed(2)}'
+                        : '';
+
+                    return Container(
+                      height: 190,
+                      clipBehavior: Clip.antiAlias,
+                      decoration:
+                          BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                      child: Stack(fit: StackFit.expand, children: [
+                        if (collection?.imageUrl != null)
+                          (collection!.imageUrl!.startsWith('assets/')
+                              ? Image.asset(collection.imageUrl!,
+                                  fit: BoxFit.cover)
+                              : Image.network(collection.imageUrl!,
+                                  fit: BoxFit.cover))
+                        else
+                          Container(color: Colors.grey[200]),
+                        Container(color: Colors.black26),
+                        Positioned(
+                          left: 12,
+                          bottom: 12,
+                          right: 12,
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(collection?.title ?? 'Featured',
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold)),
+                                if (p != null)
+                                  Text('${p.title} • $price',
+                                      style: const TextStyle(
+                                          color: Colors.white70)),
+                              ]),
+                        ),
+                      ]),
+                    );
+                  }
+
                   return Column(children: [
-                    Container(
-                        height: 190,
-                        color: Colors.white,
-                        child: Center(
-                            child: Text(first?.key.title ?? 'Featured'))),
+                    buildFeaturedEntry(first),
                     const SizedBox(height: 20),
-                    Container(
-                        height: 190,
-                        color: Colors.white,
-                        child: Center(
-                            child: Text(second?.key.title ?? 'Featured'))),
+                    buildFeaturedEntry(second)
                   ]);
                 },
               ),
