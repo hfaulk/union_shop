@@ -28,6 +28,42 @@ class HomeView extends StatelessWidget {
                     child: const Center(child: Text('Featured Collection 2'))),
               ]),
             ),
+            const SizedBox(height: 32),
+            // Our Range heading
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 40.0),
+              child: Center(
+                child: Text('OUR RANGE',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.5)),
+              ),
+            ),
+            const SizedBox(height: 16),
+            // 2x2 collections grid (first 4 collections)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: GridView.count(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: 2,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                childAspectRatio: 1,
+                children: List.generate(4, (i) {
+                  return Container(
+                    color: Colors.grey[350],
+                    child: Center(
+                        child: Text('Collection ${i + 1}',
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold))),
+                  );
+                }),
+              ),
+            ),
           ],
         ),
       ),
