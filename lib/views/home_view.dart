@@ -144,8 +144,10 @@ class HomeView extends StatelessWidget {
                         children: List.generate(4, (i) {
                           final c = i < cols.length ? cols[i] : null;
                           return GestureDetector(
-                            onTap: () =>
-                                Navigator.pushNamed(context, '/collections'),
+                            onTap: c != null
+                                ? () => Navigator.pushNamed(
+                                    context, '/collections/${c.id}')
+                                : null,
                             child: Container(
                               clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(
