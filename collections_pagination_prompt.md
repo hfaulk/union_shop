@@ -48,9 +48,9 @@ This approach minimizes changes and avoids touching backend or repository code u
 
 - [x] M1 — Add this prompt file to the repo (you did this).
 - [x] M2 — Add `currentPage` and `pageSize` state to `lib/views/collections.dart`.
-- [ ] M3 — Add Prev/Next controls and page indicator to `lib/views/collections.dart` and slice the collections to display only current page.
-- [ ] M4 — Add `currentPage` and `pageSize` state to `lib/views/collection_page.dart`.
-- [ ] M5 — Add Prev/Next controls and page indicator to `lib/views/collection_page.dart` and slice the products to display only current page.
+- [x] M3 — Add Prev/Next controls and page indicator to `lib/views/collections.dart` and slice the collections to display only current page.
+- [x] M4 — Add `currentPage` and `pageSize` state to `lib/views/collection_page.dart`.
+- [x] M5 — Add Prev/Next controls and page indicator to `lib/views/collection_page.dart` and slice the products to display only current page.
 - [ ] M6 — If needed, add repository pagination support in `lib/repositories/*.dart` in minimal changes.
 - [ ] M7 — Add or update unit/widget tests for both paginated components under `test/`.
 - [ ] M8 — Update this prompt file to reflect any deviations or decisions and mark final completion.
