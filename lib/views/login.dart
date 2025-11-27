@@ -12,7 +12,22 @@ class LoginPage extends StatelessWidget {
           child: SizedBox(
             width: 360,
             height: 420,
-            child: const Center(child: Text('Login page (placeholder)')),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  GestureDetector(
+                    onTap: () => Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false),
+                    child: Image.network('https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854', height: 64),
+                  ),
+                  const SizedBox(height: 18),
+                  const Text('Sign in', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+                  const SizedBox(height: 6),
+                  const Text('Choose how you\'d like to sign in', style: TextStyle(color: Colors.black54)),
+                ],
+              ),
+            ),
           ),
         ),
       ),
