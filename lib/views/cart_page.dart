@@ -38,24 +38,36 @@ class _CartPageState extends State<CartPage> {
                   trailing: Row(mainAxisSize: MainAxisSize.min, children: [
                     IconButton(
                         icon: const Icon(Icons.remove_circle_outline),
-                        onPressed: () {
+                        onPressed: () async {
                           final vm = appCartViewModel;
-                          if (vm != null)
-                            vm.updateQuantity(it.id, it.quantity - 1);
+                          if (vm != null) {
+                            await vm.updateQuantity(it.id, it.quantity - 1);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Quantity updated')));
+                          }
                         }),
                     Text('${it.quantity}'),
                     IconButton(
                         icon: const Icon(Icons.add_circle_outline),
-                        onPressed: () {
+                        onPressed: () async {
                           final vm = appCartViewModel;
-                          if (vm != null)
-                            vm.updateQuantity(it.id, it.quantity + 1);
+                          if (vm != null) {
+                            await vm.updateQuantity(it.id, it.quantity + 1);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Quantity updated')));
+                          }
                         }),
                     IconButton(
                         icon: const Icon(Icons.delete_outline),
-                        onPressed: () {
+                        onPressed: () async {
                           final vm = appCartViewModel;
-                          if (vm != null) vm.removeItemById(it.id);
+                          if (vm != null) {
+                            await vm.removeItemById(it.id);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Removed item')));
+                          }
                         }),
                   ]),
                 ))
