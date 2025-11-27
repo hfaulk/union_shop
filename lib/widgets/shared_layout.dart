@@ -105,7 +105,8 @@ class SharedLayout extends StatelessWidget {
                                         minWidth: 32,
                                         minHeight: 32,
                                       ),
-                                      onPressed: () => Navigator.pushNamed(context, '/login'),
+                                      onPressed: () => Navigator.pushNamed(
+                                          context, '/login'),
                                     ),
                                     IconButton(
                                       icon: const Icon(
