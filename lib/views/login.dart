@@ -55,11 +55,11 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 18),
                     const Text('Sign in',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w700)),
+                      style: TextStyle(
+                        fontSize: 22, fontWeight: FontWeight.w800)),
                     const SizedBox(height: 6),
                     const Text('Choose how you\'d like to sign in',
-                        style: TextStyle(color: Colors.black54)),
+                      style: TextStyle(fontSize: 14, color: Colors.black54)),
                     const SizedBox(height: 18),
                     SizedBox(
                       width: double.infinity,
