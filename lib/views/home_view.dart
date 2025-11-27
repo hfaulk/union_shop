@@ -11,6 +11,87 @@ String _humanizeId(String s) => s
     .map((w) => w.isEmpty ? w : '${w[0].toUpperCase()}${w.substring(1)}')
     .join(' ');
 
+// Helper to render a featured product tile (keeps same visuals as previous implementation)
+Widget _productTile(dynamic product, double height) {
+  if (product == null) return const SizedBox.shrink();
+  return Container(
+    height: height,
+    clipBehavior: Clip.antiAlias,
+    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+    child: Stack(
+      fit: StackFit.expand,
+      children: [
+        product.imageUrl.startsWith('assets/')
+            ? Image.asset(product.imageUrl, fit: BoxFit.cover)
+            : Image.network(product.imageUrl, fit: BoxFit.cover),
+        Container(color: Colors.black26),
+        if (product.discount && product.discountedPrice != null)
+          Positioned(
+            left: 12,
+            top: 12,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.redAccent,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Text(
+                '${(((product.price - product.discountedPrice!) / product.price) * 100).round()}% OFF',
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        Positioned(
+          left: 12,
+          right: 12,
+          bottom: 12,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(product.title,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold)),
+              const SizedBox(height: 6),
+              if (product.discount && product.discountedPrice != null)
+                Row(children: [
+                  Text('£${(product.price / 100).toStringAsFixed(2)}',
+                      style: const TextStyle(
+                          color: Colors.white70,
+                          decoration: TextDecoration.lineThrough)),
+                  const SizedBox(width: 8),
+                  Text(
+                      '£${(product.discountedPrice! / 100).toStringAsFixed(2)}',
+                      style: const TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold)),
+                ])
+              else
+                Text('£${(product.price / 100).toStringAsFixed(2)}',
+                    style: const TextStyle(color: Colors.white70)),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+// Small helper to compute the grid tile height used by the Our Range grid
+double gridTileHeightFor(BuildContext context) {
+  final width = MediaQuery.of(context).size.width;
+  final isWide = width > 900;
+  final containerWidth = isWide ? 1200.0 : (width - 80.0);
+  final columns = isWide ? 4 : 2;
+  final spacing = 16.0 * (columns - 1);
+  final itemWidth = (containerWidth - spacing) / columns;
+  final childAspect = isWide ? 0.9 : 1.0;
+  return itemWidth / childAspect;
+}
+
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
 
@@ -58,59 +139,64 @@ class HomeView extends StatelessWidget {
                       MapEntry<Collection, List<dynamic>>? entry) {
                     final collection = entry?.key;
                     final products = entry?.value ?? [];
-                    final p = products.isNotEmpty ? products[0] : null;
-                    final price = p != null
-                        ? '£${(p.price / 100).toStringAsFixed(2)}'
-                        : '';
+
+                    final gridTileHeight = gridTileHeightFor(context);
 
                     return GestureDetector(
                       onTap: collection != null
                           ? () => Navigator.pushNamed(
                               context, '/collections/${collection.id}')
                           : null,
-                      child: Container(
-                        height: 190,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Stack(fit: StackFit.expand, children: [
-                          if (collection?.imageUrl != null)
-                            (collection!.imageUrl!.startsWith('assets/')
-                                ? Image.asset(collection.imageUrl!,
-                                    fit: BoxFit.cover)
-                                : Image.network(collection.imageUrl!,
-                                    fit: BoxFit.cover))
-                          else
-                            Container(color: Colors.grey[200]),
-                          Container(color: Colors.black26),
-                          Positioned(
-                            left: 12,
-                            bottom: 12,
-                            right: 12,
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(collection?.title ?? 'Featured',
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold)),
-                                  if (p != null)
-                                    Text('${p.title} • $price',
-                                        style: const TextStyle(
-                                            color: Colors.white70)),
-                                ]),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            collection != null &&
+                                    collection.title.trim().isNotEmpty
+                                ? collection.title
+                                : _humanizeId(collection?.id ?? 'Featured'),
+                            style: const TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.bold),
                           ),
-                        ]),
+                          const SizedBox(height: 12),
+                          Row(children: [
+                            Expanded(
+                              child: SizedBox(
+                                height: gridTileHeight,
+                                child: products.isNotEmpty
+                                    ? _productTile(products[0], gridTileHeight)
+                                    : const SizedBox.shrink(),
+                              ),
+                            ),
+                            const SizedBox(width: 32),
+                            Expanded(
+                              child: SizedBox(
+                                height: gridTileHeight,
+                                child: products.length > 1
+                                    ? _productTile(products[1], gridTileHeight)
+                                    : const SizedBox.shrink(),
+                              ),
+                            ),
+                          ])
+                        ],
                       ),
                     );
                   }
 
-                  return Column(children: [
-                    buildFeaturedEntry(first),
-                    const SizedBox(height: 20),
-                    buildFeaturedEntry(second)
-                  ]);
+                  // center and constrain the featured area to match the Our Range margins
+                  final _widthTop = MediaQuery.of(context).size.width;
+                  final _isWideTop = _widthTop > 900;
+                  return Center(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                          maxWidth: _isWideTop ? 1200 : double.infinity),
+                      child: Column(children: [
+                        buildFeaturedEntry(first),
+                        const SizedBox(height: 20),
+                        buildFeaturedEntry(second)
+                      ]),
+                    ),
+                  );
                 },
               ),
             ),
