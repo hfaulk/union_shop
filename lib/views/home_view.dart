@@ -6,6 +6,11 @@ import 'package:union_shop/repositories/collection_repository.dart';
 import 'package:union_shop/repositories/home_repository.dart';
 import 'package:union_shop/repositories/product_repository.dart';
 
+String _humanizeId(String s) => s
+    .split('-')
+    .map((w) => w.isEmpty ? w : '${w[0].toUpperCase()}${w.substring(1)}')
+    .join(' ');
+
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
 
@@ -42,6 +47,8 @@ class HomeView extends StatelessWidget {
                               child: Text('Featured Collection 2'))),
                     ]);
                   }
+
+                  // use file-level helper `_humanizeId` for slug->title fallback
 
                   final entries = home.featured.entries.toList();
                   final first = entries.isNotEmpty ? entries[0] : null;
@@ -168,7 +175,10 @@ class HomeView extends StatelessWidget {
                                   Container(color: Colors.black26),
                                   Center(
                                     child: Text(
-                                      c?.title ?? 'Collection ${i + 1}',
+                                      (c != null && c.title.trim().isNotEmpty)
+                                          ? c.title
+                                          : _humanizeId(
+                                              c?.id ?? 'Collection ${i + 1}'),
                                       textAlign: TextAlign.center,
                                       style: const TextStyle(
                                         color: Colors.white,
