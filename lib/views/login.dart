@@ -31,6 +31,22 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(height: 6),
                   const Text('Choose how you\'d like to sign in',
                       style: TextStyle(color: Colors.black54)),
+                  const SizedBox(height: 18),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Log in with service (dummy)')));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF4d2963),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                      ),
+                      child: const Text('Log in with service'),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Row(children: const [Expanded(child: Divider()), Padding(padding: EdgeInsets.symmetric(horizontal:8.0), child: Text('or')), Expanded(child: Divider())]),
                 ],
               ),
             ),
