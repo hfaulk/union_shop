@@ -34,7 +34,30 @@ class _CartPageState extends State<CartPage> {
             .map((it) => ListTile(
                   title: Text(it.name),
                   subtitle: Text(
-                      'Qty: ${it.quantity} • ${it.options.entries.map((e) => '${e.key}:${e.value}').join(', ')}'),
+                      '${it.options.entries.map((e) => '${e.key}:${e.value}').join(', ')}'),
+                  trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                    IconButton(
+                        icon: const Icon(Icons.remove_circle_outline),
+                        onPressed: () {
+                          final vm = appCartViewModel;
+                          if (vm != null)
+                            vm.updateQuantity(it.id, it.quantity - 1);
+                        }),
+                    Text('${it.quantity}'),
+                    IconButton(
+                        icon: const Icon(Icons.add_circle_outline),
+                        onPressed: () {
+                          final vm = appCartViewModel;
+                          if (vm != null)
+                            vm.updateQuantity(it.id, it.quantity + 1);
+                        }),
+                    IconButton(
+                        icon: const Icon(Icons.delete_outline),
+                        onPressed: () {
+                          final vm = appCartViewModel;
+                          if (vm != null) vm.removeItemById(it.id);
+                        }),
+                  ]),
                 ))
             .toList(),
       ),
