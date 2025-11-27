@@ -47,7 +47,8 @@ class HomeView extends StatelessWidget {
                   final first = entries.isNotEmpty ? entries[0] : null;
                   final second = entries.length > 1 ? entries[1] : null;
 
-                  Widget buildFeaturedEntry(MapEntry? entry) {
+                  Widget buildFeaturedEntry(
+                      MapEntry<Collection, List<dynamic>>? entry) {
                     final collection = entry?.key;
                     final products = entry?.value ?? [];
                     final p = products.isNotEmpty ? products[0] : null;
