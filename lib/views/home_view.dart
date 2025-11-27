@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/shared_layout.dart';
 import 'package:union_shop/widgets/hero_carousel.dart';
+import 'package:union_shop/models/collection.dart';
+import 'package:union_shop/repositories/collection_repository.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -44,24 +46,49 @@ class HomeView extends StatelessWidget {
             // 2x2 collections grid (first 4 collections)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
-              child: GridView.count(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                childAspectRatio: 1,
-                children: List.generate(4, (i) {
-                  return Container(
-                    color: Colors.grey[350],
-                    child: Center(
-                        child: Text('Collection ${i + 1}',
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold))),
+              child: FutureBuilder<List<Collection>>(
+                future: AssetCollectionRepository().fetchAll(),
+                builder: (context, snapshot) {
+                  final cols = snapshot.data ?? <Collection>[];
+                  return GridView.count(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 1,
+                    children: List.generate(4, (i) {
+                      final c = i < cols.length ? cols[i] : null;
+                      return GestureDetector(
+                        onTap: () =>
+                            Navigator.pushNamed(context, '/collections'),
+                        child: Container(
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                              color: Colors.grey[350],
+                              borderRadius: BorderRadius.circular(6)),
+                          child: Stack(fit: StackFit.expand, children: [
+                            if (c?.imageUrl != null)
+                              (c!.imageUrl!.startsWith('assets/')
+                                  ? Image.asset(c.imageUrl!, fit: BoxFit.cover)
+                                  : Image.network(c.imageUrl!,
+                                      fit: BoxFit.cover))
+                            else
+                              Container(color: Colors.grey[400]),
+                            Container(color: Colors.black26),
+                            Center(
+                                child: Text(c?.title ?? 'Collection ${i + 1}',
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold))),
+                          ]),
+                        ),
+                      );
+                    }),
                   );
-                }),
+                },
               ),
             ),
           ],
