@@ -31,8 +31,14 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        body: SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          // ensure the scrollable area is at least the viewport height
+          minHeight: MediaQuery.of(context).size.height -
+              MediaQuery.of(context).padding.vertical,
+        ),
         child: Center(
           child: Card(
             margin: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
@@ -160,6 +166,6 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-    );
+    ));
   }
 }
