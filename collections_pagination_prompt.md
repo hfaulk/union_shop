@@ -46,8 +46,8 @@ This approach minimizes changes and avoids touching backend or repository code u
 
 ## Milestones (tick off as you complete them)
 
-- [ ] M1 — Add this prompt file to the repo (you did this).
-- [ ] M2 — Add `currentPage` and `pageSize` state to `lib/views/collections.dart`.
+- [x] M1 — Add this prompt file to the repo (you did this).
+- [x] M2 — Add `currentPage` and `pageSize` state to `lib/views/collections.dart`.
 - [ ] M3 — Add Prev/Next controls and page indicator to `lib/views/collections.dart` and slice the collections to display only current page.
 - [ ] M4 — Add `currentPage` and `pageSize` state to `lib/views/collection_page.dart`.
 - [ ] M5 — Add Prev/Next controls and page indicator to `lib/views/collection_page.dart` and slice the products to display only current page.

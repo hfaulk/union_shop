@@ -3,7 +3,7 @@ import 'package:union_shop/widgets/shared_layout.dart';
 import 'package:union_shop/models/collection.dart';
 import 'package:union_shop/repositories/collection_repository.dart';
 
-class CollectionsPage extends StatelessWidget {
+class CollectionsPage extends StatefulWidget {
   static const String routeName = '/collections';
 
   // Allow injecting a repository for tests; default uses bundled assets.
@@ -12,8 +12,16 @@ class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key, this.repo});
 
   @override
+  State<CollectionsPage> createState() => _CollectionsPageState();
+}
+
+class _CollectionsPageState extends State<CollectionsPage> {
+  static const int pageSize = 12;
+  int currentPage = 1;
+
+  @override
   Widget build(BuildContext context) {
-    final repoInstance = repo ?? AssetCollectionRepository();
+    final repoInstance = widget.repo ?? AssetCollectionRepository();
 
     return SharedLayout(
       body: Padding(
@@ -42,6 +50,11 @@ class CollectionsPage extends StatelessWidget {
                   return const Center(child: Text('No collections yet'));
                 }
 
+                // Compute pagination slice for current page
+                final totalPages = (collections.length + pageSize - 1) ~/ pageSize;
+                final start = (currentPage - 1) * pageSize;
+                final pagedCollections = collections.skip(start).take(pageSize).toList();
+
                 return GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -52,9 +65,9 @@ class CollectionsPage extends StatelessWidget {
                     mainAxisSpacing: 12,
                     childAspectRatio: 1,
                   ),
-                  itemCount: collections.length,
+                  itemCount: pagedCollections.length,
                   itemBuilder: (context, index) {
-                    final c = collections[index];
+                    final c = pagedCollections[index];
                     return InkWell(
                       onTap: () {
                         final slug = c.id;
