@@ -6,7 +6,7 @@ import '../models/hero_slide.dart';
 
 class HeroCarousel extends StatefulWidget {
   final List<HeroSlide> slides;
-  const HeroCarousel({Key? key, this.slides = const []}) : super(key: key);
+  const HeroCarousel({super.key, this.slides = const []});
 
   @override
   _HeroCarouselState createState() => _HeroCarouselState();
@@ -115,7 +115,7 @@ class _HeroCarouselState extends State<HeroCarousel> {
                       fit: BoxFit.cover,
                       errorBuilder: (_, __, ___) =>
                           Container(color: Colors.grey[800])),
-                  Container(color: Colors.black.withOpacity(0.45)),
+                  Container(color: Color.fromRGBO(0, 0, 0, 0.45)),
                   Center(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
