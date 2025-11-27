@@ -117,7 +117,7 @@ class _CartPageState extends State<CartPage> {
                                 ],
                               ));
                       if (confirmed == true) {
-                        await vm!.placeOrder();
+                        await vm.placeOrder();
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Order placed')));
                       }
