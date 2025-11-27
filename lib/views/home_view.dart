@@ -3,6 +3,8 @@ import 'package:union_shop/widgets/shared_layout.dart';
 import 'package:union_shop/widgets/hero_carousel.dart';
 import 'package:union_shop/models/collection.dart';
 import 'package:union_shop/repositories/collection_repository.dart';
+import 'package:union_shop/repositories/home_repository.dart';
+import 'package:union_shop/repositories/product_repository.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -18,17 +20,48 @@ class HomeView extends StatelessWidget {
             const SizedBox(height: 24),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
-              child: Column(children: [
-                Container(
-                    height: 190,
-                    color: Colors.grey[200],
-                    child: const Center(child: Text('Featured Collection 1'))),
-                const SizedBox(height: 20),
-                Container(
-                    height: 190,
-                    color: Colors.grey[300],
-                    child: const Center(child: Text('Featured Collection 2'))),
-              ]),
+              child: FutureBuilder<HomeData?>(
+                future: HomeRepository(
+                        collectionRepo: AssetCollectionRepository(),
+                        productRepo: AssetProductRepository())
+                    .load(),
+                builder: (context, snapshot) {
+                  final home = snapshot.data;
+                  if (home == null || home.featured.isEmpty) {
+                    return Column(children: [
+                      Container(
+                          height: 190,
+                          color: Colors.grey[200],
+                          child: const Center(
+                              child: Text('Featured Collection 1'))),
+                      const SizedBox(height: 20),
+                      Container(
+                          height: 190,
+                          color: Colors.grey[300],
+                          child: const Center(
+                              child: Text('Featured Collection 2'))),
+                    ]);
+                  }
+
+                  final entries = home.featured.entries.toList();
+                  final first = entries.isNotEmpty ? entries[0] : null;
+                  final second = entries.length > 1 ? entries[1] : null;
+
+                  return Column(children: [
+                    Container(
+                        height: 190,
+                        color: Colors.white,
+                        child: Center(
+                            child: Text(first?.key.title ?? 'Featured'))),
+                    const SizedBox(height: 20),
+                    Container(
+                        height: 190,
+                        color: Colors.white,
+                        child: Center(
+                            child: Text(second?.key.title ?? 'Featured'))),
+                  ]);
+                },
+              ),
             ),
             const SizedBox(height: 32),
             // Our Range heading
