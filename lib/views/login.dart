@@ -68,7 +68,8 @@ class LoginPage extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: TextField(
-                        onChanged: (v) => _loginHasEmail.value = v.trim().isNotEmpty,
+                        onChanged: (v) =>
+                            _loginHasEmail.value = v.trim().isNotEmpty,
                         decoration: const InputDecoration(
                           hintText: 'Email',
                           border: InputBorder.none,
@@ -84,11 +85,15 @@ class LoginPage extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: hasEmail
                             ? () {
-                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Continue (dummy)')));
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text('Continue (dummy)')));
                               }
                             : null,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: hasEmail ? const Color(0xFFe9e7ea) : Colors.grey.shade200,
+                          backgroundColor: hasEmail
+                              ? const Color(0xFFe9e7ea)
+                              : Colors.grey.shade200,
                           foregroundColor: Colors.black54,
                           padding: const EdgeInsets.symmetric(vertical: 14),
                         ),
