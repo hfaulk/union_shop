@@ -8,6 +8,7 @@ import 'package:union_shop/views/login.dart';
 import 'package:union_shop/views/cart_page.dart';
 import 'package:union_shop/widgets/shared_layout.dart';
 import 'package:union_shop/widgets/hero_carousel.dart';
+import 'package:union_shop/widgets/product_image_area.dart';
 import 'package:union_shop/repositories/home_repository.dart';
 import 'package:union_shop/repositories/collection_repository.dart';
 import 'package:union_shop/repositories/product_repository.dart';
@@ -265,23 +266,8 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Image area: fixed height so the info area keeps predictable space
-          SizedBox(
-            height: 95,
-            child: Image.network(
-              imageUrl,
-              width: double.infinity,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Colors.grey[300],
-                  child: const Center(
-                    child: Icon(Icons.image_not_supported, color: Colors.grey),
-                  ),
-                );
-              },
-            ),
-          ),
+          // Image area: extracted to a reusable widget
+          ProductImageArea(imageUrl: imageUrl),
           // Info area
           Container(
             color: const Color(0xFFF7EEF6),
