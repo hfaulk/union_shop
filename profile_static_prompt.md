@@ -43,15 +43,22 @@ Implementation plan (strict small-patch steps)
 - Insert a centered `Card` with the network image URL and the `Sign in` title + hint text.
 - Include the logo as a `GestureDetector` that will later navigate home. For now, the `onTap` can be a placeholder or an actual navigation call if the route exists.
 
-4) Add primary `Log in with service` button and divider (small patch)
+5) Add primary `Log in with service` button and divider (small patch)
 - Add an `ElevatedButton` styled with the purple color `Color(0xFF4d2963)` and label `Log in with service`.
 - Add a horizontal divider with `or` centered.
+
+6) Add email `TextField` and `Continue` button (small patch) — completed
+- Add a `TextField` with `hintText: 'Email'` and a wide `ElevatedButton` below labeled `Continue`.
+- The `Continue` button can be non-functional or show a `SnackBar`.
+
+7) Disable `Continue` until email is entered (small patch) — completed
+- Add logic so the `Continue` button is disabled when the email field is empty, and enabled when it contains text. Use a small reactive approach (e.g. `ValueNotifier`) to keep the change localized and small.
 
 5) Add email `TextField` and `Continue` button (small patch)
 - Add a `TextField` with `hintText: 'Email'` and a wide `ElevatedButton` below labeled `Continue`.
 - The `Continue` button can be non-functional or show a `SnackBar`.
 
-6) Wire profile icon to open `/login` (tiny patch)
+- 8) Wire profile icon to open `/login` (tiny patch)
 - Modify `lib/widgets/shared_layout.dart` to change the person icon button's `onPressed` to `() => Navigator.pushNamed(context, '/login')`.
 - This should be a tiny patch (1–5 lines).
 

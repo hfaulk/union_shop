@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+// Local ValueNotifier to track whether the email field has content.
+final ValueNotifier<bool> _loginHasEmail = ValueNotifier<bool>(false);
+
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
@@ -62,10 +65,11 @@ class LoginPage extends StatelessWidget {
                       border: Border.all(color: Colors.grey.shade300),
                       color: Colors.white,
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: TextField(
-                        decoration: InputDecoration(
+                        onChanged: (v) => _loginHasEmail.value = v.trim().isNotEmpty,
+                        decoration: const InputDecoration(
                           hintText: 'Email',
                           border: InputBorder.none,
                         ),
@@ -73,19 +77,23 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Continue (dummy)')));
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey.shade200,
-                        foregroundColor: Colors.black54,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
+                  ValueListenableBuilder<bool>(
+                    valueListenable: _loginHasEmail,
+                    builder: (context, hasEmail, _) => SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: hasEmail
+                            ? () {
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Continue (dummy)')));
+                              }
+                            : null,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: hasEmail ? const Color(0xFFe9e7ea) : Colors.grey.shade200,
+                          foregroundColor: Colors.black54,
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                        ),
+                        child: const Text('Continue'),
                       ),
-                      child: const Text('Continue'),
                     ),
                   ),
                 ],
