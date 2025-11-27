@@ -35,14 +35,14 @@ class _LoginPageState extends State<LoginPage> {
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Center(
           child: Card(
-          margin: const EdgeInsets.all(24),
+          margin: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
           child: LayoutBuilder(builder: (context, constraints) {
             final cardWidth =
                 constraints.maxWidth > 420 ? 420.0 : constraints.maxWidth * 0.9;
             return SizedBox(
               width: cardWidth,
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(24.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -142,6 +142,9 @@ class _LoginPageState extends State<LoginPage> {
                             : Colors.grey.shade200,
                           foregroundColor: Colors.black54,
                           padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)),
+                          minimumSize: const Size.fromHeight(48),
                         ),
                         child: const Text('Continue'),
                       ),
