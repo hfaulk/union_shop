@@ -55,40 +55,46 @@ class HomeView extends StatelessWidget {
                         ? '£${(p.price / 100).toStringAsFixed(2)}'
                         : '';
 
-                    return Container(
-                      height: 190,
-                      clipBehavior: Clip.antiAlias,
-                      decoration:
-                          BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                      child: Stack(fit: StackFit.expand, children: [
-                        if (collection?.imageUrl != null)
-                          (collection!.imageUrl!.startsWith('assets/')
-                              ? Image.asset(collection.imageUrl!,
-                                  fit: BoxFit.cover)
-                              : Image.network(collection.imageUrl!,
-                                  fit: BoxFit.cover))
-                        else
-                          Container(color: Colors.grey[200]),
-                        Container(color: Colors.black26),
-                        Positioned(
-                          left: 12,
-                          bottom: 12,
-                          right: 12,
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(collection?.title ?? 'Featured',
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold)),
-                                if (p != null)
-                                  Text('${p.title} • $price',
+                    return GestureDetector(
+                      onTap: collection != null
+                          ? () => Navigator.pushNamed(
+                              context, '/collections/${collection.id}')
+                          : null,
+                      child: Container(
+                        height: 190,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Stack(fit: StackFit.expand, children: [
+                          if (collection?.imageUrl != null)
+                            (collection!.imageUrl!.startsWith('assets/')
+                                ? Image.asset(collection.imageUrl!,
+                                    fit: BoxFit.cover)
+                                : Image.network(collection.imageUrl!,
+                                    fit: BoxFit.cover))
+                          else
+                            Container(color: Colors.grey[200]),
+                          Container(color: Colors.black26),
+                          Positioned(
+                            left: 12,
+                            bottom: 12,
+                            right: 12,
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(collection?.title ?? 'Featured',
                                       style: const TextStyle(
-                                          color: Colors.white70)),
-                              ]),
-                        ),
-                      ]),
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold)),
+                                  if (p != null)
+                                    Text('${p.title} • $price',
+                                        style: const TextStyle(
+                                            color: Colors.white70)),
+                                ]),
+                          ),
+                        ]),
+                      ),
                     );
                   }
 
