@@ -17,10 +17,11 @@ class CartViewModel extends ChangeNotifier {
   Future<void> addItem(CartItem item) async {
     final idx = items.indexWhere((e) =>
         e.productId == item.productId && mapEquals(e.options, item.options));
-    if (idx != -1)
+    if (idx != -1) {
       items[idx].quantity += item.quantity;
-    else
+    } else {
       items.add(item);
+    }
     await _repo.saveCart(items);
     notifyListeners();
   }
