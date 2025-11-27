@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/shared_layout.dart';
 import 'package:union_shop/repositories/product_repository.dart';
+import 'package:union_shop/repositories/collection_repository.dart';
 import 'package:union_shop/models/product.dart';
 
 class CollectionPage extends StatefulWidget {
@@ -45,12 +46,26 @@ class _CollectionPageState extends State<CollectionPage> {
 
   String _selectedFilterKey = 'all';
   late Future<List<Product>> _productsFuture;
+  String displayTitle = '';
+  String? displayDescription;
 
   @override
   void initState() {
     super.initState();
     final repo = widget.productRepo ?? AssetProductRepository();
     _productsFuture = repo.fetchByCollection(widget.id);
+    // initialize display title/description and try to load canonical values
+    displayTitle = widget.title;
+    displayDescription = widget.description;
+    // attempt to load collection metadata from assets and override title/description
+    AssetCollectionRepository().fetchById(widget.id).then((c) {
+      if (c != null) {
+        setState(() {
+          displayTitle = c.title;
+          displayDescription = c.description;
+        });
+      }
+    });
   }
 
   @override
@@ -73,7 +88,7 @@ class _CollectionPageState extends State<CollectionPage> {
           children: [
             Center(
               child: Text(
-                widget.title,
+                displayTitle,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 32,
