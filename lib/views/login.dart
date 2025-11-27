@@ -9,14 +9,16 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _controller = TextEditingController();
-  bool _hasEmail = false;
+  final RegExp _emailRegex = RegExp(r"^[^@\s]+@[^@\s]+\.[^@\s]+");
+  bool _isEmailValid = false;
 
   @override
   void initState() {
     super.initState();
     _controller.addListener(() {
-      final has = _controller.text.trim().isNotEmpty;
-      if (has != _hasEmail) setState(() => _hasEmail = has);
+      final text = _controller.text.trim();
+      final valid = _emailRegex.hasMatch(text);
+      if (valid != _isEmailValid) setState(() => _isEmailValid = valid);
     });
   }
 
@@ -127,17 +129,17 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: _hasEmail
-                            ? () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('Continue (dummy)')));
-                              }
-                            : null,
+                        onPressed: _isEmailValid
+                          ? () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Continue (dummy)')));
+                            }
+                          : null,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: _hasEmail
-                              ? const Color(0xFFe9e7ea)
-                              : Colors.grey.shade200,
+                          backgroundColor: _isEmailValid
+                            ? const Color(0xFFe9e7ea)
+                            : Colors.grey.shade200,
                           foregroundColor: Colors.black54,
                           padding: const EdgeInsets.symmetric(vertical: 14),
                         ),
