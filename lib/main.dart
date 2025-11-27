@@ -99,10 +99,10 @@ class HomeScreen extends StatelessWidget {
                 final home = snapshot.data;
                 if (home == null || home.featured.isEmpty) {
                   // fallback: show same placeholders while loading or if no data
-                  return Container(
-                    child: Padding(
-                      padding: const EdgeInsets.all(40.0),
-                      child: Column(children: [
+                  return Padding(
+                    padding: const EdgeInsets.all(40.0),
+                    child: Column(
+                      children: [
                         const Text('Featured Collection',
                             style: TextStyle(
                                 fontSize: 24,
@@ -141,7 +141,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ))
                         ])
-                      ]),
+                      ],
                     ),
                   );
                 }
