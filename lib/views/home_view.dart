@@ -125,7 +125,8 @@ class HomeView extends StatelessWidget {
                   // On wide screens show 4 compact columns and center the grid
                   return Center(
                     child: ConstrainedBox(
-                      constraints: BoxConstraints(maxWidth: isWide ? 1200 : double.infinity),
+                      constraints: BoxConstraints(
+                          maxWidth: isWide ? 1200 : double.infinity),
                       child: GridView.count(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -134,35 +135,46 @@ class HomeView extends StatelessWidget {
                         mainAxisSpacing: 16,
                         childAspectRatio: isWide ? 0.9 : 1,
                         children: List.generate(4, (i) {
-                      final c = i < cols.length ? cols[i] : null;
-                      return GestureDetector(
-                        onTap: () =>
-                            Navigator.pushNamed(context, '/collections'),
-                        child: Container(
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                              color: Colors.grey[350],
-                              borderRadius: BorderRadius.circular(6)),
-                          child: Stack(fit: StackFit.expand, children: [
-                            if (c?.imageUrl != null)
-                              (c!.imageUrl!.startsWith('assets/')
-                                  ? Image.asset(c.imageUrl!, fit: BoxFit.cover)
-                                  : Image.network(c.imageUrl!,
-                                      fit: BoxFit.cover))
-                            else
-                              Container(color: Colors.grey[400]),
-                            Container(color: Colors.black26),
-                            Center(
-                                child: Text(c?.title ?? 'Collection ${i + 1}',
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
+                          final c = i < cols.length ? cols[i] : null;
+                          return GestureDetector(
+                            onTap: () =>
+                                Navigator.pushNamed(context, '/collections'),
+                            child: Container(
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[350],
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Stack(
+                                fit: StackFit.expand,
+                                children: [
+                                  if (c?.imageUrl != null)
+                                    (c!.imageUrl!.startsWith('assets/')
+                                        ? Image.asset(c.imageUrl!,
+                                            fit: BoxFit.cover)
+                                        : Image.network(c.imageUrl!,
+                                            fit: BoxFit.cover))
+                                  else
+                                    Container(color: Colors.grey[400]),
+                                  Container(color: Colors.black26),
+                                  Center(
+                                    child: Text(
+                                      c?.title ?? 'Collection ${i + 1}',
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
-                                        fontWeight: FontWeight.bold))),
-                          ]),
-                        ),
-                      );
-                    }),
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                      ),
+                    ),
                   );
                 },
               ),
