@@ -120,14 +120,20 @@ class HomeView extends StatelessWidget {
                 future: AssetCollectionRepository().fetchAll(),
                 builder: (context, snapshot) {
                   final cols = snapshot.data ?? <Collection>[];
-                  return GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
-                    childAspectRatio: 1,
-                    children: List.generate(4, (i) {
+                  final width = MediaQuery.of(context).size.width;
+                  final isWide = width > 900;
+                  // On wide screens show 4 compact columns and center the grid
+                  return Center(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(maxWidth: isWide ? 1200 : double.infinity),
+                      child: GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        crossAxisCount: isWide ? 4 : 2,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
+                        childAspectRatio: isWide ? 0.9 : 1,
+                        children: List.generate(4, (i) {
                       final c = i < cols.length ? cols[i] : null;
                       return GestureDetector(
                         onTap: () =>
