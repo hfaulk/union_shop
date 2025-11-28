@@ -10,7 +10,8 @@ import 'package:union_shop/widgets/shared_layout.dart';
 import 'package:union_shop/widgets/hero_carousel.dart';
 // Product image/info widgets moved to dedicated widget files; implementations
 // are consumed by ProductCardImpl.
-import 'package:union_shop/widgets/product_card_impl.dart';
+export 'package:union_shop/widgets/product_card.dart';
+import 'package:union_shop/widgets/product_card.dart';
 import 'package:union_shop/repositories/home_repository.dart';
 import 'package:union_shop/repositories/collection_repository.dart';
 import 'package:union_shop/repositories/product_repository.dart';
@@ -245,27 +246,4 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class ProductCard extends StatelessWidget {
-  final String title;
-  final String price;
-  final String? originalPrice;
-  final String imageUrl;
-
-  const ProductCard({
-    super.key,
-    required this.title,
-    required this.price,
-    this.originalPrice,
-    required this.imageUrl,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ProductCardImpl(
-      title: title,
-      price: price,
-      originalPrice: originalPrice,
-      imageUrl: imageUrl,
-    );
-  }
-}
+// ProductCard is defined in `lib/widgets/product_card.dart` and exported above.
