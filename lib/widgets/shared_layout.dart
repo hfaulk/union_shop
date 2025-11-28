@@ -90,20 +90,9 @@ class SharedLayout extends StatelessWidget {
                                           MediaQuery.of(c).size.width >= 800;
                                       if (isDesktop)
                                         return const SizedBox.shrink();
-                                      return IconButton(
-                                        icon: const Icon(
-                                          Icons.menu,
-                                          size: 18,
-                                          color: Colors.grey,
-                                        ),
-                                        padding: const EdgeInsets.all(8),
-                                        constraints: const BoxConstraints(
-                                          minWidth: 32,
-                                          minHeight: 32,
-                                        ),
-                                        onPressed:
-                                            _placeholderCallbackForButtons,
-                                      );
+                                      // hide this early menu icon on small screens
+                                      // so we only show the single hamburger on the right
+                                      return const SizedBox.shrink();
                                     }),
                                     IconButton(
                                       icon: const Icon(
@@ -204,7 +193,7 @@ class SharedLayout extends StatelessWidget {
                                   // fallback to original popup on smaller screens
                                   return PopupMenuButton<String>(
                                     icon: const Icon(
-                                      Icons.more_vert,
+                                      Icons.menu,
                                       size: 18,
                                       color: Colors.grey,
                                     ),
