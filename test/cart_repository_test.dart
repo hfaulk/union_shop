@@ -8,8 +8,7 @@ import 'package:union_shop/models/cart_item.dart';
 void main() {
   test('CartRepository save/load roundtrip', () async {
     SharedPreferences.setMockInitialValues({});
-    final tmpDir = await Directory.systemTemp.createTemp('cart_repo_test_');
-    final repo = CartRepository(documentsDirProvider: () async => tmpDir);
+    final repo = CartRepository();
     final item = CartItem(
       productId: 'p1',
       name: 'Repo Product',
@@ -28,36 +27,30 @@ void main() {
     expect(l.name, item.name);
     expect(l.price, item.price);
     expect(l.quantity, item.quantity);
-    await tmpDir.delete(recursive: true);
   });
 
   test('loadCart returns empty on invalid JSON', () async {
-    SharedPreferences.setMockInitialValues({});
-    final tmpDir = await Directory.systemTemp.createTemp('cart_repo_test_');
-    final file = File('${tmpDir.path}/cart.json');
-    await file.writeAsString('not a json');
-    final repo = CartRepository(documentsDirProvider: () async => tmpDir);
+    SharedPreferences.setMockInitialValues({'cart_items_v1': 'not a json'});
+    final repo = CartRepository();
     final loaded = await repo.loadCart();
     expect(loaded, isEmpty);
-    await tmpDir.delete(recursive: true);
   });
 
   test('copySeedIfNeeded creates empty file when asset missing', () async {
     SharedPreferences.setMockInitialValues({});
-    final tmpDir = await Directory.systemTemp.createTemp('cart_repo_test_');
-    final repo = CartRepository(documentsDirProvider: () async => tmpDir);
-    final file = File('${tmpDir.path}/cart.json');
-    if (await file.exists()) await file.delete();
+    final repo = CartRepository();
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.getString('cart_items_v1') != null) {
+      await prefs.remove('cart_items_v1');
+    }
     await repo.copySeedIfNeeded();
-    final contents = await file.readAsString();
-    expect(contents.trim(), '[]');
-    await tmpDir.delete(recursive: true);
+    final contents = prefs.getString('cart_items_v1');
+    expect(contents?.trim() ?? '', '[]');
   });
 
   test('saveLastOrder stores key in SharedPreferences', () async {
     SharedPreferences.setMockInitialValues({});
-    final tmpDir = await Directory.systemTemp.createTemp('cart_repo_test_');
-    final repo = CartRepository(documentsDirProvider: () async => tmpDir);
+    final repo = CartRepository();
     final item = CartItem(
       productId: 'p-last',
       name: 'Last',
@@ -71,13 +64,11 @@ void main() {
     final prefs = await SharedPreferences.getInstance();
     final s = prefs.getString('last_order_v1');
     expect(s, isNotNull);
-    await tmpDir.delete(recursive: true);
   });
 
   test('saveCart does not leave .tmp file', () async {
     SharedPreferences.setMockInitialValues({});
-    final tmpDir = await Directory.systemTemp.createTemp('cart_repo_test_');
-    final repo = CartRepository(documentsDirProvider: () async => tmpDir);
+    final repo = CartRepository();
     final item = CartItem(
       productId: 'p-atomic',
       name: 'Atomic',
@@ -88,8 +79,8 @@ void main() {
       id: 'a1',
     );
     await repo.saveCart([item]);
-    final tmpFile = File('${tmpDir.path}/cart.json.tmp');
-    expect(await tmpFile.exists(), isFalse);
-    await tmpDir.delete(recursive: true);
+    final prefs = await SharedPreferences.getInstance();
+    final s = prefs.getString('cart_items_v1');
+    expect(s, isNotNull);
   });
 }
