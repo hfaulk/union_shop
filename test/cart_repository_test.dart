@@ -53,4 +53,24 @@ void main() {
     expect(contents.trim(), '[]');
     await tmpDir.delete(recursive: true);
   });
+
+  test('saveLastOrder stores key in SharedPreferences', () async {
+    SharedPreferences.setMockInitialValues({});
+    final tmpDir = await Directory.systemTemp.createTemp('cart_repo_test_');
+    final repo = CartRepository(documentsDirProvider: () async => tmpDir);
+    final item = CartItem(
+      productId: 'p-last',
+      name: 'Last',
+      price: 1.0,
+      image: '',
+      options: {},
+      quantity: 1,
+      id: 'last1',
+    );
+    await repo.saveLastOrder([item]);
+    final prefs = await SharedPreferences.getInstance();
+    final s = prefs.getString('last_order_v1');
+    expect(s, isNotNull);
+    await tmpDir.delete(recursive: true);
+  });
 }
