@@ -18,17 +18,25 @@ class CartBubble extends StatelessWidget {
     final label = (txt == '1') ? 'Cart — 1 item' : 'Cart — $txt items';
     return Semantics(
       label: label,
-      child: Container(
-        constraints: const BoxConstraints(minWidth: 20, minHeight: 20),
-        padding: const EdgeInsets.symmetric(horizontal: 6),
-        decoration:
-            const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
-        child: Center(
-            child: Text(txt,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold))),
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 250),
+        switchInCurve: Curves.easeOutBack,
+        switchOutCurve: Curves.easeInBack,
+        transitionBuilder: (child, anim) =>
+            ScaleTransition(scale: anim, child: child),
+        child: Container(
+          key: ValueKey(txt),
+          constraints: const BoxConstraints(minWidth: 20, minHeight: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 6),
+          decoration:
+              const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
+          child: Center(
+              child: Text(txt,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold))),
+        ),
       ),
     );
   }
