@@ -70,7 +70,11 @@ class _SearchScreenState extends State<SearchScreen> {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 13)),
                           ])
-                        : null,
+                        : Text(original,
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13)),
                     onTap: () {
                       Navigator.pushNamed(context, '/product', arguments: {
                         'id': p.id,
