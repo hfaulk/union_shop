@@ -9,6 +9,10 @@ import '../models/cart_item.dart';
 
 class CartRepository {
   static const _key = 'cart_items_v1';
+  // Optional provider for tests to inject a documents directory.
+  final Future<Directory> Function()? documentsDirProvider;
+
+  CartRepository({this.documentsDirProvider});
 
   Future<List<CartItem>> loadCart() async {
     await copySeedIfNeeded();
@@ -56,6 +60,10 @@ class CartRepository {
   static const assetPath = 'assets/data/cart.json';
 
   Future<String> _getLocalPath() async {
+    if (documentsDirProvider != null) {
+      final d = await documentsDirProvider!.call();
+      return d.path;
+    }
     final dir = await getApplicationDocumentsDirectory();
     return dir.path;
   }

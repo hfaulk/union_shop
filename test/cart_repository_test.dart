@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:union_shop/repositories/cart_repository.dart';
@@ -6,7 +8,8 @@ import 'package:union_shop/models/cart_item.dart';
 void main() {
   test('CartRepository save/load roundtrip', () async {
     SharedPreferences.setMockInitialValues({});
-    final repo = CartRepository();
+    final tmpDir = await Directory.systemTemp.createTemp('cart_repo_test_');
+    final repo = CartRepository(documentsDirProvider: () async => tmpDir);
     final item = CartItem(
       productId: 'p1',
       name: 'Repo Product',
@@ -25,5 +28,6 @@ void main() {
     expect(l.name, item.name);
     expect(l.price, item.price);
     expect(l.quantity, item.quantity);
+    await tmpDir.delete(recursive: true);
   });
 }
