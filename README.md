@@ -47,7 +47,7 @@ Running tests:
 - Technologies: Flutter (Dart), standard Flutter toolchain (Flutter CLI, Android Studio, Xcode for iOS builds).
 - Dependencies: see `pubspec.yaml` for the exact package list; this project uses local JSON assets and Flutter widgets for UI.
 
--- Project tree:
+### Project tree:
 ```text
 .
 ├── README.md
