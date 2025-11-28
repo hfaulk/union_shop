@@ -11,6 +11,17 @@ class CartRepository {
   static const _key = 'cart_items_v1';
 
   Future<List<CartItem>> loadCart() async {
+    await copySeedIfNeeded();
+    final file = await _localFile();
+    if (await file.exists()) {
+      try {
+        final s = await file.readAsString();
+        final data = jsonDecode(s) as List;
+        return data
+            .map((e) => CartItem.fromJson(Map<String, dynamic>.from(e)))
+            .toList();
+      } catch (_) {}
+    }
     final prefs = await SharedPreferences.getInstance();
     final s = prefs.getString(_key);
     if (s == null) return [];
@@ -21,8 +32,14 @@ class CartRepository {
   }
 
   Future<void> saveCart(List<CartItem> items) async {
-    final prefs = await SharedPreferences.getInstance();
     final s = jsonEncode(items.map((e) => e.toJson()).toList());
+    // write atomically to local file
+    final file = await _localFile();
+    final tmp = File('${file.path}.tmp');
+    await tmp.writeAsString(s, flush: true);
+    await tmp.rename(file.path);
+    // also save to prefs for backward compatibility
+    final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_key, s);
   }
 
