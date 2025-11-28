@@ -6,6 +6,7 @@ import 'package:union_shop/views/collections.dart';
 import 'package:union_shop/views/collection_page.dart';
 import 'package:union_shop/views/login.dart';
 import 'package:union_shop/views/cart_page.dart';
+import 'package:union_shop/views/search_screen.dart';
 // Note: most home-screen presentation logic now lives in `lib/views/home_view.dart`.
 import 'package:union_shop/views/home_view.dart';
 export 'package:union_shop/widgets/product_card.dart';
@@ -38,6 +39,7 @@ class UnionShopApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/product': (context) => const ProductPage(),
+        '/search': (context) => const SearchScreen(),
         '/cart': (context) => const CartPage(),
         '/collections': (context) => const CollectionsPage(),
         '/about': (context) => const AboutPage(),
