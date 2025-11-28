@@ -228,9 +228,9 @@ class HomeView extends StatelessWidget {
                       constraints: BoxConstraints(
                           maxWidth: _isWideTop ? 1200 : double.infinity),
                       child: Column(children: [
-                        buildFeaturedEntry(first),
+                        FeaturedEntry(entry: first),
                         const SizedBox(height: 20),
-                        buildFeaturedEntry(second)
+                        FeaturedEntry(entry: second)
                       ]),
                     ),
                   );
