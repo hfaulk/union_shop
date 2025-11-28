@@ -20,14 +20,20 @@ class ProductInfoArea extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 2),
-          Text(
-            title,
-            style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF2E2E2E)),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+          SizedBox(
+            height: 48,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                title,
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF2E2E2E)),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ),
           const SizedBox(height: 6),
           if (originalPrice != null) ...[

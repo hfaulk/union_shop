@@ -7,17 +7,19 @@ class ProductImageArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 4 / 3,
+    // Fill available space provided by parent (e.g. Expanded in a grid cell)
+    return SizedBox.expand(
       child: imageUrl.startsWith('assets/')
           ? Image.asset(
               imageUrl,
               width: double.infinity,
+              height: double.infinity,
               fit: BoxFit.cover,
             )
           : Image.network(
               imageUrl,
               width: double.infinity,
+              height: double.infinity,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return Container(

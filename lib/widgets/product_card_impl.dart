@@ -31,7 +31,16 @@ class ProductCardImpl extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ProductImageArea(imageUrl: imageUrl),
+            // If parent provides a bounded height (e.g. grid cell), let the image
+            // expand to fill available space. Otherwise fall back to a fixed
+            // height so the card can size itself (prevents unbounded flex errors).
+            LayoutBuilder(builder: (context, constraints) {
+              if (constraints.maxHeight.isFinite) {
+                return Expanded(child: ProductImageArea(imageUrl: imageUrl));
+              }
+              return SizedBox(
+                  height: 95, child: ProductImageArea(imageUrl: imageUrl));
+            }),
             ProductInfoArea(
                 title: title, price: price, originalPrice: originalPrice),
           ],
