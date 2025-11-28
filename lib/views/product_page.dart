@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/shared_layout.dart';
 import 'package:union_shop/view_models/cart_view_model.dart';
 import 'package:union_shop/models/cart_item.dart';
+import 'package:union_shop/models/product.dart';
+import 'package:union_shop/repositories/product_repository.dart';
 // kept minimal: no repository/model imports required for now
 
 class ProductPage extends StatefulWidget {
@@ -17,6 +19,23 @@ class _ProductPageState extends State<ProductPage> {
   final int _minQuantity = 1;
   String _selectedColor = 'Black';
   String _selectedSize = 'S';
+  Product? _loadedProduct;
+  bool _isLoadingProduct = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_loadedProduct != null || _isLoadingProduct) return;
+    final args = ModalRoute.of(context)?.settings.arguments;
+    final argMap = (args is Map) ? args as Map<String, dynamic> : null;
+    final id = argMap?['id'] as String?;
+    if (id != null) {
+      _isLoadingProduct = true;
+      AssetProductRepository().fetchById(id).then((p) {
+        if (p != null) setState(() => _loadedProduct = p);
+      }).whenComplete(() => _isLoadingProduct = false);
+    }
+  }
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -31,9 +50,10 @@ class _ProductPageState extends State<ProductPage> {
     // Read minimal product fields from route arguments (if provided)
     final args = ModalRoute.of(context)?.settings.arguments;
     final argMap = (args is Map) ? args as Map<String, dynamic> : null;
-    final passedTitle = argMap?['title'] as String?;
-    final passedImage = argMap?['imageUrl'] as String?;
-    final passedPriceRaw = argMap?['price'];
+    final passedTitle = argMap?['title'] as String? ?? _loadedProduct?.title;
+    final passedImage =
+        argMap?['imageUrl'] as String? ?? _loadedProduct?.imageUrl;
+    final passedPriceRaw = argMap?['price'] ?? _loadedProduct?.price;
 
     String priceText = '£15.00';
     if (passedPriceRaw != null) {
@@ -44,8 +64,10 @@ class _ProductPageState extends State<ProductPage> {
       }
     }
 
-    final passedDiscount = argMap?['discount'] == true;
-    final passedDiscountedRaw = argMap?['discountedPrice'];
+    final passedDiscount =
+        (argMap?['discount'] == true) || (_loadedProduct?.discount == true);
+    final passedDiscountedRaw =
+        argMap?['discountedPrice'] ?? _loadedProduct?.discountedPrice;
     String? discountedText;
     if (passedDiscountedRaw != null) {
       if (passedDiscountedRaw is int) {
