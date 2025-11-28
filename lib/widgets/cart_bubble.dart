@@ -15,8 +15,9 @@ class CartBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     if (count <= 0) return const SizedBox.shrink();
     final txt = _displayText();
+    final label = (txt == '1') ? 'Cart — 1 item' : 'Cart — $txt items';
     return Semantics(
-      label: 'Cart — $txt items',
+      label: label,
       child: Container(
         constraints: const BoxConstraints(minWidth: 20, minHeight: 20),
         padding: const EdgeInsets.symmetric(horizontal: 6),

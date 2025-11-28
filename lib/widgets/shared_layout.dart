@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/search_overlay.dart';
+import 'package:union_shop/view_models/cart_view_model.dart';
 import 'package:union_shop/widgets/cart_bubble.dart';
 
 class SharedLayout extends StatelessWidget {
@@ -146,11 +147,24 @@ class SharedLayout extends StatelessWidget {
                                           onPressed: () => Navigator.pushNamed(
                                               context, '/cart'),
                                         ),
-                                        // initially hidden with count 0; will wire to view model next
-                                        const Positioned(
-                                            right: 4,
-                                            top: 4,
-                                            child: CartBubble(count: 0)),
+                                        AnimatedBuilder(
+                                          animation: appCartViewModel ??
+                                              AlwaysStoppedAnimation(0),
+                                          builder: (context, _) {
+                                            final count = appCartViewModel
+                                                    ?.items
+                                                    .fold<int>(
+                                                        0,
+                                                        (s, it) =>
+                                                            s + it.quantity) ??
+                                                0;
+                                            return Positioned(
+                                              right: 4,
+                                              top: 4,
+                                              child: CartBubble(count: count),
+                                            );
+                                          },
+                                        ),
                                       ],
                                     ),
                                   ],
