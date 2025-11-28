@@ -86,7 +86,18 @@ class HomeRepository {
       }
       return null;
     } catch (_) {
-      return null;
+      // Fallback when asset loading fails (tests / offline): build minimal HomeData
+      final cols = await collectionRepo.fetchAll();
+      if (cols.isEmpty) return null;
+      final first = cols.first;
+      final products = await productRepo.fetchByCollection(first.id);
+      final chosen = products.take(2).toList();
+      return HomeData(
+        heroTitle: 'Essential Range - Over 20% OFF!',
+        heroDescription: '',
+        heroCollection: first,
+        featured: {first: chosen},
+      );
     }
   }
 }

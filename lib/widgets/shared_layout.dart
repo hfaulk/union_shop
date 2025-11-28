@@ -82,6 +82,26 @@ class SharedLayout extends StatelessWidget {
                                 Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
+                                    LayoutBuilder(builder: (c, cc) {
+                                      final isDesktop =
+                                          MediaQuery.of(c).size.width >= 800;
+                                      if (isDesktop)
+                                        return const SizedBox.shrink();
+                                      return IconButton(
+                                        icon: const Icon(
+                                          Icons.menu,
+                                          size: 18,
+                                          color: Colors.grey,
+                                        ),
+                                        padding: const EdgeInsets.all(8),
+                                        constraints: const BoxConstraints(
+                                          minWidth: 32,
+                                          minHeight: 32,
+                                        ),
+                                        onPressed:
+                                            _placeholderCallbackForButtons,
+                                      );
+                                    }),
                                     IconButton(
                                       icon: const Icon(
                                         Icons.search,
@@ -181,7 +201,7 @@ class SharedLayout extends StatelessWidget {
                                   // fallback to original popup on smaller screens
                                   return PopupMenuButton<String>(
                                     icon: const Icon(
-                                      Icons.menu,
+                                      Icons.more_vert,
                                       size: 18,
                                       color: Colors.grey,
                                     ),
