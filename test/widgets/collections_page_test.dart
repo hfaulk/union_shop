@@ -30,7 +30,7 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    expect(find.text('Collections'), findsOneWidget);
+    expect(find.text('Collections'), findsWidgets);
     expect(find.text('Autumn Favourites'), findsOneWidget);
     expect(find.text('Clothing'), findsOneWidget);
   });

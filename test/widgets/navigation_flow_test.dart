@@ -19,7 +19,7 @@ void main() {
     Navigator.pushNamed(appContext, '/collections');
     await tester.pumpAndSettle();
 
-    expect(find.text('Collections'), findsOneWidget);
+    expect(find.text('Collections'), findsWidgets);
 
     // Push a specific collection using onGenerateRoute pattern
     Navigator.pushNamed(appContext, '/collections/autumn');

@@ -188,12 +188,10 @@ class SharedLayout extends StatelessWidget {
                                             child: Text('Shop'),
                                           ),
                                         ),
-                                        IconButton(
+                                        TextButton(
                                           onPressed: () => Navigator.pushNamed(
                                               context, '/collections'),
-                                          icon: const Icon(Icons.grid_view,
-                                              size: 18, color: Colors.grey),
-                                          tooltip: 'Collections',
+                                          child: const Text('Collections'),
                                         ),
                                         TextButton(
                                           onPressed: () =>
