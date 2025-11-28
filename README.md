@@ -61,3 +61,12 @@ Screenshots/GIFs:
 	- Open an issue for bugs or feature requests. Fork the repo, create a branch, and submit a pull request.
 	- Follow existing code style and include tests for new logic where possible.
 
+## Contact Information
+
+- Maintainer: `Harry Faulkner`
+- Email: `up23505969@myport.ac.uk`
+- GitHub: `https://github.com/hfaulk/union_shop`
+- More projects / profile: `https://github.com/hfaulk`
+
+If you'd like to contribute or request features, open an issue or submit a pull request on GitHub.
+
