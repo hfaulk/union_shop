@@ -33,12 +33,16 @@ class CartRepository {
     if (await file.exists()) {
       try {
         final s = await file.readAsString();
+        debugPrint(
+            'CartRepository: loading cart from ${file.path} (${s.length} bytes)');
         final data = jsonDecode(s) as List;
         return data
             .map((e) => CartItem.fromJson(Map<String, dynamic>.from(e)))
             .toList();
       } catch (_) {}
     }
+    debugPrint(
+        'CartRepository: local cart file not usable, falling back to SharedPreferences');
     final prefs = await SharedPreferences.getInstance();
     final s = prefs.getString(_key);
     if (s == null) return [];
@@ -62,6 +66,8 @@ class CartRepository {
     final tmp = File('${file.path}.tmp');
     await tmp.writeAsString(s, flush: true);
     await tmp.rename(file.path);
+    debugPrint(
+        'CartRepository: saved cart to ${file.path} (${s.length} bytes)');
     // also save to prefs for backward compatibility
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_key, s);
@@ -99,8 +105,11 @@ class CartRepository {
     try {
       final data = await rootBundle.loadString(assetPath);
       await file.writeAsString(data, flush: true);
+      debugPrint('CartRepository: copied seed asset to ${file.path}');
     } catch (e) {
       await file.writeAsString('[]', flush: true);
+      debugPrint(
+          'CartRepository: seed asset missing, created empty cart at ${file.path}');
     }
   }
 }
