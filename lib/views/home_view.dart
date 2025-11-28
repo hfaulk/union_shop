@@ -15,76 +15,19 @@ String _humanizeId(String s) => s
 // Helper to render a featured product tile (keeps same visuals as previous implementation)
 Widget _productTile(dynamic product, double height) {
   if (product == null) return const SizedBox.shrink();
-  return Container(
+  final priceText =
+      '£${(product.discount && product.discountedPrice != null ? (product.discountedPrice! / 100).toStringAsFixed(2) : (product.price / 100).toStringAsFixed(2))}';
+  final original = (product.discount && product.discountedPrice != null)
+      ? '£${(product.price / 100).toStringAsFixed(2)}'
+      : null;
+  return SizedBox(
     height: height,
-    clipBehavior: Clip.antiAlias,
-    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-    child: Stack(
-      fit: StackFit.expand,
-      children: [
-        product.imageUrl.startsWith('assets/')
-            ? Image.asset(product.imageUrl, fit: BoxFit.cover)
-            : Image.network(product.imageUrl, fit: BoxFit.cover),
-        Container(color: Colors.black26),
-        if (product.discount && product.discountedPrice != null)
-          Positioned(
-            left: 12,
-            top: 12,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.redAccent,
-                borderRadius: BorderRadius.circular(4),
-              ),
-              child: Text(
-                '${(((product.price - product.discountedPrice!) / product.price) * 100).round()}% OFF',
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-        Positioned(
-          left: 12,
-          right: 12,
-          bottom: 12,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.95),
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(product.title,
-                    style: const TextStyle(
-                        color: Colors.black87,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold)),
-                const SizedBox(height: 6),
-                if (product.discount && product.discountedPrice != null)
-                  Row(children: [
-                    Text('£${(product.price / 100).toStringAsFixed(2)}',
-                        style: const TextStyle(
-                            color: Colors.black45,
-                            decoration: TextDecoration.lineThrough)),
-                    const SizedBox(width: 8),
-                    Text(
-                        '£${(product.discountedPrice! / 100).toStringAsFixed(2)}',
-                        style: const TextStyle(
-                            color: Colors.black87,
-                            fontWeight: FontWeight.bold)),
-                  ])
-                else
-                  Text('£${(product.price / 100).toStringAsFixed(2)}',
-                      style: const TextStyle(color: Colors.black54)),
-              ],
-            ),
-          ),
-        ),
-      ],
+    child: ProductCard(
+      title: product.title,
+      price: priceText,
+      originalPrice: original,
+      imageUrl: product.imageUrl,
+      id: product.id,
     ),
   );
 }
