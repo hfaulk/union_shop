@@ -3,7 +3,7 @@
         "id": "classic-sweatshirts",
         "title": "Classic Sweatshirts",
         "price": 2300,
-        "imageUrl": "https://shop.upsu.net/cdn/shop/products/GreenSweatshirtFinal_300x300.png?v=1741965433",
+        "imageUrl": "assets/images/classic_sweatshirts.png",
         "collections": ["autumn", "clothing"]
     },
     {
@@ -12,7 +12,7 @@
         "price": 2500,
         "discount": true,
         "discountedPrice": 899,
-        "imageUrl": "https://shop.upsu.net/cdn/shop/files/PurpleHoodieFinal_300x300.jpg?v=1742201957",
+        "imageUrl": "assets/images/classic_hoodies.png",
         "collections": ["clothing", "autumn", "sale"]
     },
     {
@@ -21,7 +21,7 @@
         "price": 1499,
         "discount": true,
         "discountedPrice": 999,
-        "imageUrl": "https://shop.upsu.net/cdn/shop/files/Signature_T-Shirt_Indigo_Blue_2_300x300.jpg?v=1758290534",
+        "imageUrl": "assets/images/signature_tshirt.png",
         "collections": ["signature-essentials", "clothing", "sale"]
     },
     {
@@ -30,28 +30,28 @@
         "price": 2700,
         "discount": true,
         "discountedPrice": 2500,
-        "imageUrl": "https://shop.upsu.net/cdn/shop/collections/GradGrey_300x300.jpg?v=1752234294",
+        "imageUrl": "assets/images/graduation_hoodie.png",
         "collections": ["graduation", "clothing", "sale"]
     },
     {
         "id": "graduation-tshirt",
         "title": "Graduation T-Shirt",
         "price": 1599,
-        "imageUrl": "https://shop.upsu.net/cdn/shop/collections/GradTShirt_300x300.jpg?v=1752234294",
+        "imageUrl": "assets/images/graduation_tshirt.png",
         "collections": ["graduation", "clothing"]
     },
     {
         "id": "signature-hoodie",
         "title": "Signature Hoodie",
         "price": 2600,
-        "imageUrl": "https://shop.upsu.net/cdn/shop/files/Signature_Hoodie_Charcoal_300x300.jpg?v=1758290534",
+        "imageUrl": "assets/images/signature_hoodie.png",
         "collections": ["signature-essentials", "clothing"]
     },
     {
         "id": "essentials-joggers",
         "title": "Essentials Joggers",
         "price": 2000,
-        "imageUrl": "https://shop.upsu.net/cdn/shop/files/Essentials_Joggers_Charcoal_300x300.jpg?v=1758290534",
+        "imageUrl": "assets/images/essentials_joggers.png",
         "collections": ["signature-essentials", "clothing"]
     }   
 ]
