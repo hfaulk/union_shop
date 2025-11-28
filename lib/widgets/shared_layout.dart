@@ -159,8 +159,8 @@ class SharedLayout extends StatelessWidget {
                                                             s + it.quantity) ??
                                                 0;
                                             return Positioned(
-                                              right: 4,
-                                              top: 4,
+                                              right: -6,
+                                              top: -6,
                                               child: CartBubble(count: count),
                                             );
                                           },
