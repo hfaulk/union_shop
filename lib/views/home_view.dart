@@ -49,31 +49,39 @@ Widget _productTile(dynamic product, double height) {
           left: 12,
           right: 12,
           bottom: 12,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(product.title,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold)),
-              const SizedBox(height: 6),
-              if (product.discount && product.discountedPrice != null)
-                Row(children: [
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.95),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(product.title,
+                    style: const TextStyle(
+                        color: Colors.black87,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold)),
+                const SizedBox(height: 6),
+                if (product.discount && product.discountedPrice != null)
+                  Row(children: [
+                    Text('£${(product.price / 100).toStringAsFixed(2)}',
+                        style: const TextStyle(
+                            color: Colors.black45,
+                            decoration: TextDecoration.lineThrough)),
+                    const SizedBox(width: 8),
+                    Text(
+                        '£${(product.discountedPrice! / 100).toStringAsFixed(2)}',
+                        style: const TextStyle(
+                            color: Colors.black87,
+                            fontWeight: FontWeight.bold)),
+                  ])
+                else
                   Text('£${(product.price / 100).toStringAsFixed(2)}',
-                      style: const TextStyle(
-                          color: Colors.white70,
-                          decoration: TextDecoration.lineThrough)),
-                  const SizedBox(width: 8),
-                  Text(
-                      '£${(product.discountedPrice! / 100).toStringAsFixed(2)}',
-                      style: const TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold)),
-                ])
-              else
-                Text('£${(product.price / 100).toStringAsFixed(2)}',
-                    style: const TextStyle(color: Colors.white70)),
-            ],
+                      style: const TextStyle(color: Colors.black54)),
+              ],
+            ),
           ),
         ),
       ],
@@ -192,7 +200,7 @@ class HomeView extends StatelessWidget {
                                     : const SizedBox.shrink(),
                               ),
                             ),
-                            const SizedBox(width: 32),
+                            const SizedBox(width: 24),
                             Expanded(
                               child: SizedBox(
                                 height: gridTileHeight,
@@ -221,7 +229,7 @@ class HomeView extends StatelessWidget {
                           maxWidth: _isWideTop ? 1200 : double.infinity),
                       child: Column(children: [
                         FeaturedEntry(entry: first),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 32),
                         FeaturedEntry(entry: second)
                       ]),
                     ),
