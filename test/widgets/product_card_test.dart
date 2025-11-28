@@ -9,7 +9,7 @@ void main() {
         body: ProductCard(
           title: 'Card Item',
           price: '£3.00',
-          imageUrl: 'assets/img.png',
+          imageUrl: '',
         ),
       ),
     ));
