@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as p;
 
 import '../models/cart_item.dart';
 
@@ -97,8 +98,30 @@ class CartRepository {
       final d = await documentsDirProvider!.call();
       return d.path;
     }
-    final dir = await getApplicationDocumentsDirectory();
-    return dir.path;
+    try {
+      final dir = await getApplicationDocumentsDirectory();
+      return dir.path;
+    } catch (e) {
+      debugPrint(
+          'CartRepository: getApplicationDocumentsDirectory failed: ${e.toString()}');
+      // Try to use a user-home-based fallback when possible, but Platform.environment
+      // may not be available in some runtimes (it can throw). Guard it.
+      try {
+        final env = Platform.environment;
+        final home = env['HOME'] ?? env['USERPROFILE'];
+        if (home != null && home.isNotEmpty) {
+          final fallback = Directory(p.join(home, '.union_shop'));
+          if (!await fallback.exists()) await fallback.create(recursive: true);
+          return fallback.path;
+        }
+      } catch (e2) {
+        debugPrint(
+            'CartRepository: Platform.environment unavailable: ${e2.toString()}');
+      }
+      // Last resort: use current working directory.
+      final cur = Directory.current;
+      return cur.path;
+    }
   }
 
   Future<File> _localFile() async {
