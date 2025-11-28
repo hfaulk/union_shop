@@ -25,4 +25,5 @@ flutter:
     - assets/data/collections.json
     - assets/data/home_config.json
     - assets/data/hero_slides.json
+    - assets/data/cart.json
     - assets/images/
