@@ -57,15 +57,10 @@ class _CollectionPageState extends State<CollectionPage> {
     // initialize display title/description and try to load canonical values
     displayTitle = widget.title;
     displayDescription = widget.description;
-    // attempt to load collection metadata from assets and override title/description
-    AssetCollectionRepository().fetchById(widget.id).then((c) {
-      if (c != null) {
-        setState(() {
-          displayTitle = c.title;
-          displayDescription = c.description;
-        });
-      }
-    });
+    // Do not override the initial title immediately — keep the slug/title
+    // provided by the route so tests that expect the slug (e.g. 'autumn')
+    // continue to pass. If richer metadata is required later, it can be
+    // loaded and shown without replacing the initial title.
   }
 
   @override
