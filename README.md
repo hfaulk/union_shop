@@ -50,3 +50,14 @@ Screenshots/GIFs:
 - Technologies: Flutter (Dart), standard Flutter toolchain (Flutter CLI, Android Studio, Xcode for iOS builds).
 - Dependencies: see `pubspec.yaml` for the exact package list; this project uses local JSON assets and Flutter widgets for UI.
 
+## Known Issues & Contributing
+
+- Known limitations:
+	- No real payment processing; checkout is a simulation for demo purposes.
+	- Data is stored in local JSON (not a remote backend); concurrency and sync are not handled.
+	- Accessibility and localization are limited and may need improvements.
+
+- Contributing:
+	- Open an issue for bugs or feature requests. Fork the repo, create a branch, and submit a pull request.
+	- Follow existing code style and include tests for new logic where possible.
+
