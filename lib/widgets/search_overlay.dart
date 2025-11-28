@@ -79,14 +79,7 @@ class _SearchOverlayState extends State<SearchOverlay> {
                                   fontSize: 13)),
                       onTap: () {
                         Navigator.pop(context);
-                        Navigator.pushNamed(context, '/product', arguments: {
-                          'id': p.id,
-                          'title': p.title,
-                          'imageUrl': p.imageUrl,
-                          'price': p.price,
-                          'discount': p.discount,
-                          'discountedPrice': p.discountedPrice,
-                        });
+                        Navigator.pushNamed(context, '/product/${p.id}');
                       },
                     );
                   },

@@ -76,14 +76,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 13)),
                     onTap: () {
-                      Navigator.pushNamed(context, '/product', arguments: {
-                        'id': p.id,
-                        'title': p.title,
-                        'imageUrl': p.imageUrl,
-                        'price': p.price,
-                        'discount': p.discount,
-                        'discountedPrice': p.discountedPrice,
-                      });
+                      Navigator.pushNamed(context, '/product/${p.id}');
                     },
                   );
                 },

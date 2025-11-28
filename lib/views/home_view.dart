@@ -184,20 +184,8 @@ class HomeView extends StatelessWidget {
                                 child: products.isNotEmpty
                                     ? GestureDetector(
                                         onTap: () => Navigator.pushNamed(
-                                                // navigate to product page with arguments
-                                                context,
-                                                '/product',
-                                                arguments: {
-                                                  'id': products[0].id,
-                                                  'title': products[0].title,
-                                                  'imageUrl':
-                                                      products[0].imageUrl,
-                                                  'price': products[0].price,
-                                                  'discount':
-                                                      products[0].discount,
-                                                  'discountedPrice': products[0]
-                                                      .discountedPrice,
-                                                }),
+                                            context,
+                                            '/product/${products[0].id}'),
                                         child: _productTile(
                                             products[0], gridTileHeight))
                                     : const SizedBox.shrink(),
@@ -209,17 +197,9 @@ class HomeView extends StatelessWidget {
                                 height: gridTileHeight,
                                 child: products.length > 1
                                     ? GestureDetector(
-                                        onTap: () =>
-                                            Navigator.pushNamed(context,
-                                                '/product', arguments: {
-                                              'id': products[1].id,
-                                              'title': products[1].title,
-                                              'imageUrl': products[1].imageUrl,
-                                              'price': products[1].price,
-                                              'discount': products[1].discount,
-                                              'discountedPrice':
-                                                  products[1].discountedPrice,
-                                            }),
+                                        onTap: () => Navigator.pushNamed(
+                                            context,
+                                            '/product/${products[1].id}'),
                                         child: _productTile(
                                             products[1], gridTileHeight))
                                     : const SizedBox.shrink(),
