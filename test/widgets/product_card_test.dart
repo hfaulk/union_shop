@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:union_shop/main.dart';
+import 'package:union_shop/widgets/product_card.dart';
 
 void main() {
+  testWidgets('ProductCard displays title and price', (tester) async {
+    await tester.pumpWidget(const MaterialApp(
+      home: Scaffold(
+        body: ProductCard(
+          title: 'Card Item',
+          price: '£3.00',
+          imageUrl: 'assets/img.png',
+        ),
+      ),
+    ));
+
+    expect(find.text('Card Item'), findsOneWidget);
+    expect(find.text('£3.00'), findsOneWidget);
+  });
+
   testWidgets('ProductCard shows title, prices and navigates on tap',
       (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(
@@ -30,7 +45,7 @@ void main() {
     expect(find.text('£12.34'), findsOneWidget);
     expect(find.text('£15.00'), findsOneWidget);
 
-    // Tap the title text (inside the card) to trigger the GestureDetector
+    // Tap the title text (inside the card) to trigger navigation
     await tester.tap(find.text('Test Product'));
     await tester.pumpAndSettle();
 
