@@ -3,12 +3,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:union_shop/widgets/product_image_area.dart';
 
 void main() {
-  testWidgets('ProductImageArea uses AssetImage for asset paths',
+  testWidgets('ProductImageArea shows fallback for missing/remote images',
       (tester) async {
     await tester.pumpWidget(const MaterialApp(
-      home: Scaffold(body: ProductImageArea(imageUrl: 'assets/img.png')),
+      home: Scaffold(body: ProductImageArea(imageUrl: '')),
     ));
-    final img = tester.widget<Image>(find.byType(Image));
-    expect(img.image.runtimeType.toString().toLowerCase(), contains('asset'));
+    await tester.pumpAndSettle();
+    expect(find.byIcon(Icons.image_not_supported), findsOneWidget);
   });
 }
