@@ -54,7 +54,7 @@ class UnionShopApp extends StatelessWidget {
           // still pass product fields via arguments when desired (tests rely on this).
           final existing = settings.arguments;
           final mergedArgs = (existing is Map)
-              ? Map<String, dynamic>.from(existing as Map)
+              ? Map<String, dynamic>.from(existing)
               : <String, dynamic>{};
           mergedArgs['id'] = id;
           return MaterialPageRoute(
