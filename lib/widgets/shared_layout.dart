@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/search_overlay.dart';
+import 'package:union_shop/widgets/cart_bubble.dart';
 
 class SharedLayout extends StatelessWidget {
   final Widget body;
@@ -128,19 +129,29 @@ class SharedLayout extends StatelessWidget {
                                       onPressed: () => Navigator.pushNamed(
                                           context, '/login'),
                                     ),
-                                    IconButton(
-                                      icon: const Icon(
-                                        Icons.shopping_bag_outlined,
-                                        size: 18,
-                                        color: Colors.grey,
-                                      ),
-                                      padding: const EdgeInsets.all(8),
-                                      constraints: const BoxConstraints(
-                                        minWidth: 32,
-                                        minHeight: 32,
-                                      ),
-                                      onPressed: () =>
-                                          Navigator.pushNamed(context, '/cart'),
+                                    Stack(
+                                      clipBehavior: Clip.none,
+                                      children: [
+                                        IconButton(
+                                          icon: const Icon(
+                                            Icons.shopping_bag_outlined,
+                                            size: 18,
+                                            color: Colors.grey,
+                                          ),
+                                          padding: const EdgeInsets.all(8),
+                                          constraints: const BoxConstraints(
+                                            minWidth: 32,
+                                            minHeight: 32,
+                                          ),
+                                          onPressed: () => Navigator.pushNamed(
+                                              context, '/cart'),
+                                        ),
+                                        // initially hidden with count 0; will wire to view model next
+                                        const Positioned(
+                                            right: 4,
+                                            top: 4,
+                                            child: CartBubble(count: 0)),
+                                      ],
                                     ),
                                   ],
                                 ),

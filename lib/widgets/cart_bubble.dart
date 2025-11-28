@@ -20,8 +20,14 @@ class CartBubble extends StatelessWidget {
       child: Container(
         constraints: const BoxConstraints(minWidth: 20, minHeight: 20),
         padding: const EdgeInsets.symmetric(horizontal: 6),
-        decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
-        child: Center(child: Text(txt, style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold))),
+        decoration:
+            const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
+        child: Center(
+            child: Text(txt,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold))),
       ),
     );
   }
