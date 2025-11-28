@@ -26,3 +26,19 @@ flutter pub get
 Run the app:
 - On a connected Android/iOS device or emulator: `flutter run`
 - For web debugging: `flutter run -d chrome`
+
+## Usage & Tests
+
+Usage:
+- Open the app, browse collections on the home screen, and tap a product to view details.
+- Tap `Add to cart` on a product to place it in the persistent cart stored locally in `data/cart.json`.
+- Open the cart from the top-right to review items, adjust quantities, or simulate checkout.
+
+Configuration:
+- Product data is loaded from the `data/` folder (`products.json`, `collections.json`).
+
+Running tests:
+- Unit/widget tests are in the `test/` folder. Run `flutter test` to execute them.
+
+Screenshots/GIFs:
+- Add images to `docs/screenshots/` and reference them here, e.g. `![Home screen](docs/screenshots/home.png)`.
