@@ -10,12 +10,17 @@ Key design notes (must be followed):
 - Keep public APIs small and clear: `CartRepository.loadCart()` returns cart items; `CartRepository.saveCart(items)` writes them.
 
 Milestones (check off as you finish each):
-1. Add `assets/data/cart.json` (seed) and register asset in `pubspec.yaml`.
-2. Add `prompts/persistent_cart_prompt.md` (this file) and confirm plan.
-3. Implement `CartRepository` that on first run copies seed asset to documents dir and reads/writes JSON.
-4. Add small integration in `CartViewModel` to load cart on init and call save on updates.
-5. Add tests verifying persistence across simulated restarts (load -> save -> load).
-6. Document new files and usage in `README.md` or `prompts/`.
+1. ✅ Add `assets/data/cart.json` (seed) and register asset in `pubspec.yaml`.
+	- Files: `assets/data/cart.json`, `pubspec.yaml`
+2. ✅ Add `prompts/persistent_cart_prompt.md` (this file) and confirm plan.
+	- Files: `prompts/persistent_cart_prompt.md`
+3. ✅ Implement `CartRepository` that on first run copies seed asset to documents dir and reads/writes JSON.
+	- Files: `lib/repositories/cart_repository.dart`
+4. ✅ Add small integration in `CartViewModel` to load cart on init and call save on updates.
+	- Files: `lib/view_models/cart_view_model.dart`, `lib/main.dart` (wires load on startup)
+5. ✅ Add tests verifying persistence across simulated restarts (load -> save -> load).
+	- Files: `test/cart_repository_test.dart`, `test/cart_view_model_test.dart`
+6. ⬜ Document new files and usage in `README.md` or `prompts/`.
 
 Chunking guidance (how to split into 10–30 line commits):
 - Chunk A (10–30 lines): Add `assets/data/cart.json` and update `pubspec.yaml` assets list.
