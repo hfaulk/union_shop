@@ -14,7 +14,7 @@ class ProductInfoArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color(0xFFF7EEF6),
+      color: Colors.white,
       padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,7 +23,9 @@ class ProductInfoArea extends StatelessWidget {
           Text(
             title,
             style: const TextStyle(
-                fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black),
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF2E2E2E)),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
@@ -34,8 +36,8 @@ class ProductInfoArea extends StatelessWidget {
                 Text(
                   originalPrice!,
                   style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
+                    fontSize: 15,
+                    color: Color(0xFF9E9E9E),
                     decoration: TextDecoration.lineThrough,
                   ),
                 ),
@@ -43,16 +45,16 @@ class ProductInfoArea extends StatelessWidget {
                 Text(
                   price,
                   style: const TextStyle(
-                      fontSize: 13,
-                      color: Colors.black54,
-                      fontWeight: FontWeight.w600),
+                      fontSize: 15,
+                      color: Color(0xFF4d2963),
+                      fontWeight: FontWeight.w700),
                 ),
               ],
             ),
           ] else ...[
             Text(
               price,
-              style: const TextStyle(fontSize: 13, color: Colors.black54),
+              style: const TextStyle(fontSize: 15, color: Color(0xFF7A7A7A)),
             ),
           ],
         ],
