@@ -8,8 +8,8 @@ import 'package:union_shop/views/login.dart';
 import 'package:union_shop/views/cart_page.dart';
 import 'package:union_shop/widgets/shared_layout.dart';
 import 'package:union_shop/widgets/hero_carousel.dart';
-import 'package:union_shop/widgets/product_image_area.dart';
-import 'package:union_shop/widgets/product_info_area.dart';
+// Product image/info widgets moved to dedicated widget files; implementations
+// are consumed by ProductCardImpl.
 import 'package:union_shop/widgets/product_card_impl.dart';
 import 'package:union_shop/repositories/home_repository.dart';
 import 'package:union_shop/repositories/collection_repository.dart';
