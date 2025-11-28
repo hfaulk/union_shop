@@ -88,8 +88,9 @@ class SharedLayout extends StatelessWidget {
                                     LayoutBuilder(builder: (c, cc) {
                                       final isDesktop =
                                           MediaQuery.of(c).size.width >= 800;
-                                      if (isDesktop)
+                                      if (isDesktop) {
                                         return const SizedBox.shrink();
+                                      }
                                       // hide this early menu icon on small screens
                                       // so we only show the single hamburger on the right
                                       return const SizedBox.shrink();

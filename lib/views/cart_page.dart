@@ -32,19 +32,23 @@ class _CartPageState extends State<CartPage> {
         IconButton(
           icon: const Icon(Icons.info_outline),
           onPressed: () async {
+            final ctx = context;
             final prefs = await SharedPreferences.getInstance();
             final s = prefs.getString('cart_items_v1') ?? '<none>';
-            showDialog(
-                context: context,
-                builder: (c) => AlertDialog(
-                      title: const Text('Saved cart (prefs)'),
-                      content: SingleChildScrollView(child: Text(s)),
-                      actions: [
-                        TextButton(
-                            onPressed: () => Navigator.pop(c),
-                            child: const Text('Close'))
-                      ],
-                    ));
+            if (!mounted) return;
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              showDialog(
+                  context: ctx,
+                  builder: (c) => AlertDialog(
+                        title: const Text('Saved cart (prefs)'),
+                        content: SingleChildScrollView(child: Text(s)),
+                        actions: [
+                          TextButton(
+                              onPressed: () => Navigator.pop(c),
+                              child: const Text('Close'))
+                        ],
+                      ));
+            });
           },
         )
       ]),

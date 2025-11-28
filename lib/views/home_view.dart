@@ -45,7 +45,7 @@ double gridTileHeightFor(BuildContext context) {
 }
 
 class HomeFeaturedPlaceholder extends StatelessWidget {
-  const HomeFeaturedPlaceholder({Key? key}) : super(key: key);
+  const HomeFeaturedPlaceholder({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,7 @@ class HomeFeaturedPlaceholder extends StatelessWidget {
 }
 
 class HomeView extends StatelessWidget {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -164,12 +164,12 @@ class HomeView extends StatelessWidget {
                   }
 
                   // center and constrain the featured area to match the Our Range margins
-                  final _widthTop = MediaQuery.of(context).size.width;
-                  final _isWideTop = _widthTop > 900;
+                  final widthTop = MediaQuery.of(context).size.width;
+                  final isWideTop = widthTop > 900;
                   return Center(
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
-                          maxWidth: _isWideTop ? 1200 : double.infinity),
+                          maxWidth: isWideTop ? 1200 : double.infinity),
                       child: Column(children: [
                         FeaturedEntry(entry: first),
                         const SizedBox(height: 32),
@@ -275,7 +275,7 @@ class HomeView extends StatelessWidget {
 class FeaturedEntry extends StatelessWidget {
   final MapEntry<Collection, List<dynamic>>? entry;
 
-  const FeaturedEntry({Key? key, this.entry}) : super(key: key);
+  const FeaturedEntry({super.key, this.entry});
 
   @override
   Widget build(BuildContext context) {

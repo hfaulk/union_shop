@@ -1,5 +1,4 @@
-import 'dart:io';
-
+// 'dart:io' no longer needed in tests
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:union_shop/repositories/cart_repository.dart';

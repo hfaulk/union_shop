@@ -22,7 +22,7 @@ Future<void> main() async {
     final envHome = Platform.environment['USERPROFILE'] ??
         Platform.environment['HOME'] ??
         Directory.current.path;
-    final dir = Directory('${envHome}${Platform.pathSeparator}.union_shop');
+    final dir = Directory('$envHome${Platform.pathSeparator}.union_shop');
     if (!await dir.exists()) await dir.create(recursive: true);
     return dir;
   });

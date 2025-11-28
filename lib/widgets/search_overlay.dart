@@ -4,10 +4,10 @@ import 'package:union_shop/models/product.dart';
 
 class SearchOverlay extends StatefulWidget {
   final VoidCallback? onClose;
-  const SearchOverlay({Key? key, this.onClose}) : super(key: key);
+  const SearchOverlay({super.key, this.onClose});
 
   @override
-  _SearchOverlayState createState() => _SearchOverlayState();
+  State<SearchOverlay> createState() => _SearchOverlayState();
 }
 
 class _SearchOverlayState extends State<SearchOverlay> {
