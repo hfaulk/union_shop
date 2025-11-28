@@ -65,7 +65,22 @@ class CartRepository {
     final file = await _localFile();
     final tmp = File('${file.path}.tmp');
     await tmp.writeAsString(s, flush: true);
-    await tmp.rename(file.path);
+    try {
+      await tmp.rename(file.path);
+    } catch (e) {
+      // On some platforms (notably Windows) rename may fail when the
+      // destination already exists. Fall back to a safe write.
+      debugPrint(
+          'CartRepository: rename failed (${e.toString()}), falling back to direct write');
+      try {
+        if (await file.exists()) {
+          await file.delete();
+        }
+        await file.writeAsString(s, flush: true);
+      } catch (e2) {
+        debugPrint('CartRepository: fallback write failed: ${e2.toString()}');
+      }
+    }
     debugPrint(
         'CartRepository: saved cart to ${file.path} (${s.length} bytes)');
     // also save to prefs for backward compatibility
