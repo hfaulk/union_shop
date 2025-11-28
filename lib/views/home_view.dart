@@ -111,6 +111,24 @@ class HomeFeaturedPlaceholder extends StatelessWidget {
   }
 }
 
+class FeaturedEntry extends StatelessWidget {
+  final MapEntry<dynamic, List<dynamic>>? entry;
+
+  const FeaturedEntry({Key? key, this.entry}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final collection = entry?.key;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(collection?.title ?? 'Featured',
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+      ],
+    );
+  }
+}
+
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
 
@@ -228,15 +246,16 @@ class HomeView extends StatelessWidget {
                       constraints: BoxConstraints(
                           maxWidth: _isWideTop ? 1200 : double.infinity),
                       child: Column(children: [
-                        buildFeaturedEntry(first),
+                        FeaturedEntry(entry: first),
                         const SizedBox(height: 20),
-                        buildFeaturedEntry(second)
+                        FeaturedEntry(entry: second)
                       ]),
                     ),
                   );
                 },
               ),
             ),
+
             const SizedBox(height: 32),
             // Our Range heading
             const Padding(
