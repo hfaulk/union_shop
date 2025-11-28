@@ -42,3 +42,11 @@ Running tests:
 
 Screenshots/GIFs:
 - Add images to `docs/screenshots/` and reference them here, e.g. `![Home screen](docs/screenshots/home.png)`.
+
+## Project Structure & Technologies
+
+- Project layout (brief): `lib/` (source), `data/` (sample JSON), `assets/`, `test/`, `prompts/`, and platform folders (`android/`, `ios/`, `web/`).
+- Key files: `lib/main.dart` (app entry), `pubspec.yaml` (dependencies), `data/*.json` (product and cart data), `test/` (unit & widget tests).
+- Technologies: Flutter (Dart), standard Flutter toolchain (Flutter CLI, Android Studio, Xcode for iOS builds).
+- Dependencies: see `pubspec.yaml` for the exact package list; this project uses local JSON assets and Flutter widgets for UI.
+
