@@ -73,4 +73,23 @@ void main() {
     expect(s, isNotNull);
     await tmpDir.delete(recursive: true);
   });
+
+  test('saveCart does not leave .tmp file', () async {
+    SharedPreferences.setMockInitialValues({});
+    final tmpDir = await Directory.systemTemp.createTemp('cart_repo_test_');
+    final repo = CartRepository(documentsDirProvider: () async => tmpDir);
+    final item = CartItem(
+      productId: 'p-atomic',
+      name: 'Atomic',
+      price: 2.0,
+      image: '',
+      options: {},
+      quantity: 1,
+      id: 'a1',
+    );
+    await repo.saveCart([item]);
+    final tmpFile = File('${tmpDir.path}/cart.json.tmp');
+    expect(await tmpFile.exists(), isFalse);
+    await tmpDir.delete(recursive: true);
+  });
 }
