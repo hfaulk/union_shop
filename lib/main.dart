@@ -92,9 +92,7 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Hero Section (replaced by widget)
-            SizedBox(
-                height: 400, width: double.infinity, child: HeroCarousel()),
+            // Hero Section removed from main.dart (moved to HomeView)
 
             // Featured Collection #1 Section (driven from home_config.json)
             FutureBuilder<HomeData?>(
