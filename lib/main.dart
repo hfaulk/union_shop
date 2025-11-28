@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:union_shop/view_models/cart_view_model.dart';
+import 'package:union_shop/repositories/cart_repository.dart';
 import 'package:union_shop/views/product_page.dart';
 import 'package:union_shop/views/about.dart';
 import 'package:union_shop/views/collections.dart';
@@ -12,7 +14,19 @@ export 'package:union_shop/widgets/product_card.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final cartViewModel = CartViewModel();
+  // Provide a documentsDirProvider that uses the user's home directory when
+  // `path_provider` is unavailable on the current platform. This avoids
+  // MissingPluginException on desktop runs where the plugin may not be
+  // registered in some dev setups.
+  final repo = CartRepository(documentsDirProvider: () async {
+    final envHome = Platform.environment['USERPROFILE'] ??
+        Platform.environment['HOME'] ??
+        Directory.current.path;
+    final dir = Directory('${envHome}${Platform.pathSeparator}.union_shop');
+    if (!await dir.exists()) await dir.create(recursive: true);
+    return dir;
+  });
+  final cartViewModel = CartViewModel(repo);
   // expose globally for simple access from screens
   appCartViewModel = cartViewModel;
   await cartViewModel.loadCart();

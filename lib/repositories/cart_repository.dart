@@ -16,31 +16,64 @@ class CartRepository {
   CartRepository({this.documentsDirProvider});
 
   Future<List<CartItem>> loadCart() async {
-    // Simplified persistence: use SharedPreferences only.
+    // Try file-based cart first for cross-run persistence.
+    try {
+      final file = await _localFile();
+      if (await file.exists()) {
+        final s = await file.readAsString();
+        if (s.trim().isNotEmpty) {
+          debugPrint('CartRepository: loading cart from file ${file.path}');
+          final data = jsonDecode(s) as List;
+          return data
+              .map((e) => CartItem.fromJson(Map<String, dynamic>.from(e)))
+              .toList();
+        }
+      }
+    } catch (e) {
+      debugPrint('CartRepository: file load failed: ${e.toString()}');
+    }
+    // Fallback to SharedPreferences
     final prefs = await SharedPreferences.getInstance();
     final s = prefs.getString(_key);
     if (s == null || s.isEmpty) {
-      debugPrint('CartRepository: no saved cart found in SharedPreferences');
+      debugPrint(
+          'CartRepository: no saved cart found in SharedPreferences (fallback)');
       return [];
     }
-    debugPrint('CartRepository: found saved cart string (${s.length} bytes)');
+    debugPrint('CartRepository: found saved cart in prefs (${s.length} bytes)');
     try {
       final data = jsonDecode(s) as List;
       final items = data
           .map((e) => CartItem.fromJson(Map<String, dynamic>.from(e)))
           .toList();
-      debugPrint(
-          'CartRepository: parsed ${items.length} cart items from prefs');
+      debugPrint('CartRepository: parsed ${items.length} items from prefs');
       return items;
     } catch (e) {
-      debugPrint('CartRepository: failed to parse saved cart: ${e.toString()}');
+      debugPrint(
+          'CartRepository: failed to parse saved cart from prefs: ${e.toString()}');
       return [];
     }
   }
 
   Future<void> saveCart(List<CartItem> items) async {
     final s = jsonEncode(items.map((e) => e.toJson()).toList());
-    // Simplified: store cart in SharedPreferences for cross-platform reliability.
+    // Prefer writing to a local file (atomic), then also back up to SharedPreferences.
+    try {
+      final file = await _localFile();
+      final tmp = File('${file.path}.tmp');
+      await tmp.writeAsString(s, flush: true);
+      try {
+        await tmp.rename(file.path);
+      } catch (e) {
+        debugPrint(
+            'CartRepository: rename failed (${e.toString()}), falling back');
+        if (await file.exists()) await file.delete();
+        await file.writeAsString(s, flush: true);
+      }
+      debugPrint('CartRepository: saved cart to file ${file.path}');
+    } catch (e) {
+      debugPrint('CartRepository: file save failed: ${e.toString()}');
+    }
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_key, s);
     debugPrint(
