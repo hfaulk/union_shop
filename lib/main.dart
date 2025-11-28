@@ -7,7 +7,6 @@ import 'package:union_shop/views/collection_page.dart';
 import 'package:union_shop/views/login.dart';
 import 'package:union_shop/views/cart_page.dart';
 import 'package:union_shop/views/search_screen.dart';
-// Note: most home-screen presentation logic now lives in `lib/views/home_view.dart`.
 import 'package:union_shop/views/home_view.dart';
 export 'package:union_shop/widgets/product_card.dart';
 
@@ -67,7 +66,3 @@ class UnionShopApp extends StatelessWidget {
     );
   }
 }
-
-// `HomeScreen` removed — use `HomeView` in `lib/views/home_view.dart` instead.
-
-// ProductCard is defined in `lib/widgets/product_card.dart` and exported above.
