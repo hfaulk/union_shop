@@ -23,6 +23,7 @@ void main() {
     expect(find.text('TProd'), findsOneWidget);
     expect(find.text('£9.99'), findsOneWidget);
 
+    await tester.ensureVisible(find.text('ADD TO CART'));
     await tester.tap(find.text('ADD TO CART'));
     await tester.pumpAndSettle();
     expect(find.text('Cart not ready'), findsOneWidget);
