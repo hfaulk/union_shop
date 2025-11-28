@@ -18,7 +18,7 @@ Prerequisites:
 
 Clone and install dependencies:
 ```bash
-git clone <repo-url>
+git clone https://github.com/hfaulk/union_shop.git
 cd union_shop
 flutter pub get
 ```
