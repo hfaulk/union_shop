@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/shared_layout.dart';
+import 'package:union_shop/widgets/product_card.dart';
 import 'package:union_shop/repositories/product_repository.dart';
 import 'package:union_shop/repositories/collection_repository.dart';
 import 'package:union_shop/models/product.dart';
@@ -303,138 +304,21 @@ class _CollectionPageState extends State<CollectionPage> {
                             itemCount: pagedProducts.length,
                             itemBuilder: (context, i) {
                               final p = pagedProducts[i];
+                              final priceText =
+                                  '£${(p.discount && p.discountedPrice != null ? (p.discountedPrice! / 100).toStringAsFixed(2) : (p.price / 100).toStringAsFixed(2))}';
+                              final original =
+                                  (p.discount && p.discountedPrice != null)
+                                      ? '£${(p.price / 100).toStringAsFixed(2)}'
+                                      : null;
                               return InkWell(
-                                onTap: () {
-                                  // Navigate to the canonical deep-link for this product
-                                  Navigator.pushNamed(
-                                      context, '/product/${p.id}');
-                                },
-                                child: Card(
-                                  clipBehavior: Clip.hardEdge,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4)),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
-                                    children: [
-                                      // Image (covers area). Falls back to placeholder on error/empty URL.
-                                      AspectRatio(
-                                        aspectRatio: 4 / 3,
-                                        child: Builder(builder: (ctx) {
-                                          final src = p.imageUrl;
-                                          if (src.isEmpty) {
-                                            return Container(
-                                              color: const Color(0xFFF2F2F2),
-                                              child: const Center(
-                                                child: Icon(
-                                                  Icons.image,
-                                                  color: Color(0xFFBDBDBD),
-                                                ),
-                                              ),
-                                            );
-                                          }
-
-                                          return Image.network(
-                                            src,
-                                            fit: BoxFit.cover,
-                                            loadingBuilder:
-                                                (context, child, chunk) {
-                                              if (chunk == null) return child;
-                                              return Container(
-                                                color: const Color(0xFFF2F2F2),
-                                                child: const Center(
-                                                  child: SizedBox(
-                                                    width: 24,
-                                                    height: 24,
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      strokeWidth: 2,
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                            errorBuilder:
-                                                (context, error, stack) {
-                                              return Container(
-                                                color: const Color(0xFFF2F2F2),
-                                                child: const Center(
-                                                  child: Icon(
-                                                    Icons.broken_image,
-                                                    color: Color(0xFFBDBDBD),
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        }),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            12.0, 8.0, 12.0, 0.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              height: 48,
-                                              child: Align(
-                                                alignment: Alignment.centerLeft,
-                                                child: Text(
-                                                  p.title,
-                                                  style: const TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: Color(0xFF2E2E2E),
-                                                  ),
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(height: 4),
-                                            // Show discounted price if present
-                                            p.discount &&
-                                                    p.discountedPrice != null
-                                                ? Row(
-                                                    children: [
-                                                      Text(
-                                                        '£${(p.price / 100).toStringAsFixed(2)}',
-                                                        style: const TextStyle(
-                                                          fontSize: 15,
-                                                          color:
-                                                              Color(0xFF9E9E9E),
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .lineThrough,
-                                                        ),
-                                                      ),
-                                                      const SizedBox(width: 8),
-                                                      Text(
-                                                        '£${(p.discountedPrice! / 100).toStringAsFixed(2)}',
-                                                        style: const TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          color:
-                                                              Color(0xFF4d2963),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  )
-                                                : Text(
-                                                    '£${(p.price / 100).toStringAsFixed(2)}',
-                                                    style: const TextStyle(
-                                                      fontSize: 15,
-                                                      color: Color(0xFF7A7A7A),
-                                                    ),
-                                                  ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                onTap: () => Navigator.pushNamed(
+                                    context, '/product/${p.id}'),
+                                child: ProductCard(
+                                  title: p.title,
+                                  price: priceText,
+                                  originalPrice: original,
+                                  imageUrl: p.imageUrl,
+                                  id: p.id,
                                 ),
                               );
                             },
