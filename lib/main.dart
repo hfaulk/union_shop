@@ -6,16 +6,9 @@ import 'package:union_shop/views/collections.dart';
 import 'package:union_shop/views/collection_page.dart';
 import 'package:union_shop/views/login.dart';
 import 'package:union_shop/views/cart_page.dart';
-import 'package:union_shop/widgets/shared_layout.dart';
-// hero_carousel moved into `HomeView`; no direct import needed in main.dart
-// Product image/info widgets moved to dedicated widget files; implementations
-// are consumed by ProductCardImpl.
-export 'package:union_shop/widgets/product_card.dart';
-import 'package:union_shop/widgets/product_card.dart';
-import 'package:union_shop/repositories/home_repository.dart';
-import 'package:union_shop/repositories/collection_repository.dart';
-import 'package:union_shop/repositories/product_repository.dart';
+// Note: most home-screen presentation logic now lives in `lib/views/home_view.dart`.
 import 'package:union_shop/views/home_view.dart';
+export 'package:union_shop/widgets/product_card.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
