@@ -7,8 +7,8 @@ class ProductImageArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 95,
+    return AspectRatio(
+      aspectRatio: 4 / 3,
       child: Image.network(
         imageUrl,
         width: double.infinity,
