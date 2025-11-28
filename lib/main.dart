@@ -9,6 +9,7 @@ import 'package:union_shop/views/cart_page.dart';
 import 'package:union_shop/widgets/shared_layout.dart';
 import 'package:union_shop/widgets/hero_carousel.dart';
 import 'package:union_shop/widgets/product_image_area.dart';
+import 'package:union_shop/widgets/product_info_area.dart';
 import 'package:union_shop/repositories/home_repository.dart';
 import 'package:union_shop/repositories/collection_repository.dart';
 import 'package:union_shop/repositories/product_repository.dart';
@@ -268,53 +269,11 @@ class ProductCard extends StatelessWidget {
         children: [
           // Image area: extracted to a reusable widget
           ProductImageArea(imageUrl: imageUrl),
-          // Info area
-          Container(
-            color: const Color(0xFFF7EEF6),
-            padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 2),
-                Text(
-                  title,
-                  style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 6),
-                if (originalPrice != null) ...[
-                  Row(
-                    children: [
-                      Text(
-                        originalPrice!,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
-                          decoration: TextDecoration.lineThrough,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        price,
-                        style: const TextStyle(
-                            fontSize: 13,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ],
-                  ),
-                ] else ...[
-                  Text(
-                    price,
-                    style: const TextStyle(fontSize: 13, color: Colors.black54),
-                  ),
-                ],
-              ],
-            ),
+          // Info area: extracted to a reusable widget
+          ProductInfoArea(
+            title: title,
+            price: price,
+            originalPrice: originalPrice,
           ),
         ],
       ),
