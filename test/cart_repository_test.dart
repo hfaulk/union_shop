@@ -30,4 +30,15 @@ void main() {
     expect(l.quantity, item.quantity);
     await tmpDir.delete(recursive: true);
   });
+
+  test('loadCart returns empty on invalid JSON', () async {
+    SharedPreferences.setMockInitialValues({});
+    final tmpDir = await Directory.systemTemp.createTemp('cart_repo_test_');
+    final file = File('${tmpDir.path}/cart.json');
+    await file.writeAsString('not a json');
+    final repo = CartRepository(documentsDirProvider: () async => tmpDir);
+    final loaded = await repo.loadCart();
+    expect(loaded, isEmpty);
+    await tmpDir.delete(recursive: true);
+  });
 }
