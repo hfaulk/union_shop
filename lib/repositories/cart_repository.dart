@@ -16,76 +16,28 @@ class CartRepository {
   CartRepository({this.documentsDirProvider});
 
   Future<List<CartItem>> loadCart() async {
-    // On web, file system APIs and path_provider are not available.
-    // Use SharedPreferences as the primary persistence mechanism instead.
-    if (kIsWeb) {
-      final prefs = await SharedPreferences.getInstance();
-      final s = prefs.getString(_key);
-      if (s == null) return [];
+    // Simplified persistence: use SharedPreferences only.
+    final prefs = await SharedPreferences.getInstance();
+    final s = prefs.getString(_key);
+    if (s == null || s.isEmpty) return [];
+    try {
       final data = jsonDecode(s) as List;
       return data
           .map((e) => CartItem.fromJson(Map<String, dynamic>.from(e)))
           .toList();
+    } catch (e) {
+      debugPrint('CartRepository: failed to parse saved cart: ${e.toString()}');
+      return [];
     }
-
-    await copySeedIfNeeded();
-    final file = await _localFile();
-    if (await file.exists()) {
-      try {
-        final s = await file.readAsString();
-        debugPrint(
-            'CartRepository: loading cart from ${file.path} (${s.length} bytes)');
-        final data = jsonDecode(s) as List;
-        return data
-            .map((e) => CartItem.fromJson(Map<String, dynamic>.from(e)))
-            .toList();
-      } catch (_) {}
-    }
-    debugPrint(
-        'CartRepository: local cart file not usable, falling back to SharedPreferences');
-    final prefs = await SharedPreferences.getInstance();
-    final s = prefs.getString(_key);
-    if (s == null) return [];
-    final data = jsonDecode(s) as List;
-    return data
-        .map((e) => CartItem.fromJson(Map<String, dynamic>.from(e)))
-        .toList();
   }
 
   Future<void> saveCart(List<CartItem> items) async {
     final s = jsonEncode(items.map((e) => e.toJson()).toList());
-    // On web, prefer SharedPreferences (localStorage) instead of file I/O.
-    if (kIsWeb) {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(_key, s);
-      return;
-    }
-
-    // write atomically to local file
-    final file = await _localFile();
-    final tmp = File('${file.path}.tmp');
-    await tmp.writeAsString(s, flush: true);
-    try {
-      await tmp.rename(file.path);
-    } catch (e) {
-      // On some platforms (notably Windows) rename may fail when the
-      // destination already exists. Fall back to a safe write.
-      debugPrint(
-          'CartRepository: rename failed (${e.toString()}), falling back to direct write');
-      try {
-        if (await file.exists()) {
-          await file.delete();
-        }
-        await file.writeAsString(s, flush: true);
-      } catch (e2) {
-        debugPrint('CartRepository: fallback write failed: ${e2.toString()}');
-      }
-    }
-    debugPrint(
-        'CartRepository: saved cart to ${file.path} (${s.length} bytes)');
-    // also save to prefs for backward compatibility
+    // Simplified: store cart in SharedPreferences for cross-platform reliability.
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_key, s);
+    debugPrint(
+        'CartRepository: saved cart to SharedPreferences (${s.length} bytes)');
   }
 
   // Convenience helpers - simple wrappers that load, modify, and save.
