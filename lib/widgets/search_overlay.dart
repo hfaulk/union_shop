@@ -45,15 +45,36 @@ class _SearchOverlayState extends State<SearchOverlay> {
                   separatorBuilder: (_, __) => const Divider(height: 1),
                   itemBuilder: (c, i) {
                     final p = _results[i];
+                    final original = '£${(p.price / 100).toStringAsFixed(2)}';
+                    final discounted = p.discountedPrice != null
+                        ? '£${(p.discountedPrice! / 100).toStringAsFixed(2)}'
+                        : null;
                     return ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 6),
                       leading: p.imageUrl.isNotEmpty
                           ? Image.asset(p.imageUrl,
-                              width: 40, height: 40, fit: BoxFit.cover)
+                              width: 44, height: 44, fit: BoxFit.cover)
                           : null,
-                      title: Text(p.title),
-                      trailing: Text('£${(p.price / 100).toStringAsFixed(2)}'),
+                      title:
+                          Text(p.title, style: const TextStyle(fontSize: 14)),
+                      subtitle: discounted != null
+                          ? Row(children: [
+                              Text(original,
+                                  style: const TextStyle(
+                                      decoration: TextDecoration.lineThrough,
+                                      color: Colors.grey,
+                                      fontSize: 12)),
+                              const SizedBox(width: 8),
+                              Text(discounted,
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13)),
+                            ])
+                          : null,
                       onTap: () {
-                        Navigator.pop(context); // close overlay
+                        Navigator.pop(context);
                         Navigator.pushNamed(context, '/product', arguments: {
                           'id': p.id,
                           'title': p.title,
