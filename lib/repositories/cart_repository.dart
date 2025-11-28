@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:path_provider/path_provider.dart';
 
 import '../models/cart_item.dart';
 
@@ -30,5 +33,29 @@ class CartRepository {
     final prefs = await SharedPreferences.getInstance();
     final s = jsonEncode(items.map((e) => e.toJson()).toList());
     await prefs.setString('last_order_v1', s);
+  }
+
+  // Persistence helpers for asset -> local file
+  static const assetPath = 'assets/data/cart.json';
+
+  Future<String> _getLocalPath() async {
+    final dir = await getApplicationDocumentsDirectory();
+    return dir.path;
+  }
+
+  Future<File> _localFile() async {
+    final path = await _getLocalPath();
+    return File('$path/cart.json');
+  }
+
+  Future<void> copySeedIfNeeded() async {
+    final file = await _localFile();
+    if (await file.exists()) return;
+    try {
+      final data = await rootBundle.loadString(assetPath);
+      await file.writeAsString(data, flush: true);
+    } catch (e) {
+      await file.writeAsString('[]', flush: true);
+    }
   }
 }
