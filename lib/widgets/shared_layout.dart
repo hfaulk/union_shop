@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/widgets/search_overlay.dart';
 
 class SharedLayout extends StatelessWidget {
   final Widget body;
@@ -92,7 +93,12 @@ class SharedLayout extends StatelessWidget {
                                         minWidth: 32,
                                         minHeight: 32,
                                       ),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (c) => const SearchOverlay(),
+                                        );
+                                      },
                                     ),
                                     IconButton(
                                       icon: const Icon(
@@ -283,7 +289,7 @@ class SharedLayout extends StatelessWidget {
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
                   SizedBox(height: 12),
                   GestureDetector(
-                    onTap: _placeholderCallbackForButtons,
+                    onTap: () => Navigator.pushNamed(context, '/search'),
                     child: const Text('Search',
                         style: TextStyle(
                             color: Color(0xFF4d2963),
