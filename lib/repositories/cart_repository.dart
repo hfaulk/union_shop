@@ -19,12 +19,19 @@ class CartRepository {
     // Simplified persistence: use SharedPreferences only.
     final prefs = await SharedPreferences.getInstance();
     final s = prefs.getString(_key);
-    if (s == null || s.isEmpty) return [];
+    if (s == null || s.isEmpty) {
+      debugPrint('CartRepository: no saved cart found in SharedPreferences');
+      return [];
+    }
+    debugPrint('CartRepository: found saved cart string (${s.length} bytes)');
     try {
       final data = jsonDecode(s) as List;
-      return data
+      final items = data
           .map((e) => CartItem.fromJson(Map<String, dynamic>.from(e)))
           .toList();
+      debugPrint(
+          'CartRepository: parsed ${items.length} cart items from prefs');
+      return items;
     } catch (e) {
       debugPrint('CartRepository: failed to parse saved cart: ${e.toString()}');
       return [];

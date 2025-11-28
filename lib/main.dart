@@ -16,6 +16,7 @@ Future<void> main() async {
   // expose globally for simple access from screens
   appCartViewModel = cartViewModel;
   await cartViewModel.loadCart();
+  debugPrint('main: cart loaded, items=${cartViewModel.items.length}');
   runApp(UnionShopApp(cartViewModel: cartViewModel));
 }
 
