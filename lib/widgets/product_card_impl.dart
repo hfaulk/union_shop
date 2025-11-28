@@ -20,9 +20,10 @@ class ProductCardImpl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => id != null
-          ? Navigator.pushNamed(context, '/product/$id')
-          : Navigator.pushNamed(context, '/product'),
+      onTap: () {
+        if (id == null) return; // no deep-link available; do nothing
+        Navigator.pushNamed(context, '/product/$id');
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

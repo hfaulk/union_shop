@@ -290,18 +290,9 @@ class _CollectionPageState extends State<CollectionPage> {
                               final p = pagedProducts[i];
                               return InkWell(
                                 onTap: () {
+                                  // Navigate to the canonical deep-link for this product
                                   Navigator.pushNamed(
-                                    context,
-                                    '/product',
-                                    arguments: {
-                                      'id': p.id,
-                                      'title': p.title,
-                                      'price': p.price,
-                                      'imageUrl': p.imageUrl,
-                                      'discount': p.discount,
-                                      'discountedPrice': p.discountedPrice,
-                                    },
-                                  );
+                                      context, '/product/${p.id}');
                                 },
                                 child: Card(
                                   clipBehavior: Clip.hardEdge,

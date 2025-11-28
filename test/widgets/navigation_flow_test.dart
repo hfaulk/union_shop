@@ -28,8 +28,8 @@ void main() {
     // The CollectionPage uses the slug as the title (hyphens replaced with spaces)
     expect(find.text('autumn'), findsOneWidget);
 
-    // Push Product page with explicit arguments so we can assert title + price
-    Navigator.pushNamed(appContext, '/product', arguments: {
+    // Push Product page with explicit arguments via deep-link path
+    Navigator.pushNamed(appContext, '/product/integration-test', arguments: {
       'title': 'Integration Test Product',
       'price': 1599,
     });

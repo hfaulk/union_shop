@@ -8,12 +8,12 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(
       routes: {
-        '/product': (context) => const ProductPage(),
+        '/product/test-sale': (context) => const ProductPage(),
       },
       home: Builder(builder: (context) {
         return ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/product', arguments: {
+            Navigator.pushNamed(context, '/product/test-sale', arguments: {
               'title': 'Sale Item',
               'price': 2500,
               'discount': true,

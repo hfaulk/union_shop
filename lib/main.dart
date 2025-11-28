@@ -37,7 +37,6 @@ class UnionShopApp extends StatelessWidget {
       home: const HomeView(),
       initialRoute: '/',
       routes: {
-        '/product': (context) => const ProductPage(),
         '/search': (context) => const SearchScreen(),
         '/cart': (context) => const CartPage(),
         '/collections': (context) => const CollectionsPage(),
