@@ -7,7 +7,7 @@ import 'package:union_shop/views/collection_page.dart';
 import 'package:union_shop/views/login.dart';
 import 'package:union_shop/views/cart_page.dart';
 import 'package:union_shop/widgets/shared_layout.dart';
-import 'package:union_shop/widgets/hero_carousel.dart';
+// hero_carousel moved into `HomeView`; no direct import needed in main.dart
 // Product image/info widgets moved to dedicated widget files; implementations
 // are consumed by ProductCardImpl.
 export 'package:union_shop/widgets/product_card.dart';
@@ -103,52 +103,8 @@ class HomeScreen extends StatelessWidget {
               builder: (context, snapshot) {
                 final home = snapshot.data;
                 if (home == null || home.featured.isEmpty) {
-                  // fallback: show same placeholders while loading or if no data
-                  return Padding(
-                    padding: const EdgeInsets.all(40.0),
-                    child: Column(
-                      children: [
-                        const Text('Featured Collection',
-                            style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black)),
-                        const SizedBox(height: 16),
-                        Row(children: [
-                          Expanded(
-                              child: SizedBox(
-                            height: 190,
-                            child: Card(
-                              elevation: 2,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              clipBehavior: Clip.antiAlias,
-                              child: ProductCard(
-                                  title: 'Sample Product',
-                                  price: '£20.00',
-                                  imageUrl: 'https://via.placeholder.com/150'),
-                            ),
-                          )),
-                          const SizedBox(width: 20),
-                          Expanded(
-                              child: SizedBox(
-                            height: 190,
-                            child: Card(
-                              elevation: 2,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              clipBehavior: Clip.antiAlias,
-                              child: ProductCard(
-                                  title: 'Sample Product',
-                                  price: '£20.00',
-                                  originalPrice: '£25.00',
-                                  imageUrl: 'https://via.placeholder.com/150'),
-                            ),
-                          ))
-                        ])
-                      ],
-                    ),
-                  );
+                  // fallback UI moved to `HomeView`; nothing to show here.
+                  return const SizedBox.shrink();
                 }
 
                 // Use the first featured collection from the config
