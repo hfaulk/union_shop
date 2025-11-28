@@ -40,9 +40,6 @@ Configuration:
 Running tests:
 - Unit/widget tests are in the `test/` folder. Run `flutter test` to execute them.
 
-Screenshots/GIFs:
-- Add images to `docs/screenshots/` and reference them here, e.g. `![Home screen](docs/screenshots/home.png)`.
-
 ## Project Structure & Technologies
 
 - Project layout (brief): `lib/` (source), `data/` (sample JSON), `assets/`, `test/`, `prompts/`, and platform folders (`android/`, `ios/`, `web/`).
