@@ -51,8 +51,15 @@ class UnionShopApp extends StatelessWidget {
         // match /product/:id -> forward id via settings.arguments for ProductPage
         if (uri.pathSegments.length == 2 && uri.pathSegments[0] == 'product') {
           final id = uri.pathSegments[1];
+          // Merge any existing arguments with the id from the path so callers can
+          // still pass product fields via arguments when desired (tests rely on this).
+          final existing = settings.arguments;
+          final mergedArgs = (existing is Map)
+              ? Map<String, dynamic>.from(existing as Map)
+              : <String, dynamic>{};
+          mergedArgs['id'] = id;
           return MaterialPageRoute(
-            settings: RouteSettings(name: name, arguments: {'id': id}),
+            settings: RouteSettings(name: name, arguments: mergedArgs),
             builder: (context) => const ProductPage(),
           );
         }

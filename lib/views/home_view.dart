@@ -142,7 +142,8 @@ class HomeView extends StatelessWidget {
                       ProductCard(
                           title: 'Fallback Product',
                           price: '£20.00',
-                          imageUrl: '')
+                          imageUrl: '',
+                          id: 'fallback-product')
                     ]);
                   }
 
@@ -357,7 +358,8 @@ class FeaturedEntry extends StatelessWidget {
                     title: p.title,
                     price: priceText,
                     originalPrice: original,
-                    imageUrl: p.imageUrl));
+                    imageUrl: p.imageUrl,
+                    id: p.id));
           }).toList(),
         )
       ],

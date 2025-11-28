@@ -7,7 +7,7 @@ void main() {
       (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(
       routes: {
-        '/product': (context) =>
+        '/product/test-product': (context) =>
             const Scaffold(body: Center(child: Text('PRODUCT PAGE'))),
       },
       home: Scaffold(
@@ -17,6 +17,7 @@ void main() {
             price: '£12.34',
             originalPrice: '£15.00',
             imageUrl: '',
+            id: 'test-product',
           ),
         ),
       ),

@@ -7,18 +7,22 @@ class ProductCardImpl extends StatelessWidget {
   final String price;
   final String? originalPrice;
   final String imageUrl;
+  final String? id;
 
   const ProductCardImpl(
       {super.key,
       required this.title,
       required this.price,
       this.originalPrice,
-      required this.imageUrl});
+      required this.imageUrl,
+      this.id});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, '/product'),
+      onTap: () => id != null
+          ? Navigator.pushNamed(context, '/product/$id')
+          : Navigator.pushNamed(context, '/product'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
