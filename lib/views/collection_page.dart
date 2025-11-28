@@ -73,8 +73,23 @@ class _CollectionPageState extends State<CollectionPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isWide = MediaQuery.of(context).size.width > 600;
-    final gridChildAspectRatio = isWide ? 0.9 : 0.75;
+    final width = MediaQuery.of(context).size.width;
+    // Choose number of columns based on available width so cards aren't huge on desktop
+    int crossAxisCount;
+    double gridChildAspectRatio;
+    if (width > 1400) {
+      crossAxisCount = 5;
+      gridChildAspectRatio = 0.9;
+    } else if (width > 1000) {
+      crossAxisCount = 4;
+      gridChildAspectRatio = 0.9;
+    } else if (width > 700) {
+      crossAxisCount = 3;
+      gridChildAspectRatio = 0.9;
+    } else {
+      crossAxisCount = 2;
+      gridChildAspectRatio = 0.75;
+    }
     return SharedLayout(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24),
@@ -280,7 +295,7 @@ class _CollectionPageState extends State<CollectionPage> {
                             physics: const NeverScrollableScrollPhysics(),
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: isWide ? 3 : 2,
+                              crossAxisCount: crossAxisCount,
                               crossAxisSpacing: 12,
                               mainAxisSpacing: 12,
                               childAspectRatio: gridChildAspectRatio,
