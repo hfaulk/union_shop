@@ -96,7 +96,8 @@ class SharedLayout extends StatelessWidget {
                                       onPressed: () {
                                         showDialog(
                                           context: context,
-                                          builder: (c) => const SearchOverlay(),
+                                          builder: (c) => SearchOverlay(
+                                              onClose: () => Navigator.pop(c)),
                                         );
                                       },
                                     ),

@@ -72,7 +72,11 @@ class _SearchOverlayState extends State<SearchOverlay> {
                                       fontWeight: FontWeight.bold,
                                       fontSize: 13)),
                             ])
-                          : null,
+                          : Text(original,
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13)),
                       onTap: () {
                         Navigator.pop(context);
                         Navigator.pushNamed(context, '/product', arguments: {
