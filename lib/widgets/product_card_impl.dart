@@ -19,18 +19,23 @@ class ProductCardImpl extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        if (id == null) return; // no deep-link available; do nothing
-        Navigator.pushNamed(context, '/product/$id');
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ProductImageArea(imageUrl: imageUrl),
-          ProductInfoArea(
-              title: title, price: price, originalPrice: originalPrice),
-        ],
+    return Card(
+      clipBehavior: Clip.hardEdge,
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+      child: InkWell(
+        onTap: () {
+          if (id == null) return;
+          Navigator.pushNamed(context, '/product/$id');
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ProductImageArea(imageUrl: imageUrl),
+            ProductInfoArea(
+                title: title, price: price, originalPrice: originalPrice),
+          ],
+        ),
       ),
     );
   }
