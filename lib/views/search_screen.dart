@@ -37,7 +37,8 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
           const SizedBox(height: 12),
           if (_results.isNotEmpty)
-            Expanded(
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.5,
               child: ListView.separated(
                 itemCount: _results.length,
                 separatorBuilder: (_, __) => const Divider(height: 1),
