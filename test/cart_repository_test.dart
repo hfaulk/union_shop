@@ -41,4 +41,16 @@ void main() {
     expect(loaded, isEmpty);
     await tmpDir.delete(recursive: true);
   });
+
+  test('copySeedIfNeeded creates empty file when asset missing', () async {
+    SharedPreferences.setMockInitialValues({});
+    final tmpDir = await Directory.systemTemp.createTemp('cart_repo_test_');
+    final repo = CartRepository(documentsDirProvider: () async => tmpDir);
+    final file = File('${tmpDir.path}/cart.json');
+    if (await file.exists()) await file.delete();
+    await repo.copySeedIfNeeded();
+    final contents = await file.readAsString();
+    expect(contents.trim(), '[]');
+    await tmpDir.delete(recursive: true);
+  });
 }
