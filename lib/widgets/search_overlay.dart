@@ -52,7 +52,17 @@ class _SearchOverlayState extends State<SearchOverlay> {
                           : null,
                       title: Text(p.title),
                       trailing: Text('£${(p.price / 100).toStringAsFixed(2)}'),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pop(context); // close overlay
+                        Navigator.pushNamed(context, '/product', arguments: {
+                          'id': p.id,
+                          'title': p.title,
+                          'imageUrl': p.imageUrl,
+                          'price': p.price,
+                          'discount': p.discount,
+                          'discountedPrice': p.discountedPrice,
+                        });
+                      },
                     );
                   },
                 ),
