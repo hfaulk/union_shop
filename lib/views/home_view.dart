@@ -328,3 +328,21 @@ class HomeView extends StatelessWidget {
     );
   }
 }
+
+class FeaturedEntry extends StatelessWidget {
+  final MapEntry<Collection, List<dynamic>>? entry;
+
+  const FeaturedEntry({Key? key, this.entry}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final collection = entry?.key;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(collection?.title ?? 'Featured',
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+      ],
+    );
+  }
+}
