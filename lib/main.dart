@@ -48,6 +48,14 @@ class UnionShopApp extends StatelessWidget {
         final name = settings.name ?? '';
         // parse as URI to handle any encoded parts
         final uri = Uri.parse(name);
+        // match /product/:id -> forward id via settings.arguments for ProductPage
+        if (uri.pathSegments.length == 2 && uri.pathSegments[0] == 'product') {
+          final id = uri.pathSegments[1];
+          return MaterialPageRoute(
+            settings: RouteSettings(name: name, arguments: {'id': id}),
+            builder: (context) => const ProductPage(),
+          );
+        }
         // match /collections/:slug
         if (uri.pathSegments.length == 2 &&
             uri.pathSegments[0] == 'collections') {
