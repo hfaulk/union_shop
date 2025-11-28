@@ -6,6 +6,9 @@ void main() {
   testWidgets('SearchScreen shows header and TextField', (tester) async {
     await tester.pumpWidget(const MaterialApp(home: SearchScreen()));
     expect(find.text('SEARCH OUR SITE'), findsOneWidget);
-    expect(find.byType(TextField), findsOneWidget);
+    expect(
+        find.byWidgetPredicate(
+            (w) => w is TextField && w.decoration?.hintText == 'Search'),
+        findsOneWidget);
   });
 }
