@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -15,6 +16,18 @@ class CartRepository {
   CartRepository({this.documentsDirProvider});
 
   Future<List<CartItem>> loadCart() async {
+    // On web, file system APIs and path_provider are not available.
+    // Use SharedPreferences as the primary persistence mechanism instead.
+    if (kIsWeb) {
+      final prefs = await SharedPreferences.getInstance();
+      final s = prefs.getString(_key);
+      if (s == null) return [];
+      final data = jsonDecode(s) as List;
+      return data
+          .map((e) => CartItem.fromJson(Map<String, dynamic>.from(e)))
+          .toList();
+    }
+
     await copySeedIfNeeded();
     final file = await _localFile();
     if (await file.exists()) {
@@ -37,6 +50,13 @@ class CartRepository {
 
   Future<void> saveCart(List<CartItem> items) async {
     final s = jsonEncode(items.map((e) => e.toJson()).toList());
+    // On web, prefer SharedPreferences (localStorage) instead of file I/O.
+    if (kIsWeb) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_key, s);
+      return;
+    }
+
     // write atomically to local file
     final file = await _localFile();
     final tmp = File('${file.path}.tmp');
