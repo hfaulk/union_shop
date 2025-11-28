@@ -10,6 +10,7 @@ import 'package:union_shop/widgets/shared_layout.dart';
 import 'package:union_shop/widgets/hero_carousel.dart';
 import 'package:union_shop/widgets/product_image_area.dart';
 import 'package:union_shop/widgets/product_info_area.dart';
+import 'package:union_shop/widgets/product_card_impl.dart';
 import 'package:union_shop/repositories/home_repository.dart';
 import 'package:union_shop/repositories/collection_repository.dart';
 import 'package:union_shop/repositories/product_repository.dart';
@@ -260,23 +261,11 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, '/product');
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Image area: extracted to a reusable widget
-          ProductImageArea(imageUrl: imageUrl),
-          // Info area: extracted to a reusable widget
-          ProductInfoArea(
-            title: title,
-            price: price,
-            originalPrice: originalPrice,
-          ),
-        ],
-      ),
+    return ProductCardImpl(
+      title: title,
+      price: price,
+      originalPrice: originalPrice,
+      imageUrl: imageUrl,
     );
   }
 }
