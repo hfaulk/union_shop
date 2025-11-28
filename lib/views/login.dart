@@ -64,6 +64,9 @@ class _LoginPageState extends State<LoginPage> {
                         child: Image.network(
                           'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
                           height: 64,
+                          errorBuilder: (context, error, stackTrace) {
+                            return const SizedBox(height: 64);
+                          },
                         ),
                       ),
                       const SizedBox(height: 18),
