@@ -210,30 +210,33 @@ class _ProductPageState extends State<ProductPage> {
                             borderRadius: BorderRadius.circular(4),
                             border: Border.all(color: Colors.grey.shade400),
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.remove),
-                                onPressed: _quantity > _minQuantity
-                                    ? () => setState(() => _quantity--)
-                                    : null,
-                                padding: EdgeInsets.zero,
-                                constraints: const BoxConstraints(
-                                    minWidth: 36, minHeight: 36),
-                              ),
-                              Text('$_quantity',
-                                  style: const TextStyle(fontSize: 16)),
-                              IconButton(
-                                icon: const Icon(Icons.add),
-                                onPressed: _quantity < _maxQuantity
-                                    ? () => setState(() => _quantity++)
-                                    : null,
-                                padding: EdgeInsets.zero,
-                                constraints: const BoxConstraints(
-                                    minWidth: 36, minHeight: 36),
-                              ),
-                            ],
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.remove),
+                                  onPressed: _quantity > _minQuantity
+                                      ? () => setState(() => _quantity--)
+                                      : null,
+                                  padding: EdgeInsets.zero,
+                                  constraints: const BoxConstraints(
+                                      minWidth: 36, minHeight: 36),
+                                ),
+                                Text('$_quantity',
+                                    style: const TextStyle(fontSize: 16)),
+                                IconButton(
+                                  icon: const Icon(Icons.add),
+                                  onPressed: _quantity < _maxQuantity
+                                      ? () => setState(() => _quantity++)
+                                      : null,
+                                  padding: EdgeInsets.zero,
+                                  constraints: const BoxConstraints(
+                                      minWidth: 36, minHeight: 36),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
