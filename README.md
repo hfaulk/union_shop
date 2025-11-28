@@ -7,7 +7,7 @@ and run through basic checkout flows (for demo purposes).
 Key features:
 - Browse products and collections sourced from local JSON data.
 - Hero carousel and responsive product cards for multiple screen sizes.
--- Persistent cart saved locally; simple checkout simulation.
+- Persistent cart saved locally; simple checkout simulation.
 
 ## Installation & Setup
 
