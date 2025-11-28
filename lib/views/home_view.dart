@@ -92,6 +92,25 @@ double gridTileHeightFor(BuildContext context) {
   return itemWidth / childAspect;
 }
 
+class HomeFeaturedPlaceholder extends StatelessWidget {
+  const HomeFeaturedPlaceholder({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      Container(
+          height: 190,
+          color: Colors.grey[200],
+          child: const Center(child: Text('Featured Collection 1'))),
+      const SizedBox(height: 20),
+      Container(
+          height: 190,
+          color: Colors.grey[300],
+          child: const Center(child: Text('Featured Collection 2'))),
+    ]);
+  }
+}
+
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
 
@@ -114,19 +133,7 @@ class HomeView extends StatelessWidget {
                 builder: (context, snapshot) {
                   final home = snapshot.data;
                   if (home == null || home.featured.isEmpty) {
-                    return Column(children: [
-                      Container(
-                          height: 190,
-                          color: Colors.grey[200],
-                          child: const Center(
-                              child: Text('Featured Collection 1'))),
-                      const SizedBox(height: 20),
-                      Container(
-                          height: 190,
-                          color: Colors.grey[300],
-                          child: const Center(
-                              child: Text('Featured Collection 2'))),
-                    ]);
+                    return const HomeFeaturedPlaceholder();
                   }
 
                   // use file-level helper `_humanizeId` for slug->title fallback
