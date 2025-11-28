@@ -111,24 +111,6 @@ class HomeFeaturedPlaceholder extends StatelessWidget {
   }
 }
 
-class FeaturedEntry extends StatelessWidget {
-  final MapEntry<dynamic, List<dynamic>>? entry;
-
-  const FeaturedEntry({Key? key, this.entry}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final collection = entry?.key;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(collection?.title ?? 'Featured',
-            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-      ],
-    );
-  }
-}
-
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
 
