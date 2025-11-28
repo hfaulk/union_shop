@@ -47,6 +47,31 @@ Running tests:
 - Technologies: Flutter (Dart), standard Flutter toolchain (Flutter CLI, Android Studio, Xcode for iOS builds).
 - Dependencies: see `pubspec.yaml` for the exact package list; this project uses local JSON assets and Flutter widgets for UI.
 
+-- Project tree:
+```text
+.
+├── README.md
+├── pubspec.yaml
+├── lib/
+│   ├── main.dart
+│   ├── helpers/
+│   ├── models/
+│   ├── repositories/
+│   ├── view_models/
+│   ├── views/
+│   └── widgets/
+├── assets/
+│   └── data/
+│       ├── products.json
+│       ├── collections.json
+│       └── cart.json
+├── prompts/
+├── test/
+├── android/
+├── ios/
+├── web/
+└── other platform folders (linux/, macos/, windows/)
+```
 ## Known Issues & Contributing
 
 - Known limitations:
