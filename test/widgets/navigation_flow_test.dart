@@ -25,8 +25,8 @@ void main() {
     Navigator.pushNamed(appContext, '/collections/autumn');
     await tester.pumpAndSettle();
 
-    // The CollectionPage uses the slug as the title (hyphens replaced with spaces)
-    expect(find.text('autumn'), findsOneWidget);
+    // The CollectionPage shows a human-friendly title for the collection
+    expect(find.text('Autumn'), findsOneWidget);
 
     // Push Product page with explicit arguments via deep-link path
     Navigator.pushNamed(appContext, '/product/integration-test', arguments: {

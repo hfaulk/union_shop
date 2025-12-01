@@ -77,7 +77,11 @@ class UnionShopApp extends StatelessWidget {
         if (uri.pathSegments.length == 2 &&
             uri.pathSegments[0] == 'collections') {
           final slug = uri.pathSegments[1];
-          final title = Uri.decodeComponent(slug.replaceAll('-', ' '));
+          final title = Uri.decodeComponent(slug.replaceAll('-', ' '))
+              .split(' ')
+              .map((w) =>
+                  w.isEmpty ? w : '${w[0].toUpperCase()}${w.substring(1)}')
+              .join(' ');
           return MaterialPageRoute(
             settings: settings,
             builder: (context) => CollectionPage(
