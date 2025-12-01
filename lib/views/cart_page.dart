@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/view_models/cart_view_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -28,30 +27,7 @@ class _CartPageState extends State<CartPage> {
     final vm = appCartViewModel;
     final items = vm?.items ?? [];
     return Scaffold(
-      appBar: AppBar(title: const Text('Your Cart'), actions: [
-        IconButton(
-          icon: const Icon(Icons.info_outline),
-          onPressed: () async {
-            final ctx = context;
-            final prefs = await SharedPreferences.getInstance();
-            final s = prefs.getString('cart_items_v1') ?? '<none>';
-            if (!mounted) return;
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              showDialog(
-                  context: ctx,
-                  builder: (c) => AlertDialog(
-                        title: const Text('Saved cart (prefs)'),
-                        content: SingleChildScrollView(child: Text(s)),
-                        actions: [
-                          TextButton(
-                              onPressed: () => Navigator.pop(c),
-                              child: const Text('Close'))
-                        ],
-                      ));
-            });
-          },
-        )
-      ]),
+      appBar: AppBar(title: const Text('Your Cart')),
       body: ListView(
         padding: const EdgeInsets.all(12),
         children: items
