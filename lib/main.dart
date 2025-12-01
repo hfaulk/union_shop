@@ -14,10 +14,6 @@ export 'package:union_shop/widgets/product_card.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Provide a documentsDirProvider that uses the user's home directory when
-  // `path_provider` is unavailable on the current platform. This avoids
-  // MissingPluginException on desktop runs where the plugin may not be
-  // registered in some dev setups.
   final repo = CartRepository(documentsDirProvider: () async {
     final envHome = Platform.environment['USERPROFILE'] ??
         Platform.environment['HOME'] ??
