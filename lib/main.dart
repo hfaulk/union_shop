@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
 import 'package:union_shop/view_models/cart_view_model.dart';
 import 'package:union_shop/repositories/cart_repository.dart';
@@ -14,6 +16,18 @@ export 'package:union_shop/widgets/product_card.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Load collection titles from bundled JSON so routes can show canonical titles
+  try {
+    final s = await rootBundle.loadString('assets/data/collections.json');
+    final list = json.decode(s) as List<dynamic>;
+    for (final item in list) {
+      if (item is Map && item['id'] != null && item['title'] != null) {
+        collectionTitles[item['id'] as String] = item['title'] as String;
+      }
+    }
+  } catch (e) {
+    debugPrint('Failed to load collections.json: $e');
+  }
   final repo = CartRepository(documentsDirProvider: () async {
     final envHome = Platform.environment['USERPROFILE'] ??
         Platform.environment['HOME'] ??
@@ -29,6 +43,9 @@ Future<void> main() async {
   debugPrint('main: cart loaded, items=${cartViewModel.items.length}');
   runApp(UnionShopApp(cartViewModel: cartViewModel));
 }
+
+// Mapping of collection id -> canonical title (loaded from assets)
+final Map<String, String> collectionTitles = {};
 
 // Small helper: format integer pence as a pounds string, e.g. 1499 -> £14.99
 String penceToPounds(int pence) => '£${(pence / 100).toStringAsFixed(2)}';
@@ -77,11 +94,13 @@ class UnionShopApp extends StatelessWidget {
         if (uri.pathSegments.length == 2 &&
             uri.pathSegments[0] == 'collections') {
           final slug = uri.pathSegments[1];
-          final title = Uri.decodeComponent(slug.replaceAll('-', ' '))
-              .split(' ')
-              .map((w) =>
-                  w.isEmpty ? w : '${w[0].toUpperCase()}${w.substring(1)}')
-              .join(' ');
+          final decoded = Uri.decodeComponent(slug.replaceAll('-', ' '));
+          final title = collectionTitles[slug] ??
+              decoded
+                  .split(' ')
+                  .map((w) =>
+                      w.isEmpty ? w : '${w[0].toUpperCase()}${w.substring(1)}')
+                  .join(' ');
           return MaterialPageRoute(
             settings: settings,
             builder: (context) => CollectionPage(
