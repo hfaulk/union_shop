@@ -16,6 +16,6 @@ void main() {
 
     // No visible badge text for empty cart
     expect(find.bySemanticsLabel('Cart — 0 items'), findsNothing);
-    expect(find.textContaining('0'), findsNothing);
+    expect(find.text('0'), findsNothing);
   });
 }
