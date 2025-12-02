@@ -186,17 +186,21 @@ class SharedLayout extends StatelessWidget {
                                           padding: EdgeInsets.zero,
                                           itemBuilder: (c) => [
                                             const PopupMenuItem(
-                                                value: 'Clothing',
+                                                value: 'clothing',
                                                 child: Text('Clothing')),
                                             const PopupMenuItem(
-                                                value: 'Merchandise',
+                                                value: 'merchandise',
                                                 child: Text('Merchandise')),
                                             const PopupMenuItem(
-                                                value: 'Halloween',
+                                                value: 'halloween',
                                                 child: Text('Halloween')),
                                           ],
-                                          onSelected: (_) =>
-                                              _placeholderCallbackForButtons(),
+                                          onSelected: (val) {
+                                            if (val.isNotEmpty) {
+                                              Navigator.pushNamed(
+                                                  context, '/collections/$val');
+                                            }
+                                          },
                                           child: const Padding(
                                             padding: EdgeInsets.symmetric(
                                                 horizontal: 8.0),
@@ -207,6 +211,11 @@ class SharedLayout extends StatelessWidget {
                                           onPressed: () => Navigator.pushNamed(
                                               context, '/collections'),
                                           child: const Text('Collections'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () => Navigator.pushNamed(
+                                              context, '/collections/sale'),
+                                          child: const Text('SALE!'),
                                         ),
                                         TextButton(
                                           onPressed: () =>
