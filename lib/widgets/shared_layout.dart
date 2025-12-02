@@ -239,17 +239,20 @@ class SharedLayout extends StatelessWidget {
                                               padding: EdgeInsets.zero,
                                               itemBuilder: (context) => [
                                                 const PopupMenuItem(
-                                                    value: 'Clothing',
+                                                    value: 'clothing',
                                                     child: Text('Clothing')),
                                                 const PopupMenuItem(
-                                                    value: 'Merchandise',
+                                                    value: 'merchandise',
                                                     child: Text('Merchandise')),
                                                 const PopupMenuItem(
-                                                    value: 'Halloween',
+                                                    value: 'halloween',
                                                     child: Text('Halloween')),
                                               ],
-                                              onSelected: (sub) =>
-                                                  _placeholderCallbackForButtons(),
+                                              onSelected: (sub) {
+                                                // Navigate to the matching collection
+                                                Navigator.pushNamed(context,
+                                                    '/collections/$sub');
+                                              },
                                             ),
                                           ],
                                         ),
@@ -257,7 +260,7 @@ class SharedLayout extends StatelessWidget {
                                       const PopupMenuItem(
                                           value: 'The Print Shack',
                                           child: Text('The Print Shack')),
-                                        const PopupMenuItem(
+                                      const PopupMenuItem(
                                           value: 'sale', child: Text('SALE!')),
                                       const PopupMenuItem(
                                           value: 'Collections',
