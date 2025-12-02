@@ -82,7 +82,7 @@ class SharedLayout extends StatelessWidget {
                           ConstrainedBox(
                             constraints: const BoxConstraints(maxWidth: 600),
                             child: Row(
-                              mainAxisSize: MainAxisSize.min,
+                              mainAxisSize: MainAxisSize.max,
                               children: [
                                 Row(
                                   mainAxisSize: MainAxisSize.min,
@@ -169,85 +169,27 @@ class SharedLayout extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                LayoutBuilder(builder: (context, constraints) {
-                                  final isDesktop =
-                                      MediaQuery.of(context).size.width >= 800;
-                                  if (isDesktop) {
-                                    return Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              _navigateToHome(context),
-                                          child: const Text('Home'),
-                                        ),
-                                        // keep Shop as a popup for now (will expand later)
-                                        PopupMenuButton<String>(
-                                          padding: EdgeInsets.zero,
-                                          itemBuilder: (c) => [
-                                            const PopupMenuItem(
-                                                value: 'autumn',
-                                                child:
-                                                    Text('Autumn Favourites')),
-                                            const PopupMenuItem(
-                                                value: 'clothing',
-                                                child: Text('Clothing')),
-                                            const PopupMenuItem(
-                                                value: 'graduation',
-                                                child: Text('Graduation')),
-                                          ],
-                                          onSelected: (val) {
-                                            if (val.isNotEmpty) {
-                                              Navigator.pushNamed(
-                                                  context, '/collections/$val');
-                                            }
-                                          },
-                                          child: const Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 8.0),
-                                            child: Text('Shop'),
-                                          ),
-                                        ),
-                                        TextButton(
-                                          onPressed: () => Navigator.pushNamed(
-                                              context, '/collections'),
-                                          child: const Text('Collections'),
-                                        ),
-                                        TextButton(
-                                          onPressed: () => Navigator.pushNamed(
-                                              context, '/collections/sale'),
-                                          child: const Text('SALE!'),
-                                        ),
-                                        TextButton(
-                                          onPressed: () =>
-                                              _navigateToAbout(context),
-                                          child: const Text('About'),
-                                        ),
-                                      ],
-                                    );
-                                  }
-                                  // fallback to original popup on smaller screens
-                                  return PopupMenuButton<String>(
-                                    icon: const Icon(
-                                      Icons.menu,
-                                      size: 18,
-                                      color: Colors.grey,
-                                    ),
-                                    padding: const EdgeInsets.all(8),
-                                    itemBuilder: (context) => [
-                                      const PopupMenuItem(
-                                          value: 'Home', child: Text('Home')),
-                                      PopupMenuItem(
+                                Flexible(
+                                  child: LayoutBuilder(
+                                      builder: (context, constraints) {
+                                    final isDesktop =
+                                        MediaQuery.of(context).size.width >=
+                                            800;
+                                    if (isDesktop) {
+                                      return SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
                                         child: Row(
+                                          mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            const Text('Shop'),
-                                            const Spacer(),
+                                            TextButton(
+                                              onPressed: () =>
+                                                  _navigateToHome(context),
+                                              child: const Text('Home'),
+                                            ),
+                                            // keep Shop as a popup for now (will expand later)
                                             PopupMenuButton<String>(
-                                              icon: const Icon(
-                                                  Icons.chevron_right,
-                                                  size: 18),
                                               padding: EdgeInsets.zero,
-                                              itemBuilder: (context) => [
+                                              itemBuilder: (c) => [
                                                 const PopupMenuItem(
                                                     value: 'autumn',
                                                     child: Text(
@@ -259,43 +201,113 @@ class SharedLayout extends StatelessWidget {
                                                     value: 'graduation',
                                                     child: Text('Graduation')),
                                               ],
-                                              onSelected: (sub) {
-                                                // Navigate to the matching collection
-                                                Navigator.pushNamed(context,
-                                                    '/collections/$sub');
+                                              onSelected: (val) {
+                                                if (val.isNotEmpty) {
+                                                  Navigator.pushNamed(context,
+                                                      '/collections/$val');
+                                                }
                                               },
+                                              child: const Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8.0),
+                                                child: Text('Shop'),
+                                              ),
+                                            ),
+                                            TextButton(
+                                              onPressed: () =>
+                                                  Navigator.pushNamed(
+                                                      context, '/collections'),
+                                              child: const Text('Collections'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () =>
+                                                  Navigator.pushNamed(context,
+                                                      '/collections/sale'),
+                                              child: const Text('SALE!'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () =>
+                                                  _navigateToAbout(context),
+                                              child: const Text('About'),
                                             ),
                                           ],
                                         ),
+                                      );
+                                    }
+                                    // fallback to original popup on smaller screens
+                                    return PopupMenuButton<String>(
+                                      icon: const Icon(
+                                        Icons.menu,
+                                        size: 18,
+                                        color: Colors.grey,
                                       ),
-                                      const PopupMenuItem(
-                                          value: 'The Print Shack',
-                                          child: Text('The Print Shack')),
-                                      const PopupMenuItem(
-                                          value: 'sale', child: Text('SALE!')),
-                                      const PopupMenuItem(
-                                          value: 'Collections',
-                                          child: Text('Collections')),
-                                      const PopupMenuItem(
-                                          value: 'About', child: Text('About')),
-                                    ],
-                                    onSelected: (value) {
-                                      if (value == 'Home') {
-                                        _navigateToHome(context);
-                                      } else if (value == 'Collections') {
-                                        Navigator.pushNamed(
-                                            context, '/collections');
-                                      } else if (value == 'sale') {
-                                        Navigator.pushNamed(
-                                            context, '/collections/sale');
-                                      } else if (value == 'About') {
-                                        _navigateToAbout(context);
-                                      } else {
-                                        _placeholderCallbackForButtons();
-                                      }
-                                    },
-                                  );
-                                }),
+                                      padding: const EdgeInsets.all(8),
+                                      itemBuilder: (context) => [
+                                        const PopupMenuItem(
+                                            value: 'Home', child: Text('Home')),
+                                        PopupMenuItem(
+                                          child: Row(
+                                            children: [
+                                              const Text('Shop'),
+                                              const Spacer(),
+                                              PopupMenuButton<String>(
+                                                icon: const Icon(
+                                                    Icons.chevron_right,
+                                                    size: 18),
+                                                padding: EdgeInsets.zero,
+                                                itemBuilder: (context) => [
+                                                  const PopupMenuItem(
+                                                      value: 'autumn',
+                                                      child: Text(
+                                                          'Autumn Favourites')),
+                                                  const PopupMenuItem(
+                                                      value: 'clothing',
+                                                      child: Text('Clothing')),
+                                                  const PopupMenuItem(
+                                                      value: 'graduation',
+                                                      child:
+                                                          Text('Graduation')),
+                                                ],
+                                                onSelected: (sub) {
+                                                  // Navigate to the matching collection
+                                                  Navigator.pushNamed(context,
+                                                      '/collections/$sub');
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const PopupMenuItem(
+                                            value: 'The Print Shack',
+                                            child: Text('The Print Shack')),
+                                        const PopupMenuItem(
+                                            value: 'sale',
+                                            child: Text('SALE!')),
+                                        const PopupMenuItem(
+                                            value: 'Collections',
+                                            child: Text('Collections')),
+                                        const PopupMenuItem(
+                                            value: 'About',
+                                            child: Text('About')),
+                                      ],
+                                      onSelected: (value) {
+                                        if (value == 'Home') {
+                                          _navigateToHome(context);
+                                        } else if (value == 'Collections') {
+                                          Navigator.pushNamed(
+                                              context, '/collections');
+                                        } else if (value == 'sale') {
+                                          Navigator.pushNamed(
+                                              context, '/collections/sale');
+                                        } else if (value == 'About') {
+                                          _navigateToAbout(context);
+                                        } else {
+                                          _placeholderCallbackForButtons();
+                                        }
+                                      },
+                                    );
+                                  }),
+                                ),
                               ],
                             ),
                           ),
