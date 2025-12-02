@@ -186,14 +186,15 @@ class SharedLayout extends StatelessWidget {
                                           padding: EdgeInsets.zero,
                                           itemBuilder: (c) => [
                                             const PopupMenuItem(
+                                                value: 'autumn',
+                                                child:
+                                                    Text('Autumn Favourites')),
+                                            const PopupMenuItem(
                                                 value: 'clothing',
                                                 child: Text('Clothing')),
                                             const PopupMenuItem(
-                                                value: 'merchandise',
-                                                child: Text('Merchandise')),
-                                            const PopupMenuItem(
-                                                value: 'halloween',
-                                                child: Text('Halloween')),
+                                                value: 'graduation',
+                                                child: Text('Graduation')),
                                           ],
                                           onSelected: (val) {
                                             if (val.isNotEmpty) {
@@ -248,14 +249,15 @@ class SharedLayout extends StatelessWidget {
                                               padding: EdgeInsets.zero,
                                               itemBuilder: (context) => [
                                                 const PopupMenuItem(
+                                                    value: 'autumn',
+                                                    child: Text(
+                                                        'Autumn Favourites')),
+                                                const PopupMenuItem(
                                                     value: 'clothing',
                                                     child: Text('Clothing')),
                                                 const PopupMenuItem(
-                                                    value: 'merchandise',
-                                                    child: Text('Merchandise')),
-                                                const PopupMenuItem(
-                                                    value: 'halloween',
-                                                    child: Text('Halloween')),
+                                                    value: 'graduation',
+                                                    child: Text('Graduation')),
                                               ],
                                               onSelected: (sub) {
                                                 // Navigate to the matching collection
