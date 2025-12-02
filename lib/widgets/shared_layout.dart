@@ -257,8 +257,8 @@ class SharedLayout extends StatelessWidget {
                                       const PopupMenuItem(
                                           value: 'The Print Shack',
                                           child: Text('The Print Shack')),
-                                      const PopupMenuItem(
-                                          value: 'SALE!', child: Text('SALE!')),
+                                        const PopupMenuItem(
+                                          value: 'sale', child: Text('SALE!')),
                                       const PopupMenuItem(
                                           value: 'Collections',
                                           child: Text('Collections')),
@@ -271,6 +271,9 @@ class SharedLayout extends StatelessWidget {
                                       } else if (value == 'Collections') {
                                         Navigator.pushNamed(
                                             context, '/collections');
+                                      } else if (value == 'sale') {
+                                        Navigator.pushNamed(
+                                            context, '/collections/sale');
                                       } else if (value == 'About') {
                                         _navigateToAbout(context);
                                       } else {
