@@ -8,7 +8,7 @@ class CartBubble extends StatelessWidget {
 
   String _displayText() {
     if (count <= 0) return '';
-    return count <= maxDisplay ? '$count' : '${maxDisplay}+';
+    return count <= maxDisplay ? '$count' : '$maxDisplay+';
   }
 
   @override
