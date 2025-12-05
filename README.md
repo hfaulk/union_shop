@@ -42,35 +42,78 @@ Running tests:
 
 ## Project Structure & Technologies
 
-- Project layout (brief): `lib/` (source), `data/` (sample JSON), `assets/`, `test/`, `prompts/`, and platform folders (`android/`, `ios/`, `web/`).
-- Key files: `lib/main.dart` (app entry), `pubspec.yaml` (dependencies), `data/*.json` (product and cart data), `test/` (unit & widget tests).
+- Project layout (brief): `lib/` (source), `assets/` (JSON data & images), `test/` (unit & widget tests), `prompts/` (development notes), and platform folders (`android/`, `ios/`, `web/`, `linux/`, `macos/`, `windows/`).
+- Key files: `lib/main.dart` (app entry), `pubspec.yaml` (dependencies), `assets/data/*.json` (product, collection, cart, and config data), `test/` (unit & widget tests).
 - Technologies: Flutter (Dart), standard Flutter toolchain (Flutter CLI, Android Studio, Xcode for iOS builds).
-- Dependencies: see `pubspec.yaml` for the exact package list; this project uses local JSON assets and Flutter widgets for UI.
+- Dependencies: `shared_preferences` (persistent storage), `path_provider` (file system access), `cupertino_icons` (iOS icons). See `pubspec.yaml` for full list.
 
 ### Project tree
 ```text
 .
 ├── README.md
 ├── pubspec.yaml
+├── analysis_options.yaml
 ├── lib/
 │   ├── main.dart
 │   ├── helpers/
+│   │   └── search_helper.dart
+│   ├── models/
+│   │   ├── cart_item.dart
+│   │   ├── collection.dart
+│   │   ├── hero_slide.dart
+│   │   ├── home_config.dart
+│   │   └── product.dart
+│   ├── repositories/
+│   │   ├── cart_repository.dart
+│   │   ├── collection_repository.dart
+│   │   ├── home_repository.dart
+│   │   └── product_repository.dart
+│   ├── view_models/
+│   │   └── cart_view_model.dart
+│   ├── views/
+│   │   ├── home_view.dart
+│   │   ├── product_page.dart
+│   │   ├── collection_page.dart
+│   │   ├── collections.dart
+│   │   ├── cart_page.dart
+│   │   ├── search_screen.dart
+│   │   ├── login.dart
+│   │   └── about.dart
+│   └── widgets/
+│       ├── product_card.dart
+│       ├── product_card_impl.dart
+│       ├── product_image_area.dart
+│       ├── product_info_area.dart
+│       ├── cart_bubble.dart
+│       ├── hero_carousel.dart
+│       ├── search_overlay.dart
+│       └── shared_layout.dart
+├── assets/
+│   ├── data/
+│   │   ├── products.json
+│   │   ├── collections.json
+│   │   ├── cart.json
+│   │   ├── home_config.json
+│   │   └── hero_slides.json
+│   └── images/
+├── test/
+│   ├── unit/
+│   ├── views/
+│   ├── widgets/
 │   ├── models/
 │   ├── repositories/
 │   ├── view_models/
-│   ├── views/
-│   └── widgets/
-├── assets/
-│   └── data/
-│       ├── products.json
-│       ├── collections.json
-│       └── cart.json
+│   ├── helpers/
+│   ├── scripts/
+│   └── [individual test files]
 ├── prompts/
-├── test/
 ├── android/
 ├── ios/
 ├── web/
-└── other platform folders (linux/, macos/, windows/)
+├── linux/
+├── macos/
+├── windows/
+└── other configuration files
 ```
 ## Known Issues & Contributing
 
